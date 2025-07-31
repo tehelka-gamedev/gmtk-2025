@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd5giy7mmmmxe"]
+
+[ext_resource type="Texture2D" uid="uid://bdg4laa3wc80a" path="res://sprites/room.png" id="1_2vtrl"]
+[ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_d4lmf")
+metadata/_edit_group_ = true
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Room" type="Sprite2D" parent="Pivot"]
+texture = ExtResource("1_2vtrl")

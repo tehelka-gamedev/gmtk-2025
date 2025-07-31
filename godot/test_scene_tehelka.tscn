@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://ck8ma3a7300uf"]
 
 [ext_resource type="PackedScene" uid="uid://bttrvcujvlunr" path="res://objects/npc/npc.tscn" id="1_3mla1"]
-[ext_resource type="Texture2D" uid="uid://c46t4mgyx75iv" path="res://sprites/elevator.png" id="2_6v6t2"]
 [ext_resource type="Texture2D" uid="uid://fklnwtqtkvws" path="res://sprites/circle.png" id="2_fkhtt"]
-[ext_resource type="Texture2D" uid="uid://bdg4laa3wc80a" path="res://sprites/room.png" id="4_7yu2k"]
+[ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_fkhtt"]
+[ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_7yu2k"]
 
 [sub_resource type="Curve2D" id="Curve2D_xl2fy"]
 _data = {
@@ -33,19 +33,7 @@ curve = SubResource("Curve2D_xl2fy")
 position = Vector2(374, 306)
 rotates = false
 
-[node name="Elevator" type="Node2D" parent="World/Path2D/PathFollow2D"]
-metadata/_edit_group_ = true
+[node name="Elevator" parent="World/Path2D/PathFollow2D" instance=ExtResource("3_fkhtt")]
 
-[node name="Pivot" type="Node2D" parent="World/Path2D/PathFollow2D/Elevator"]
-
-[node name="Elevator" type="Sprite2D" parent="World/Path2D/PathFollow2D/Elevator/Pivot"]
-texture = ExtResource("2_6v6t2")
-
-[node name="Room" type="Node2D" parent="World"]
+[node name="Room" parent="World" instance=ExtResource("4_7yu2k")]
 position = Vector2(182, 535)
-metadata/_edit_group_ = true
-
-[node name="Pivot" type="Node2D" parent="World/Room"]
-
-[node name="Room" type="Sprite2D" parent="World/Room/Pivot"]
-texture = ExtResource("4_7yu2k")
