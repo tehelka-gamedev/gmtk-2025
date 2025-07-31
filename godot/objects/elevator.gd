@@ -3,6 +3,7 @@ extends RoomBase
 class_name Elevator
 
 signal door_opened
+signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 
 @export var distance_to_pivot_point:float = 300 :
@@ -120,4 +121,5 @@ func stop_snapping() -> void:
     _snapping = false
 
 func _on_snap_finished() -> void:
+    snapped_to_room.emit(snap_target)
     stop_snapping()
