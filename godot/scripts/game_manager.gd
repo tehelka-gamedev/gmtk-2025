@@ -4,32 +4,19 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
-@export var path_follow: PathFollow2D = null
-
 @onready var rooms: Array[Node] = $Rooms.get_children()
 @onready var _npcs: Node2D = $NPCs
 
 var current_npc_count: int = 0
 
-
 func _ready() -> void:
 	if elevator == null:
 		push_error("no elevator")
 		return
-	
-	if path_follow == null:
-		push_error("no path follow")
-		return
+
 	
 	for i in range(starting_npc_count):
 		_spawn_npc()
-
-
-func _process(delta) -> void:
-	# This part could be in a script of pathFollow2D probably...
-	if elevator.moving:
-		path_follow.progress += delta * elevator.speed
-
 
 func _spawn_npc() -> void:
 	var non_full_rooms: Array[Room] = []

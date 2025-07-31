@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=6 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="PackedScene" uid="uid://bttrvcujvlunr" path="res://objects/npc/npc.tscn" id="1_1bvp3"]
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
@@ -6,16 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 
-[sub_resource type="Curve2D" id="Curve2D_xl2fy"]
-_data = {
-"points": PackedVector2Array(-11.759, -203.795, 11.759, 203.795, 374, 306, -89.0288, -5.40754, 89.0288, 5.40754, 593, 533, 1.84168, 92.5022, -1.84168, -92.5022, 800, 338, 152.266, -5.71385, -152.266, 5.71385, 589, 101, 4.13223, -85.9504, -4.13223, 85.9504, 374, 306)
-}
-point_count = 5
-
-[node name="Main" type="Node2D" node_paths=PackedStringArray("elevator", "path_follow")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
-elevator = NodePath("World/Path2D/PathFollow2D/Elevator")
-path_follow = NodePath("World/Path2D/PathFollow2D")
+elevator = NodePath("World/Elevator")
 
 [node name="NPC" parent="." instance=ExtResource("1_1bvp3")]
 
@@ -30,14 +23,10 @@ color = Color(0.513726, 0.513726, 0.513726, 0.580392)
 position = Vector2(590, 320)
 texture = ExtResource("2_lquwl")
 
-[node name="Path2D" type="Path2D" parent="World"]
-curve = SubResource("Curve2D_xl2fy")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="World/Path2D"]
-position = Vector2(374, 306)
-rotates = false
-
-[node name="Elevator" parent="World/Path2D/PathFollow2D" instance=ExtResource("3_7mycd")]
+[node name="Elevator" parent="World" instance=ExtResource("3_7mycd")]
+position = Vector2(594, 304)
+distance_to_pivot_point = 220.0
+snap_duration = 2.0
 
 [node name="Rooms" type="Node2D" parent="."]
 

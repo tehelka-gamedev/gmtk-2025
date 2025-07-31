@@ -1,13 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://bixriv415q58j"]
+[gd_scene load_steps=4 format=3 uid="uid://bixriv415q58j"]
 
 [ext_resource type="Texture2D" uid="uid://c46t4mgyx75iv" path="res://sprites/elevator.png" id="1_581l7"]
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
 
-[node name="Elevator" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
+size = Vector2(55, 112)
+
+[node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper")]
 script = ExtResource("1_ogmrx")
-metadata/_edit_group_ = true
+snap_duration = null
+inner_pivot = NodePath("Pivot/InnerPivot")
+room_detector = NodePath("Pivot/InnerPivot/RoomDetector")
+look_at_helper = NodePath("lookAtHelper")
 
 [node name="Pivot" type="Node2D" parent="."]
 
-[node name="Elevator" type="Sprite2D" parent="Pivot"]
+[node name="InnerPivot" type="Node2D" parent="Pivot"]
+position = Vector2(300, 0)
+
+[node name="Elevator" type="Sprite2D" parent="Pivot/InnerPivot"]
 texture = ExtResource("1_581l7")
+
+[node name="RoomDetector" type="Area2D" parent="Pivot/InnerPivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/InnerPivot/RoomDetector"]
+position = Vector2(39.5, 0)
+shape = SubResource("RectangleShape2D_ogmrx")
+
+[node name="lookAtHelper" type="Node2D" parent="."]
