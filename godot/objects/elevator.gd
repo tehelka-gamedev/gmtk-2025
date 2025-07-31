@@ -60,7 +60,8 @@ func _process_editor() -> void:
     queue_redraw()
 
 func _process_game(delta: float) -> void:
-    if Input.is_action_just_pressed("elevator_toggle_movement"):
+    # only can toggle movement if doors are closed
+    if Input.is_action_just_pressed("elevator_toggle_movement") and not door_is_open:
         toggle_movement_requested.emit()
 
         # if snapping, we can abort and leave
