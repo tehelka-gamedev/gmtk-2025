@@ -26,7 +26,6 @@ texture = ExtResource("2_lquwl")
 [node name="Elevator" parent="World" instance=ExtResource("3_7mycd")]
 position = Vector2(594, 304)
 distance_to_pivot_point = 220.0
-snap_duration = 2.0
 
 [node name="Rooms" type="Node2D" parent="."]
 

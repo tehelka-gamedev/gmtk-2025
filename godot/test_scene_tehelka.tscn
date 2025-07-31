@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck8ma3a7300uf"]
+[gd_scene load_steps=6 format=3 uid="uid://ck8ma3a7300uf"]
 
 [ext_resource type="PackedScene" uid="uid://bttrvcujvlunr" path="res://objects/npc/npc.tscn" id="1_3mla1"]
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_gtmcs"]
 [ext_resource type="Texture2D" uid="uid://fklnwtqtkvws" path="res://sprites/circle.png" id="2_fkhtt"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_fkhtt"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_7yu2k"]
-[ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="5_7yu2k"]
 
 [node name="TestSceneTehelka" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_gtmcs")
@@ -30,10 +29,10 @@ texture = ExtResource("2_fkhtt")
 position = Vector2(590, 320)
 distance_to_pivot_point = 220.0
 speed = 90.0
-snap_duration = 2.0
 
-[node name="Room" parent="World" instance=ExtResource("4_7yu2k")]
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Room" parent="Rooms" instance=ExtResource("4_7yu2k")]
 position = Vector2(186, 320)
 
-[node name="SlotManager2" type="Node2D" parent="World/Room"]
-script = ExtResource("5_7yu2k")
+[node name="NPCs" type="Node2D" parent="."]
