@@ -17,26 +17,26 @@ offset_bottom = 648.0
 color = Color(0.513726, 0.513726, 0.513726, 0.580392)
 
 [node name="circle" type="Sprite2D" parent="World"]
-position = Vector2(590, 320)
+position = Vector2(333, 185)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_lquwl")
 
 [node name="Elevator" parent="World" instance=ExtResource("3_7mycd")]
-position = Vector2(594, 304)
-distance_to_pivot_point = 220.0
+position = Vector2(332, 186)
 speed = 90.0
 
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Room" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(182, 535)
+position = Vector2(243, 214)
 
 [node name="Room2" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(182, 157)
+position = Vector2(244, 157)
 
 [node name="Room3" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(990, 168)
+position = Vector2(428, 156)
 
 [node name="Room4" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(969, 484)
+position = Vector2(429, 216)
 
 [node name="NPCs" type="Node2D" parent="."]

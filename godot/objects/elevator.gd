@@ -6,7 +6,7 @@ signal door_opened
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 
-@export var distance_to_pivot_point:float = 300 :
+@export var distance_to_pivot_point:float = 60.0 :
     set(value):
         distance_to_pivot_point = value
         if inner_pivot:

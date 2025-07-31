@@ -15,7 +15,8 @@ look_at_helper = NodePath("lookAtHelper")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="InnerPivot" type="Node2D" parent="Pivot"]
-position = Vector2(300, 0)
+position = Vector2(60, 0)
+scale = Vector2(0.2, 0.2)
 
 [node name="Elevator" type="Sprite2D" parent="Pivot/InnerPivot"]
 texture = ExtResource("1_581l7")

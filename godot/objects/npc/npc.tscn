@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bttrvcujvlunr"]
+[gd_scene load_steps=7 format=3 uid="uid://bttrvcujvlunr"]
 
 [ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
 [ext_resource type="Texture2D" uid="uid://dl2gum1rnr5xw" path="res://sprites/npg_spritesheet.png" id="2_aqpri"]
@@ -9,9 +9,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6gh1"]
 atlas = ExtResource("2_aqpri")
 region = Rect2(0, 0, 124, 128)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_rn7i7"]
-radius = 190.15
 
 [node name="NPC" type="Node2D"]
 script = ExtResource("1_rn7i7")
@@ -34,8 +31,3 @@ metadata/_custom_type_script = "uid://b7yur33qvtvau"
 [node name="MoveTo" type="Node" parent="StateMachine"]
 script = ExtResource("4_m6gh1")
 metadata/_custom_type_script = "uid://b7yur33qvtvau"
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_rn7i7")
