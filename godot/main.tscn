@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://yb7xrfudbkkw" path="res://sprites/spacestation_n.png" id="3_lquwl"]
 [ext_resource type="Script" uid="uid://dqgdl6pik3h05" path="res://objects/space_station.gd" id="4_7mycd"]
@@ -18,14 +19,14 @@ elevator = NodePath("Elevator")
 [node name="World" type="Node2D" parent="."]
 position = Vector2(-246, -143)
 
-[node name="ColorRect" type="ColorRect" parent="World"]
+[node name="Background" type="TextureRect" parent="World"]
 offset_left = 246.0
 offset_top = 143.0
 offset_right = 886.0
 offset_bottom = 503.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(0.513726, 0.513726, 0.513726, 0.580392)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_7mycd")
 
 [node name="SpaceStation" type="Sprite2D" parent="."]
 position = Vector2(302, 179)
