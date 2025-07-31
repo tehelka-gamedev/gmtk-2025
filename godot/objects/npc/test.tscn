@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsn8axecpw58p"]
+
+[ext_resource type="PackedScene" uid="uid://mc17i3n0ujcj" path="res://objects/npc/skin.tscn" id="1_kl73b"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Skin" parent="." instance=ExtResource("1_kl73b")]
+position = Vector2(80, 18)
+
+[node name="Skin2" parent="." instance=ExtResource("1_kl73b")]
+position = Vector2(80, 42)
+
+[node name="Skin3" parent="." instance=ExtResource("1_kl73b")]
+position = Vector2(81, 64)
+
+[node name="Skin4" parent="." instance=ExtResource("1_kl73b")]
+position = Vector2(81, 88)

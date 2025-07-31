@@ -1,23 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bttrvcujvlunr"]
+[gd_scene load_steps=6 format=3 uid="uid://bttrvcujvlunr"]
 
 [ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
-[ext_resource type="Texture2D" uid="uid://dl2gum1rnr5xw" path="res://sprites/npg_spritesheet.png" id="2_aqpri"]
+[ext_resource type="PackedScene" uid="uid://mc17i3n0ujcj" path="res://objects/npc/skin.tscn" id="2_aqpri"]
 [ext_resource type="Script" uid="uid://bfabaymcuhp74" path="res://utils/state_machine/state_machine.gd" id="2_rn7i7"]
 [ext_resource type="Script" uid="uid://chs00o4pldxek" path="res://states/idle_state.gd" id="3_aqpri"]
 [ext_resource type="Script" uid="uid://h0sp5pu5a2io" path="res://states/move_to_state.gd" id="4_m6gh1"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6gh1"]
-atlas = ExtResource("2_aqpri")
-region = Rect2(0, 0, 124, 128)
 
 [node name="NPC" type="Node2D"]
 script = ExtResource("1_rn7i7")
 
 [node name="Pivot" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-scale = Vector2(0.4, 0.4)
-texture = SubResource("AtlasTexture_m6gh1")
+[node name="Skin" parent="Pivot" instance=ExtResource("2_aqpri")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("2_rn7i7")

@@ -5,6 +5,8 @@ extends Node2D
 @export var slot:Slot = null
 
 @onready var state_machine: StateMachine = $StateMachine
+@onready var _skin: NPCSkin = $Pivot/Skin
+
 
 func go_to_slot(s: Slot) -> void:
     slot = s
