@@ -8,3 +8,4 @@ signal empty # emitted when it is empty
 signal waiting_for_someone
 @warning_ignore_restore("unused_signal")
 
+@export var slot_manager: SlotManager

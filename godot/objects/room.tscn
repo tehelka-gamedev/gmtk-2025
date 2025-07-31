@@ -1,13 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd5giy7mmmmxe"]
+[gd_scene load_steps=5 format=3 uid="uid://dd5giy7mmmmxe"]
 
 [ext_resource type="Texture2D" uid="uid://bdg4laa3wc80a" path="res://sprites/room.png" id="1_2vtrl"]
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
+[ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
+[ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
 
-[node name="Room" type="Node2D"]
+[node name="Room" type="Node2D" node_paths=PackedStringArray("slot_manager")]
 script = ExtResource("1_d4lmf")
+slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
+
+[node name="NPCSpawn" type="Marker2D" parent="."]
+position = Vector2(-82, 0)
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Room" type="Sprite2D" parent="Pivot"]
 texture = ExtResource("1_2vtrl")
+
+[node name="SlotManager" type="Node2D" parent="."]
+script = ExtResource("3_lvljb")
+
+[node name="Marker2D" type="Marker2D" parent="SlotManager"]
+position = Vector2(36, -34)
+script = ExtResource("4_4d8i4")
+
+[node name="Marker2D2" type="Marker2D" parent="SlotManager"]
+position = Vector2(36, 36)
+script = ExtResource("4_4d8i4")
+
+[node name="Marker2D3" type="Marker2D" parent="SlotManager"]
+position = Vector2(96, 35)
+script = ExtResource("4_4d8i4")
+
+[node name="Marker2D4" type="Marker2D" parent="SlotManager"]
+position = Vector2(95, -34)
+script = ExtResource("4_4d8i4")
