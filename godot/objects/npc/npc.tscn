@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bttrvcujvlunr"]
+
+[ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="1_opgxg"]
+[ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
+[ext_resource type="Script" uid="uid://bfabaymcuhp74" path="res://utils/state_machine/state_machine.gd" id="2_rn7i7"]
+[ext_resource type="Script" uid="uid://chs00o4pldxek" path="res://states/idle_state.gd" id="3_aqpri"]
+[ext_resource type="Script" uid="uid://h0sp5pu5a2io" path="res://states/move_to_state.gd" id="4_m6gh1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rn7i7"]
+radius = 190.15
+
+[node name="NPC" type="Node2D"]
+script = ExtResource("1_rn7i7")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+texture = ExtResource("1_opgxg")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("2_rn7i7")
+state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bfabaymcuhp74"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_aqpri")
+metadata/_custom_type_script = "uid://b7yur33qvtvau"
+
+[node name="MoveTo" type="Node" parent="StateMachine"]
+script = ExtResource("4_m6gh1")
+metadata/_custom_type_script = "uid://b7yur33qvtvau"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rn7i7")
