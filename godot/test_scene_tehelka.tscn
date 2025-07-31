@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck8ma3a7300uf"]
+[gd_scene load_steps=9 format=3 uid="uid://ck8ma3a7300uf"]
 
 [ext_resource type="PackedScene" uid="uid://bttrvcujvlunr" path="res://objects/npc/npc.tscn" id="1_3mla1"]
+[ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_gtmcs"]
 [ext_resource type="Texture2D" uid="uid://fklnwtqtkvws" path="res://sprites/circle.png" id="2_fkhtt"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_fkhtt"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_7yu2k"]
+[ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="5_7yu2k"]
+[ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="6_xl2fy"]
 
 [sub_resource type="Curve2D" id="Curve2D_xl2fy"]
 _data = {
@@ -11,7 +14,11 @@ _data = {
 }
 point_count = 5
 
-[node name="TestSceneTehelka" type="Node2D"]
+[node name="TestSceneTehelka" type="Node2D" node_paths=PackedStringArray("elevator", "path_follow", "rooms")]
+script = ExtResource("1_gtmcs")
+elevator = NodePath("World/Path2D/PathFollow2D/Elevator")
+path_follow = NodePath("World/Path2D/PathFollow2D")
+rooms = [NodePath("World/Room")]
 
 [node name="NPC" parent="." instance=ExtResource("1_3mla1")]
 
@@ -37,3 +44,23 @@ rotates = false
 
 [node name="Room" parent="World" instance=ExtResource("4_7yu2k")]
 position = Vector2(182, 535)
+
+[node name="SlotManager" type="Node2D" parent="World/Room"]
+script = ExtResource("5_7yu2k")
+
+[node name="Slot" type="Marker2D" parent="World/Room/SlotManager"]
+position = Vector2(-100, 53)
+gizmo_extents = 20.0
+script = ExtResource("6_xl2fy")
+
+[node name="Slot2" type="Marker2D" parent="World/Room/SlotManager"]
+position = Vector2(-33, 53)
+gizmo_extents = 20.0
+
+[node name="Slot3" type="Marker2D" parent="World/Room/SlotManager"]
+position = Vector2(35, 53)
+gizmo_extents = 20.0
+
+[node name="Slot4" type="Marker2D" parent="World/Room/SlotManager"]
+position = Vector2(99, 53)
+gizmo_extents = 20.0
