@@ -1,1 +1,2 @@
-extends Node2D
+extends RoomBase
+class_name Room
