@@ -9,6 +9,7 @@
 size = Vector2(10, 30)
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("slot_manager")]
+modulate = Color(1, 0, 0, 1)
 script = ExtResource("1_d4lmf")
 slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
