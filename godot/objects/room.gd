@@ -10,3 +10,6 @@ class_name Room
 
 
 @onready var npc_spawn: Marker2D = $NPCSpawn
+
+func get_spawn_point() -> Marker2D:
+    return npc_spawn

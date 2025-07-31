@@ -46,16 +46,21 @@ func _on_elevator_door_opened() -> void:
         return # do nothing, if somehow the door opened without snapping
     
     # Start releasing people
+    var spawn_point:Marker2D = snapped_room.get_spawn_point()
     var npc_to_release: NPC = null
 
-    while not elevator.is_empty() and not snapped_room.is_full():
+    while not elevator.is_empty():
         # TODO: add a filter to only let people that want to leave out
         npc_to_release = elevator.pop_npc_from_inside()
 
-        # room is not full so there is at least one slot
-        var slot = snapped_room.slot_manager.get_first_available_slot() # not null :)
-        snapped_room.add_npc_inside(npc_to_release, slot)
-        npc_to_release.go_to_slot(slot)
+        npc_to_release.exiting = true
+        npc_to_release.state_machine.transition_to(
+        NPCStatesUtil.StatesName.move_to,
+        {
+            NPCStatesUtil.Message.target: spawn_point
+        }
+    )
+
     
     _on_all_npc_released()
 

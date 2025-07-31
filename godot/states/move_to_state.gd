@@ -10,7 +10,8 @@ func process(delta: float) -> void:
         return
     
     owner.global_position = lerp(owner.global_position, _target.global_position, delta * 5)
-    
+    if owner.exiting and owner.global_position.distance_squared_to(_target.global_position) < 10:
+            owner.queue_free()
 
 func enter(msg: = {}) -> void:
     _target = msg.get(NPCStatesUtil.Message.target)
