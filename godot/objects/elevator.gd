@@ -2,8 +2,8 @@
 extends RoomBase
 class_name Elevator
 
-signal left_door_opened
-signal right_door_opened
+signal door_opened
+signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 
 @export var distance_to_pivot_point:float = 300 :
@@ -17,6 +17,7 @@ signal toggle_movement_requested
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
 
+var npc_inside:Array[NPC] = []
 
 @export_category("Editor variables")
 @export var inner_pivot:Node2D = null # Where the sprite and object actually is
@@ -77,14 +78,10 @@ func _process_game(delta: float) -> void:
             moving = not moving
 
     if not moving:
-        if Input.is_action_just_pressed("open_left_door"):
-            # play open_left_door_animation
-            # await open_left_door_animation.finished
-            left_door_opened.emit()
-        elif Input.is_action_just_pressed("open_right_door"):
-            # play open_right_door_animation
-            # await open_right_door_animation.finished
-            right_door_opened.emit()
+        if Input.is_action_just_pressed("open_door"):
+            # play open_door_animation
+            # await open__door_animation.finished
+            door_opened.emit()
     
     if _snapping:
         return
@@ -125,4 +122,21 @@ func stop_snapping() -> void:
     _snapping = false
 
 func _on_snap_finished() -> void:
+    snapped_to_room.emit(snap_target)
     stop_snapping()
+
+func add_npc_inside(npc:NPC) -> void:
+    npc_inside.push_back(npc)
+
+# Remove an npc from the (end of the) list and returns it
+# If there are none, returns none and prints an error
+func pop_npc_from_inside() -> NPC:
+    return npc_inside.pop_back()
+
+func is_empty() -> bool:
+    return len(npc_inside) == 0
+
+func release_all_npc_inside() -> Array[NPC]:
+    var array_to_return:Array[NPC] = npc_inside.duplicate()
+    npc_inside = []
+    return array_to_return

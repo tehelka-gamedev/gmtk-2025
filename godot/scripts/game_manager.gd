@@ -11,10 +11,10 @@ var current_npc_count: int = 0
 
 func _ready() -> void:
     randomize()
+
     if elevator == null:
         push_error("no elevator")
         return
-
     
     for i in range(starting_npc_count):
         _spawn_npc()
@@ -33,3 +33,16 @@ func _spawn_npc() -> void:
     var slot: Slot = random_room.slot_manager.get_first_available_slot()
     random_room.slot_manager.reserve_slot(slot)
     npc.state_machine.transition_to("MoveTo", {NPCStatesUtil.Message.target: slot})
+
+func _on_elevator_door_opened() -> void:
+    # Start releasing people
+    var npc_to_release: Array[NPC] = elevator.release_all_npc_inside()
+
+    for npc in npc_to_release:
+        pass
+    
+    _on_all_npc_released()
+
+func _on_all_npc_released() -> void:
+    # Start entering the elevator
+    pass
