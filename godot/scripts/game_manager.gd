@@ -43,7 +43,7 @@ func _spawn_npc() -> void:
 
 func _on_elevator_door_opened() -> void:
 	var snapped_room: Room = elevator.get_snapped_room()
-
+	print("elevator door opened and snapped to %s" % [snapped_room])
 	if snapped_room == null:
 		return # do nothing, if somehow the door opened without snapping
 	
@@ -58,8 +58,8 @@ func _on_elevator_door_opened() -> void:
 
 		# room is not full so there is at least one slot
 		var slot = snapped_room.slot_manager.get_first_available_slot() # not null :)
+		snapped_room.add_npc_inside(npc_to_release, slot)
 		npc_to_release.go_to_slot(slot)
-		slot.reserve()
 	
 	_on_all_npc_released()
 
@@ -78,6 +78,6 @@ func _on_all_npc_released() -> void:
 
 		# elevator is not full so there is at least one slot
 		var slot = elevator.slot_manager.get_first_available_slot() # not null :)
+		elevator.add_npc_inside(npc_to_enter, slot)
 		npc_to_enter.go_to_slot(slot)
-		print("%s go to %s" % [npc_to_enter.name, slot.name])
-		slot.reserve()
+		
