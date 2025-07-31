@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
-size = Vector2(92, 29)
+size = Vector2(24, 80)
 
 [node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper", "slot_manager")]
 script = ExtResource("1_ogmrx")
@@ -18,16 +18,16 @@ slot_manager = NodePath("Pivot/InnerPivot/SlotManager")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="InnerPivot" type="Node2D" parent="Pivot"]
-position = Vector2(0, -77)
+position = Vector2(77, 0)
 
 [node name="Elevator" type="Sprite2D" parent="Pivot/InnerPivot"]
+rotation = 1.5708
 texture = ExtResource("1_581l7")
 
 [node name="RoomDetector" type="Area2D" parent="Pivot/InnerPivot"]
-position = Vector2(0, -32)
+position = Vector2(32, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/InnerPivot/RoomDetector"]
-position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_ogmrx")
 
 [node name="SlotManager" type="Node2D" parent="Pivot/InnerPivot"]
@@ -35,19 +35,19 @@ script = ExtResource("3_uinhc")
 metadata/_edit_lock_ = true
 
 [node name="ElevatorSlot1" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-33, 3)
+position = Vector2(-3, -31)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot2" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-15, 3)
+position = Vector2(-3, -9)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot3" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(16, 3)
+position = Vector2(-3, 10)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot4" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(31, 3)
+position = Vector2(-3, 30)
 script = ExtResource("4_h6q4t")
 
 [node name="lookAtHelper" type="Node2D" parent="."]
