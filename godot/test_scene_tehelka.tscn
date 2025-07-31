@@ -28,6 +28,7 @@ texture = ExtResource("2_fkhtt")
 [node name="Elevator" parent="World" instance=ExtResource("3_fkhtt")]
 position = Vector2(590, 320)
 distance_to_pivot_point = 220.0
+speed = 90.0
 
 [node name="Rooms" type="Node2D" parent="."]
 
