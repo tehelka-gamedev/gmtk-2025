@@ -10,10 +10,11 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 var current_npc_count: int = 0
 
 func _ready() -> void:
+    randomize()
+
     if elevator == null:
         push_error("no elevator")
         return
-
     
     for i in range(starting_npc_count):
         _spawn_npc()
@@ -30,3 +31,16 @@ func _spawn_npc() -> void:
     npc.position = spawn_position
     _npcs.add_child(npc)
     npc.state_machine.transition_to(NPCStatesUtil.StatesName.move_to, {NPCStatesUtil.Message.target: random_room.slot_manager.get_first_available_slot()})
+
+func _on_elevator_door_opened() -> void:
+    # Start releasing people
+    var npc_to_release: Array[NPC] = elevator.release_all_npc_inside()
+
+    for npc in npc_to_release:
+        pass
+    
+    _on_all_npc_released()
+
+func _on_all_npc_released() -> void:
+    # Start entering the elevator
+    pass

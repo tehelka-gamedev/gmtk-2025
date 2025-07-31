@@ -17,6 +17,7 @@ signal toggle_movement_requested
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
 
+var npc_inside:Array[NPC] = []
 
 @export_category("Editor variables")
 @export var inner_pivot:Node2D = null # Where the sprite and object actually is
@@ -123,3 +124,19 @@ func stop_snapping() -> void:
 func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
     stop_snapping()
+
+func add_npc_inside(npc:NPC) -> void:
+    npc_inside.push_back(npc)
+
+# Remove an npc from the (end of the) list and returns it
+# If there are none, returns none and prints an error
+func pop_npc_from_inside() -> NPC:
+    return npc_inside.pop_back()
+
+func is_empty() -> bool:
+    return len(npc_inside) == 0
+
+func release_all_npc_inside() -> Array[NPC]:
+    var array_to_return:Array[NPC] = npc_inside.duplicate()
+    npc_inside = []
+    return array_to_return
