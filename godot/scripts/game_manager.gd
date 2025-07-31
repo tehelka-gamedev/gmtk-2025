@@ -29,4 +29,4 @@ func _spawn_npc() -> void:
     var npc: NPC = NPC_class.instantiate()
     npc.position = spawn_position
     _npcs.add_child(npc)
-    npc.state_machine.transition_to("MoveTo", {NPCStatesUtil.Message.target: random_room.slot_manager.get_first_available_slot()})
+    npc.state_machine.transition_to(NPCStatesUtil.StatesName.move_to, {NPCStatesUtil.Message.target: random_room.slot_manager.get_first_available_slot()})
