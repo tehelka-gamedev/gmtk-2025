@@ -32,19 +32,23 @@ position = Vector2(548, 322)
 position = Vector2(302, 179)
 
 [node name="Room" parent="Rooms" instance=ExtResource("4_272bh")]
+position = Vector2(0, -150)
 
 [node name="Room2" parent="Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0, 0, 1, 0.5)
+position = Vector2(150, 0)
 rotation = 1.5708
 color = 1
 
 [node name="Room3" parent="Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0.8, 0.05, 0.8, 0.5)
+position = Vector2(0, 145)
 rotation = 3.14159
 color = 3
 
 [node name="Room4" parent="Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0.8, 0.45, 0.05, 0.5)
+position = Vector2(-150, 0)
 rotation = 4.71239
 color = 4
 
