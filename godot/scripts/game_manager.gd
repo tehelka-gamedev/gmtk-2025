@@ -22,7 +22,6 @@ func _ready() -> void:
     elevator.door_opened.connect(_on_elevator_door_opened)
 
 func _spawn_npc() -> void:
-    print(rooms)
     var non_full_rooms: Array[Room] = []
     for room: Room in rooms:
         if not room.slot_manager.is_full():
@@ -43,14 +42,11 @@ func _spawn_npc() -> void:
 
 func _on_elevator_door_opened() -> void:
     var snapped_room: Room = elevator.get_snapped_room()
-    print("elevator door opened and snapped to %s" % [snapped_room])
     if snapped_room == null:
         return # do nothing, if somehow the door opened without snapping
     
     # Start releasing people
     var npc_to_release: NPC = null
-
-    print("elevator empty: %s" % [ elevator.is_empty()])
 
     while not elevator.is_empty() and not snapped_room.is_full():
         # TODO: add a filter to only let people that want to leave out
@@ -64,14 +60,12 @@ func _on_elevator_door_opened() -> void:
     _on_all_npc_released()
 
 func _on_all_npc_released() -> void:
-    print("all npc released!")
     var snapped_room: Room = elevator.get_snapped_room()
     if snapped_room == null:
         return # do nothing, if somehow the door opened without snapping
 
     # Start entering the elevator
     var npc_to_enter: NPC = null
-    print("elevator full: %s, room empty: %s" % [elevator.is_full(), snapped_room.is_empty()])
 
     while not elevator.is_full() and not snapped_room.is_empty():
         npc_to_enter = snapped_room.pop_npc_from_inside()
