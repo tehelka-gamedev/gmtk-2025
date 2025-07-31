@@ -10,7 +10,6 @@ signal toggle_movement_requested
     set(value):
         distance_to_pivot_point = value
         if inner_pivot:
-            print("move elevator")
             inner_pivot.position.x = distance_to_pivot_point
 
 @export var speed: float = 2.0
@@ -95,12 +94,10 @@ func _draw():
             draw_circle(Vector2.ZERO, distance_to_pivot_point, Color.RED, filled)
 
 func _on_body_entered(body: Node2D):
-    print("BODY ! %s" % body)
     snap_target = body
 
 func _on_body_exited(body: Node2D):
     if body == snap_target:
-        print("OUT")
         snap_target = null
 
 # for now, just typehint Node2D since we actually give the PhysicsBody2D and not the room...
@@ -110,13 +107,7 @@ func snap_to_room(room: Node2D) -> void:
     look_at_helper.look_at(room.global_position)
     var target_rotation:float = look_at_helper.global_rotation
 
-    if rotation < 0:
-        target_rotation -= 2*PI
-
-    print("From %s to %s !" % [rotation, target_rotation])
-
-
-
+    target_rotation = lerp_angle(rotation, target_rotation, 1)
     _tween = get_tree().create_tween()
     _tween.tween_property(self, "rotation", target_rotation, snap_duration)
     _tween.set_trans(Tween.TRANS_ELASTIC)
@@ -130,5 +121,4 @@ func stop_snapping() -> void:
     _snapping = false
 
 func _on_snap_finished() -> void:
-    print("Snap finished!")
     stop_snapping()
