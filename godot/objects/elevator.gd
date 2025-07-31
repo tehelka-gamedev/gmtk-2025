@@ -110,13 +110,13 @@ func _draw():
 func _on_body_entered(body: Node2D):
     # UGLY HACK: refer to the grand-parent room, and fallback to the staticBody2D otherwise
     # Would need to find a better way for that...
-    snap_target = body.find_parent("Room")
+    snap_target = body.find_parent("Room*")
     if snap_target == null:
         snap_target = body
 
 
 func _on_body_exited(body: Node2D):
-    var target = body.find_parent("Room")
+    var target = body.find_parent("Room*")
     target = target if target else body
     if target == snap_target:
         snap_target = null
