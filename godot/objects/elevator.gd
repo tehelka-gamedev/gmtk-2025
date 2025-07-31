@@ -65,9 +65,13 @@ func _process_game(delta: float) -> void:
             stop_snapping()
             moving = true
 
-        # otherwise, if we can snap, we start snapping
+        # otherwise, if we can snap
         elif snap_target:
-            snap_to_room(snap_target)
+            # we start snapping if we move, otherwise that is we are already stopped
+            if moving:
+                snap_to_room(snap_target)
+            else:
+                moving = true
         # else just regular start/stop
         else:
             moving = not moving
