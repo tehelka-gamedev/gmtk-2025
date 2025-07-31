@@ -14,6 +14,8 @@ func _ready() -> void:
             _available_slots.push_back(s)
         else:
             _occupied_slots.push_back(s)
+        s.reserved.connect(_on_slot_reserved)
+        s.released.connect(_on_slot_released)
 
 
 func get_first_available_slot() -> Slot:
@@ -35,17 +37,25 @@ func reserve_slot(s:Slot) -> void:
     if _available_slots.find(s) == -1:
         push_error("Tried to reserve a slot that was not there!")
         return
-    s.available = false
-    _available_slots.erase(s)
-    _occupied_slots.append(s)
+    _on_slot_reserved(s)
+    
 
 func release_slot(s:Slot) -> void:
     if _occupied_slots.find(s) == -1:
         push_error("Tried to release a slot that was not there!")
         return
-    s.available = true
-    _available_slots.append(s)
-    _occupied_slots.erase(s)
+    _on_slot_released(s)
 
 func is_full() -> bool:
-    return _available_slots.is_empty()
+    return _available_slots.is_empty() # no available slot
+
+func is_empty() -> bool:
+    return _occupied_slots.is_empty() # nothing occupied
+
+func _on_slot_reserved(s: Slot) -> void:
+    _available_slots.erase(s)
+    _occupied_slots.append(s)
+
+func _on_slot_released(s: Slot) -> void:
+    _available_slots.append(s)
+    _occupied_slots.erase(s)

@@ -3,6 +3,7 @@ extends RoomBase
 class_name Elevator
 
 signal door_opened
+signal door_closed
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 
@@ -17,7 +18,8 @@ signal toggle_movement_requested
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
 
-var npc_inside:Array[NPC] = []
+
+var door_is_open: bool = false
 
 @export_category("Editor variables")
 @export var inner_pivot:Node2D = null # Where the sprite and object actually is
@@ -79,14 +81,25 @@ func _process_game(delta: float) -> void:
 
     if not moving:
         if Input.is_action_just_pressed("open_door"):
-            # play open_door_animation
-            # await open__door_animation.finished
-            door_opened.emit()
+            if door_is_open:
+                _close_door()
+            else:
+                _open_door()
     
     if _snapping:
         return
     if moving:
         rotation_degrees -= delta * speed
+
+func _open_door() -> void:
+    # play open_door_animation
+    # await open__door_animation.finished
+    door_is_open = true
+    door_opened.emit()
+
+func _close_door() -> void:
+    door_is_open = false
+    door_closed.emit()
 
 func _draw():
     if Engine.is_editor_hint():
@@ -95,10 +108,17 @@ func _draw():
             draw_circle(Vector2.ZERO, distance_to_pivot_point, Color.RED, filled)
 
 func _on_body_entered(body: Node2D):
-    snap_target = body
+    # UGLY HACK: refer to the grand-parent room, and fallback to the staticBody2D otherwise
+    # Would need to find a better way for that...
+    snap_target = body.find_parent("Room")
+    if snap_target == null:
+        snap_target = body
+
 
 func _on_body_exited(body: Node2D):
-    if body == snap_target:
+    var target = body.find_parent("Room")
+    target = target if target else body
+    if target == snap_target:
         snap_target = null
 
 # for now, just typehint Node2D since we actually give the PhysicsBody2D and not the room...
@@ -125,18 +145,5 @@ func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
     stop_snapping()
 
-func add_npc_inside(npc:NPC) -> void:
-    npc_inside.push_back(npc)
-
-# Remove an npc from the (end of the) list and returns it
-# If there are none, returns none and prints an error
-func pop_npc_from_inside() -> NPC:
-    return npc_inside.pop_back()
-
-func is_empty() -> bool:
-    return len(npc_inside) == 0
-
-func release_all_npc_inside() -> Array[NPC]:
-    var array_to_return:Array[NPC] = npc_inside.duplicate()
-    npc_inside = []
-    return array_to_return
+func get_snapped_room() -> Room:
+    return snap_target as Room if snap_target else null

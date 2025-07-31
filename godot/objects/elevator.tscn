@@ -1,16 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bixriv415q58j"]
+[gd_scene load_steps=6 format=3 uid="uid://bixriv415q58j"]
 
 [ext_resource type="Texture2D" uid="uid://c46t4mgyx75iv" path="res://sprites/elevator.png" id="1_581l7"]
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
+[ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_uinhc"]
+[ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
 size = Vector2(55, 112)
 
-[node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper")]
+[node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper", "slot_manager")]
 script = ExtResource("1_ogmrx")
 inner_pivot = NodePath("Pivot/InnerPivot")
 room_detector = NodePath("Pivot/InnerPivot/RoomDetector")
 look_at_helper = NodePath("lookAtHelper")
+slot_manager = NodePath("Pivot/InnerPivot/SlotManager")
 
 [node name="Pivot" type="Node2D" parent="."]
 
@@ -26,5 +29,26 @@ texture = ExtResource("1_581l7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/InnerPivot/RoomDetector"]
 position = Vector2(39.5, 0)
 shape = SubResource("RectangleShape2D_ogmrx")
+
+[node name="SlotManager" type="Node2D" parent="Pivot/InnerPivot"]
+position = Vector2(-300, 0)
+script = ExtResource("3_uinhc")
+metadata/_edit_lock_ = true
+
+[node name="ElevatorSlot1" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
+position = Vector2(264, -35)
+script = ExtResource("4_h6q4t")
+
+[node name="ElevatorSlot2" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
+position = Vector2(262, 37)
+script = ExtResource("4_h6q4t")
+
+[node name="ElevatorSlot3" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
+position = Vector2(333, 40)
+script = ExtResource("4_h6q4t")
+
+[node name="ElevatorSlot4" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
+position = Vector2(330, -32)
+script = ExtResource("4_h6q4t")
 
 [node name="lookAtHelper" type="Node2D" parent="."]
