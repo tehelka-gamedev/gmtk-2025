@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
-[ext_resource type="Texture2D" uid="uid://fklnwtqtkvws" path="res://sprites/circle.png" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 
@@ -10,34 +10,42 @@ script = ExtResource("1_lquwl")
 elevator = NodePath("World/Elevator")
 
 [node name="World" type="Node2D" parent="."]
+position = Vector2(-246, -143)
 
 [node name="ColorRect" type="ColorRect" parent="World"]
-offset_right = 1145.0
-offset_bottom = 648.0
+offset_left = 246.0
+offset_top = 143.0
+offset_right = 886.0
+offset_bottom = 503.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 color = Color(0.513726, 0.513726, 0.513726, 0.580392)
 
 [node name="circle" type="Sprite2D" parent="World"]
-position = Vector2(333, 185)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_lquwl")
+position = Vector2(548, 322)
+texture = ExtResource("2_1bvp3")
 
 [node name="Elevator" parent="World" instance=ExtResource("3_7mycd")]
-position = Vector2(332, 186)
-distance_to_pivot_point = 43.0
-speed = 90.0
+position = Vector2(548, 322)
 
 [node name="Rooms" type="Node2D" parent="."]
+position = Vector2(302, 179)
 
 [node name="Room" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(243, 214)
 
 [node name="Room2" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(244, 157)
+modulate = Color(0, 0, 1, 0.5)
+rotation = 1.5708
+color = 1
 
 [node name="Room3" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(428, 156)
+modulate = Color(0.8, 0.05, 0.8, 0.5)
+rotation = 3.14159
+color = 3
 
 [node name="Room4" parent="Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(429, 216)
+modulate = Color(0.8, 0.45, 0.05, 0.5)
+rotation = 4.71239
+color = 4
 
 [node name="NPCs" type="Node2D" parent="."]

@@ -13,7 +13,7 @@ signal toggle_movement_requested
         if inner_pivot:
             inner_pivot.position.x = distance_to_pivot_point
 
-@export var speed: float = 2.0
+@export var speed: float = 90.0
 @export var moving: bool = true
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null

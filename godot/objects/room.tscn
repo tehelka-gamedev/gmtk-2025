@@ -6,44 +6,46 @@
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4lmf"]
-size = Vector2(10, 30)
+size = Vector2(94, 17)
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("slot_manager")]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1, 0, 0, 0.5)
 script = ExtResource("1_d4lmf")
 slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
 
 [node name="NPCSpawn" type="Marker2D" parent="."]
-position = Vector2(-20, 0)
+position = Vector2(0, -160)
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -147)
 
 [node name="Room" type="Sprite2D" parent="Pivot"]
-scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_2vtrl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Pivot"]
-position = Vector2(31, 0)
+position = Vector2(0, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/StaticBody2D"]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_d4lmf")
 
 [node name="SlotManager" type="Node2D" parent="."]
+position = Vector2(0, -147)
 script = ExtResource("3_lvljb")
 
 [node name="Marker2D" type="Marker2D" parent="SlotManager"]
-position = Vector2(8, -8)
+position = Vector2(-27, 6)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D2" type="Marker2D" parent="SlotManager"]
-position = Vector2(8, 7)
+position = Vector2(-11, 6)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D3" type="Marker2D" parent="SlotManager"]
-position = Vector2(20, 7)
+position = Vector2(11, 6)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D4" type="Marker2D" parent="SlotManager"]
-position = Vector2(20, -8)
+position = Vector2(27, 6)
 script = ExtResource("4_4d8i4")
