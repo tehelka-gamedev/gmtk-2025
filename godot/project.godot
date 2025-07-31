@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioManager="*res://addons/audio_manager/audio_manager.tscn"
+Enum="*res://scripts/Enum.gd"
 
 [editor_plugins]
 
