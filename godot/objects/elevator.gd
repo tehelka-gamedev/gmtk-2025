@@ -18,6 +18,7 @@ signal toggle_movement_requested
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
 
+@export var space_station: SpaceStation
 
 var door_is_open: bool = false
 
@@ -79,6 +80,8 @@ func _process_game(delta: float) -> void:
         # else just regular start/stop
         else:
             moving = not moving
+    elif _snapping:
+        _refresh_tween()
 
     if not moving:
         if Input.is_action_just_pressed("open_door"):
@@ -87,10 +90,10 @@ func _process_game(delta: float) -> void:
             else:
                 _open_door()
     
-    if _snapping:
-        return
-    if moving:
+    if moving and not _snapping:
         rotation_degrees -= delta * speed
+    else:
+        rotation_degrees += space_station.rotation_speed * delta
 
 func _open_door() -> void:
     # play open_door_animation
@@ -126,16 +129,26 @@ func _on_body_exited(body: Node2D):
 func snap_to_room(room: Node2D) -> void:
     _snapping = true
     moving = false
-    look_at_helper.look_at(room.global_position)
+    _refresh_tween()
+
+
+func _refresh_tween() -> void:
+    if not snap_target:
+        return
+    
+    look_at_helper.look_at(snap_target.global_position)
     var target_rotation:float = look_at_helper.global_rotation
 
     target_rotation = lerp_angle(rotation, target_rotation, 1)
+    if _tween:
+        _tween.stop()
     _tween = get_tree().create_tween()
     _tween.tween_property(self, "rotation", target_rotation, snap_duration)
     _tween.set_trans(Tween.TRANS_ELASTIC)
     _tween.set_ease(Tween.EASE_IN)
 
     _tween.finished.connect(_on_snap_finished)
+
 
 func stop_snapping() -> void:
     _tween.stop()

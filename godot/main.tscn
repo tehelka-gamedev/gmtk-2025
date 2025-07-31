@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=8 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://yb7xrfudbkkw" path="res://sprites/spacestation_n.png" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://dqgdl6pik3h05" path="res://objects/space_station.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
@@ -12,7 +13,7 @@ normal_texture = ExtResource("3_lquwl")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
-elevator = NodePath("World/Elevator")
+elevator = NodePath("Elevator")
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2(-246, -143)
@@ -26,35 +27,37 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.513726, 0.513726, 0.513726, 0.580392)
 
-[node name="SpaceStation" type="Sprite2D" parent="World"]
-position = Vector2(548, 322)
-texture = SubResource("CanvasTexture_1bvp3")
-
-[node name="Elevator" parent="World" instance=ExtResource("3_7mycd")]
-position = Vector2(548, 322)
-
-[node name="Rooms" type="Node2D" parent="."]
+[node name="SpaceStation" type="Sprite2D" parent="."]
 position = Vector2(302, 179)
+texture = SubResource("CanvasTexture_1bvp3")
+script = ExtResource("4_7mycd")
 
-[node name="Room" parent="Rooms" instance=ExtResource("4_272bh")]
+[node name="Rooms" type="Node2D" parent="SpaceStation"]
+
+[node name="Room" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 position = Vector2(0, -150)
 
-[node name="Room2" parent="Rooms" instance=ExtResource("4_272bh")]
+[node name="Room2" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0, 0, 1, 0.5)
 position = Vector2(150, 0)
 rotation = 1.5708
 color = 1
 
-[node name="Room3" parent="Rooms" instance=ExtResource("4_272bh")]
+[node name="Room3" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0.8, 0.05, 0.8, 0.5)
 position = Vector2(0, 145)
 rotation = 3.14159
 color = 3
 
-[node name="Room4" parent="Rooms" instance=ExtResource("4_272bh")]
+[node name="Room4" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0.8, 0.45, 0.05, 0.5)
 position = Vector2(-150, 0)
 rotation = 4.71239
 color = 4
+
+[node name="Elevator" parent="." node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
+position = Vector2(302, 179)
+snap_duration = 0.3
+space_station = NodePath("../SpaceStation")
 
 [node name="NPCs" type="Node2D" parent="."]

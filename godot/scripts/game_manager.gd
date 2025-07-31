@@ -4,8 +4,10 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
-@onready var rooms: Array[Node] = $Rooms.get_children()
+
+@onready var rooms: Array[Node] = $SpaceStation/Rooms.get_children()
 @onready var _npcs: Node2D = $NPCs
+@onready var _space_station: Sprite2D = $SpaceStation
 
 var current_npc_count: int = 0
 
@@ -20,6 +22,7 @@ func _ready() -> void:
         _spawn_npc()
 
     elevator.door_opened.connect(_on_elevator_door_opened)
+
 
 func _spawn_npc() -> void:
     var non_full_rooms: Array[Room] = []
