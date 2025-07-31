@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck8ma3a7300uf"]
+
+[ext_resource type="PackedScene" uid="uid://bttrvcujvlunr" path="res://objects/npc/npc.tscn" id="1_3mla1"]
+
+[node name="TestSceneTehelka" type="Node2D"]
+
+[node name="NPC" parent="." instance=ExtResource("1_3mla1")]
