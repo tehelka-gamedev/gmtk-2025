@@ -10,6 +10,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 var current_npc_count: int = 0
 
 func _ready() -> void:
+    randomize()
     if elevator == null:
         push_error("no elevator")
         return
@@ -29,4 +30,6 @@ func _spawn_npc() -> void:
     var npc: NPC = NPC_class.instantiate()
     npc.position = spawn_position
     _npcs.add_child(npc)
-    npc.state_machine.transition_to("MoveTo", {NPCStatesUtil.Message.target: random_room.slot_manager.get_first_available_slot()})
+    var slot: Slot = random_room.slot_manager.get_first_available_slot()
+    random_room.slot_manager.reserve_slot(slot)
+    npc.state_machine.transition_to("MoveTo", {NPCStatesUtil.Message.target: slot})

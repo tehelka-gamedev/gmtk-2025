@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bttrvcujvlunr"]
+[gd_scene load_steps=8 format=3 uid="uid://bttrvcujvlunr"]
 
-[ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="1_opgxg"]
 [ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
+[ext_resource type="Texture2D" uid="uid://dl2gum1rnr5xw" path="res://sprites/npg_spritesheet.png" id="2_aqpri"]
 [ext_resource type="Script" uid="uid://bfabaymcuhp74" path="res://utils/state_machine/state_machine.gd" id="2_rn7i7"]
 [ext_resource type="Script" uid="uid://chs00o4pldxek" path="res://states/idle_state.gd" id="3_aqpri"]
 [ext_resource type="Script" uid="uid://h0sp5pu5a2io" path="res://states/move_to_state.gd" id="4_m6gh1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6gh1"]
+atlas = ExtResource("2_aqpri")
+region = Rect2(0, 0, 124, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rn7i7"]
 radius = 190.15
@@ -15,7 +19,8 @@ script = ExtResource("1_rn7i7")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-texture = ExtResource("1_opgxg")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_m6gh1")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("2_rn7i7")

@@ -9,11 +9,11 @@ func process(delta: float) -> void:
         push_error("'%s' trying to move to a target but there is none!" % name)
         return
     
+    owner.global_position = lerp(owner.global_position, _target.global_position, delta * 5)
+    
 
 func enter(msg: = {}) -> void:
-    #print("Entering MoveTo State, msg=%s" %msg)
     _target = msg.get(NPCStatesUtil.Message.target)
     
 func exit(msg: = {}) -> void:
-    #print("Exiting MoveTo State")
     _target = null
