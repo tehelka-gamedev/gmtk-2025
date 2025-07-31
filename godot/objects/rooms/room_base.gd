@@ -27,7 +27,7 @@ func pop_npc_from_inside() -> NPC:
 
     if not npc:
         push_error("Tried to pop an npc but there are no left in the elevator, something is wrong!!")
-        return
+        return null
     slot_manager.release_slot(npc.slot)
 
     return npc
