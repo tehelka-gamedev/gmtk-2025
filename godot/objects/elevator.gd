@@ -2,8 +2,7 @@
 extends RoomBase
 class_name Elevator
 
-signal left_door_opened
-signal right_door_opened
+signal door_opened
 signal toggle_movement_requested
 
 @export var distance_to_pivot_point:float = 300 :
@@ -77,14 +76,10 @@ func _process_game(delta: float) -> void:
             moving = not moving
 
     if not moving:
-        if Input.is_action_just_pressed("open_left_door"):
-            # play open_left_door_animation
-            # await open_left_door_animation.finished
-            left_door_opened.emit()
-        elif Input.is_action_just_pressed("open_right_door"):
-            # play open_right_door_animation
-            # await open_right_door_animation.finished
-            right_door_opened.emit()
+        if Input.is_action_just_pressed("open_door"):
+            # play open_door_animation
+            # await open__door_animation.finished
+            door_opened.emit()
     
     if _snapping:
         return
