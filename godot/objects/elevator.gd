@@ -15,7 +15,8 @@ signal toggle_movement_requested
 
 @export var speed: float = 2.0
 @export var moving: bool = true
-@export var snap_duration: float = 2.0
+@export var snap_duration: float = 0.5
+@export var snap_target:Node2D = null
 
 
 @export_category("Editor variables")
@@ -43,6 +44,7 @@ func _ready() -> void:
         return
     
     room_detector.body_entered.connect(_on_body_entered)
+    room_detector.body_exited.connect(_on_body_exited)
 
     
 
@@ -58,7 +60,18 @@ func _process_editor() -> void:
 func _process_game(delta: float) -> void:
     if Input.is_action_just_pressed("elevator_toggle_movement"):
         toggle_movement_requested.emit()
-        moving = not moving
+
+        # if snapping, we can abort and leave
+        if _snapping:
+            stop_snapping()
+            moving = true
+
+        # otherwise, if we can snap, we start snapping
+        elif snap_target:
+            snap_to_room(snap_target)
+        # else just regular start/stop
+        else:
+            moving = not moving
 
     if not moving:
         if Input.is_action_just_pressed("open_left_door"):
@@ -83,7 +96,12 @@ func _draw():
 
 func _on_body_entered(body: Node2D):
     print("BODY ! %s" % body)
-    snap_to_room(body)
+    snap_target = body
+
+func _on_body_exited(body: Node2D):
+    if body == snap_target:
+        print("OUT")
+        snap_target = null
 
 # for now, just typehint Node2D since we actually give the PhysicsBody2D and not the room...
 func snap_to_room(room: Node2D) -> void:
@@ -106,5 +124,11 @@ func snap_to_room(room: Node2D) -> void:
 
     _tween.finished.connect(_on_snap_finished)
 
+func stop_snapping() -> void:
+    _tween.stop()
+    _tween = null
+    _snapping = false
+
 func _on_snap_finished() -> void:
     print("Snap finished!")
+    stop_snapping()
