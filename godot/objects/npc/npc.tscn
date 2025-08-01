@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://chs00o4pldxek" path="res://states/idle_state.gd" id="3_aqpri"]
 [ext_resource type="Script" uid="uid://h0sp5pu5a2io" path="res://states/move_to_state.gd" id="4_m6gh1"]
 
-[node name="NPC" type="Node2D"]
+[node name="NPC" type="Node2D" node_paths=PackedStringArray("_skin")]
 script = ExtResource("1_rn7i7")
+_skin = NodePath("Pivot/Skin")
 
 [node name="Pivot" type="Node2D" parent="."]
 

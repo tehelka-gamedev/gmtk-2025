@@ -68,16 +68,16 @@ rotation = 1.5708
 color = 1
 
 [node name="Room3" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-modulate = Color(0.8, 0.05, 0.8, 0.5)
+modulate = Color(0.8, 0.45, 0.05, 0.5)
 position = Vector2(0, 147)
 rotation = 3.14159
 color = 3
 
 [node name="Room4" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-modulate = Color(0.8, 0.45, 0.05, 0.5)
+modulate = Color(0.8, 0.05, 0.8, 0.5)
 position = Vector2(-147, 0)
 rotation = 4.71239
-color = 4
+color = 2
 
 [node name="Elevator" parent="." node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
 position = Vector2(302, 179)

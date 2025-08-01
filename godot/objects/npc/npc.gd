@@ -1,14 +1,19 @@
 class_name NPC
 extends Node2D
 
-@export var color: Enum.NPCColors = Enum.NPCColors.RED
+@export var _skin: NPCSkin
+@export var color: Enum.NPCColors = Enum.NPCColors.RED:
+    set(value):
+        color = value
+        if not is_node_ready():
+            await ready
+        _skin.set_color_to(Enum.color_enum_to_rgb(color))
 @export var slot:Slot = null
 
 ## If true, will queue_free() after reaching its point
 var exiting: bool = false
 
 @onready var state_machine: StateMachine = $StateMachine
-@onready var _skin: NPCSkin = $Pivot/Skin
 
 
 func go_to_slot(s: Slot) -> void:

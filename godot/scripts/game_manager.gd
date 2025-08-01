@@ -36,8 +36,9 @@ func _spawn_npc() -> void:
     var random_room: Room = non_full_rooms.pick_random()
     var spawn_position: Vector2 = random_room.npc_spawn.global_position
     var npc: NPC = NPC_class.instantiate()
-    npc.position = spawn_position
     _npcs.add_child(npc)
+    npc.position = spawn_position
+    npc.color = Enum.NPCColors.values().pick_random()
 
     var slot: Slot = random_room.slot_manager.get_first_available_slot()
     random_room.add_npc_inside(npc, slot)

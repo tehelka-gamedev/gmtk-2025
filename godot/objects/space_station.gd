@@ -2,7 +2,7 @@ class_name SpaceStation
 extends Sprite2D
 
 
-@export var rotation_speed: float = 5.0
+@export var rotation_speed: float = 3.0
 
 
 func _physics_process(delta: float) -> void:
