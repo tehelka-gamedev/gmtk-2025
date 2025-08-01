@@ -27,6 +27,8 @@ normal_texture = ExtResource("3_lquwl")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
+MIN_NPC_RESPAWN_TIME = 2.0
+MAX_NPC_RESPAWN_TIME = 4.0
 starting_npc_count = 8
 elevator = NodePath("Elevator")
 
@@ -57,6 +59,7 @@ material = SubResource("ShaderMaterial_efxa6")
 position = Vector2(302, 179)
 texture = SubResource("CanvasTexture_1bvp3")
 script = ExtResource("4_7mycd")
+rotation_speed = 2.0
 
 [node name="Rooms" type="Node2D" parent="SpaceStation"]
 
