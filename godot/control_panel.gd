@@ -7,11 +7,14 @@ signal start_elevator_pressed
 signal stop_elevator_pressed
 signal speed_cursor_changed(value: int)
 
+@export var MESSAGE_TIMER: float = 5.0
+
 @onready var speed_label: Label = %SpeedLabel
 @onready var h_slider: HSlider = %HSlider
 @onready var message_panel: Label = %MessagePanel
 @onready var angry_npc_label: Label = %AngryNPCLabel
 @onready var happy_npc_label: Label = %HappyNPCLabel
+@onready var _message_timer: Timer = $MessageTimer
 
 
 func set_speed_cursor(value: int) -> void:
@@ -20,7 +23,9 @@ func set_speed_cursor(value: int) -> void:
 
 
 func set_panel_message(message: String) -> void:
+    _message_timer.stop()
     message_panel.text = message
+    _message_timer.start(MESSAGE_TIMER)
 
 
 func set_angry_npc_count(value: int) -> void:
@@ -50,3 +55,7 @@ func _on_start_button_pressed() -> void:
 
 func _on_stop_button_pressed() -> void:
     stop_elevator_pressed.emit()
+
+
+func _on_message_timer_timeout() -> void:
+    message_panel.text = ""

@@ -258,6 +258,8 @@ min_value = 1.0
 max_value = 5.0
 value = 1.0
 
+[node name="MessageTimer" type="Timer" parent="HUD/ControlPanel"]
+
 [node name="MuteSoundsContainer" parent="HUD" instance=ExtResource("12_dg77c")]
 offset_left = -98.0
 offset_bottom = 63.0
@@ -278,3 +280,4 @@ warning_to_almost_fired_messages = ExtResource("18_getpj")
 [connection signal="pressed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer2/StartButton" to="HUD/ControlPanel" method="_on_start_button_pressed"]
 [connection signal="pressed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer2/StopButton" to="HUD/ControlPanel" method="_on_stop_button_pressed"]
 [connection signal="value_changed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HSlider" to="HUD/ControlPanel" method="_on_h_slider_value_changed"]
+[connection signal="timeout" from="HUD/ControlPanel/MessageTimer" to="HUD/ControlPanel" method="_on_message_timer_timeout"]
