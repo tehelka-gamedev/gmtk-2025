@@ -10,6 +10,16 @@ class_name Room
 
 
 @onready var npc_spawn: Marker2D = $NPCSpawn
+@onready var _door: Sprite2D = $Door
+
 
 func get_spawn_point() -> Marker2D:
     return npc_spawn
+
+
+func open_door() -> void:
+    _door.hide()
+
+
+func close_door() -> void:
+    _door.show()

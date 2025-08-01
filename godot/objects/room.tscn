@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd5giy7mmmmxe"]
+[gd_scene load_steps=7 format=3 uid="uid://dd5giy7mmmmxe"]
 
 [ext_resource type="Texture2D" uid="uid://bdg4laa3wc80a" path="res://sprites/room.png" id="1_2vtrl"]
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
+[ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_c0xyw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4lmf"]
 size = Vector2(94, 17)
@@ -47,3 +48,9 @@ script = ExtResource("4_4d8i4")
 [node name="Marker2D4" type="Marker2D" parent="SlotManager"]
 position = Vector2(27, 6)
 script = ExtResource("4_4d8i4")
+
+[node name="Door" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 28.5)
+scale = Vector2(0.15625, 0.0234375)
+texture = ExtResource("5_c0xyw")

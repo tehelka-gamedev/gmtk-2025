@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bixriv415q58j"]
+[gd_scene load_steps=7 format=3 uid="uid://bixriv415q58j"]
 
 [ext_resource type="Texture2D" uid="uid://c46t4mgyx75iv" path="res://sprites/elevator.png" id="1_581l7"]
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_uinhc"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
+[ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_h6q4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
 size = Vector2(24, 80)
@@ -51,3 +52,10 @@ position = Vector2(-3, 30)
 script = ExtResource("4_h6q4t")
 
 [node name="lookAtHelper" type="Node2D" parent="."]
+
+[node name="Door" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(109, 1.19209e-07)
+rotation = 1.57079
+scale = Vector2(0.15625, 0.0234375)
+texture = ExtResource("5_h6q4t")

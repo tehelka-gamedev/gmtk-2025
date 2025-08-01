@@ -33,7 +33,10 @@ var door_is_open: bool = false
         show_trajectory = value
 
 var _snapping: bool = false
+var _snapped: bool = false
 var _tween: Tween = null
+@onready var _door: Sprite2D = $Door
+
 
 func _ready() -> void:
     if not room_detector:
@@ -79,11 +82,14 @@ func _process_game(delta: float) -> void:
                 moving = true
         # else just regular start/stop
         else:
+            if _snapped:
+                _snapped = false
             moving = not moving
+            
     elif _snapping:
         _refresh_tween()
 
-    if not moving:
+    if _snapped:
         if Input.is_action_just_pressed("open_door"):
             if door_is_open:
                 _close_door()
@@ -99,10 +105,14 @@ func _open_door() -> void:
     # play open_door_animation
     # await open__door_animation.finished
     door_is_open = true
+    _door.hide()
+    snap_target.open_door()
     door_opened.emit()
 
 func _close_door() -> void:
     door_is_open = false
+    _door.show()
+    snap_target.close_door()
     door_closed.emit()
 
 func _draw():
@@ -140,6 +150,9 @@ func _refresh_tween() -> void:
     var target_rotation:float = look_at_helper.global_rotation
 
     target_rotation = lerp_angle(rotation, target_rotation, 1)
+    if abs(target_rotation - rotation) < 0.001:
+        _on_snap_finished()
+        return
     if _tween:
         _tween.stop()
     _tween = get_tree().create_tween()
@@ -157,6 +170,7 @@ func stop_snapping() -> void:
 
 func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
+    _snapped = true
     stop_snapping()
 
 func get_snapped_room() -> Room:
