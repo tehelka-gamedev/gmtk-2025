@@ -13,7 +13,8 @@ signal toggle_movement_requested
         if inner_pivot:
             inner_pivot.position.x = distance_to_pivot_point
 
-@export var speed: float = 90.0
+@export var speed_array: Array[float] = [30.0, 60.0, 90.0, 150.0, 360.0]
+@export var current_speed: int = 2
 @export var moving: bool = true
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
@@ -66,25 +67,7 @@ func _process_editor() -> void:
 func _process_game(delta: float) -> void:
     # only can toggle movement if doors are closed
     if Input.is_action_just_pressed("elevator_toggle_movement") and not door_is_open:
-        toggle_movement_requested.emit()
-
-        # if snapping, we can abort and leave
-        if _snapping:
-            stop_snapping()
-            moving = true
-
-        # otherwise, if we can snap
-        elif snap_target:
-            # we start snapping if we move, otherwise that is we are already stopped
-            if moving:
-                snap_to_room()
-            else:
-                moving = true
-        # else just regular start/stop
-        else:
-            if _snapped:
-                _snapped = false
-            moving = not moving
+        handle_toggle_movement()
             
     elif _snapping:
         _refresh_tween()
@@ -97,7 +80,7 @@ func _process_game(delta: float) -> void:
                 _open_door()
     
     if moving and not _snapping:
-        rotation_degrees -= delta * speed
+        rotation_degrees -= delta * speed_array[current_speed]
     else:
         rotation_degrees += space_station.rotation_speed * delta
 
@@ -168,10 +151,65 @@ func stop_snapping() -> void:
     _tween = null
     _snapping = false
 
+
 func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
     _snapped = true
     stop_snapping()
 
+
 func get_snapped_room() -> Room:
     return snap_target as Room if snap_target else null
+
+
+func handle_toggle_movement() -> void:
+    toggle_movement_requested.emit()
+
+    # if snapping, we can abort and leave
+    if _snapping:
+        stop_snapping()
+        moving = true
+
+    # otherwise, if we can snap
+    elif snap_target:
+        # we start snapping if we move, otherwise that is we are already stopped
+        if moving:
+            snap_to_room()
+        else:
+            if _snapped:
+                _snapped = false
+            moving = true
+    # else just regular start/stop
+    else:
+        if _snapped:
+            _snapped = false
+        moving = not moving
+
+func on_speed_value_changed(value: int) -> void:
+    if value != current_speed:
+        current_speed = value
+
+
+func on_open_gates() -> void:
+    if door_is_open:
+        return
+    if _snapped:
+        _open_door()
+
+
+func on_close_gates() -> void:
+    if not door_is_open:
+        return
+    _close_door()
+
+
+func on_start_elevator() -> void:
+    if moving:
+        return
+    handle_toggle_movement()
+
+
+func on_stop_elevator() -> void:
+    if not moving:
+        return
+    handle_toggle_movement()

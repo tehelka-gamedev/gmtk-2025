@@ -8,9 +8,10 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
 
-@onready var rooms: Array[Node] = $SpaceStation/Rooms.get_children()
-@onready var _npcs: Node2D = $NPCs
-@onready var _npc_spawn_timer: Timer = $NPCSpawnTimer
+@onready var rooms: Array[Node] = $World/SpaceStation/Rooms.get_children()
+@onready var _npcs: Node2D = $World/NPCs
+@onready var _npc_spawn_timer: Timer = $World/NPCSpawnTimer
+@onready var _control_panel: Panel = $ControlPanel
 
 var current_npc_count: int = 0
 
@@ -26,6 +27,13 @@ func _ready() -> void:
 
     elevator.door_opened.connect(_on_elevator_door_opened)
     _restart_npc_spawn_timer()
+    
+    _control_panel.set_speed_cursor(elevator.current_speed)
+    _control_panel.speed_cursor_changed.connect(elevator.on_speed_value_changed)
+    _control_panel.open_gates_pressed.connect(elevator.on_open_gates)
+    _control_panel.close_gates_pressed.connect(elevator.on_close_gates)
+    _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
+    _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
 
 
 func _spawn_npc() -> void:

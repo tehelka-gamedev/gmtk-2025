@@ -11,6 +11,7 @@ size = Vector2(24, 80)
 
 [node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper", "slot_manager")]
 script = ExtResource("1_ogmrx")
+current_speed = null
 inner_pivot = NodePath("Pivot/InnerPivot")
 room_detector = NodePath("Pivot/InnerPivot/RoomDetector")
 look_at_helper = NodePath("lookAtHelper")

@@ -1,0 +1,28 @@
+# Gameplay
+
+- Control pannel on the right:
+    - Elevator speed (several speed: 1, 2, 3, 4, 5)
+        -? overheat gauge
+    - Stop elevator
+    - Start elevator
+    - Open gates
+    - Close gates
+    -? Jingle
+    -? Label with the number of passengers correctly transported
+    -? Label with passengers and each color 
+    -? Ingame time clock
+    
+
+- Outline the room and elevator when docked
+- Faire en sorte que les passagers rentrent un par un et plus lentement
+
+-? More passenger you have in the elevator, slower is the elevator
+
+## Events
+
+-? Brouillard de guerre
+-? Broken rooms? Needs to bring a tech guy to repair
+-? Room qui se détache
+-? Asteroids
+
+## Roguelike addons

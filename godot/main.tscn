@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=16 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dqgdl6pik3h05" path="res://objects/space_station.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
+[ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="11_efxa6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 particles_animation = true
@@ -25,12 +26,15 @@ shader_parameter/pixel_scale = 1.0
 diffuse_texture = ExtResource("2_1bvp3")
 normal_texture = ExtResource("3_lquwl")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+bg_color = Color(0.153436, 0.153437, 0.153436, 1)
+
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
 MIN_NPC_RESPAWN_TIME = 2.0
 MAX_NPC_RESPAWN_TIME = 4.0
 starting_npc_count = 8
-elevator = NodePath("Elevator")
+elevator = NodePath("World/Elevator")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
@@ -54,53 +58,125 @@ gravity = Vector2(0, 0)
 anim_speed_min = 0.05
 anim_speed_max = 0.5
 
-[node name="SpaceStation" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_efxa6")
-position = Vector2(302, 179)
-texture = SubResource("CanvasTexture_1bvp3")
-script = ExtResource("4_7mycd")
-rotation_speed = 2.0
-
-[node name="Rooms" type="Node2D" parent="SpaceStation"]
-
-[node name="Room" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(0, -147)
-
-[node name="Room2" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-modulate = Color(0, 0, 1, 0.5)
-position = Vector2(147, 0)
-rotation = 1.5708
-color = 1
-
-[node name="Room3" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-modulate = Color(0.8, 0.45, 0.05, 0.5)
-position = Vector2(0, 147)
-rotation = 3.14159
-color = 3
-
-[node name="Room4" parent="SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-modulate = Color(0.8, 0.05, 0.8, 0.5)
-position = Vector2(-147, 0)
-rotation = 4.71239
-color = 2
-
-[node name="Elevator" parent="." node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
-position = Vector2(302, 179)
-snap_duration = 0.3
-space_station = NodePath("../SpaceStation")
-
-[node name="NPCs" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(69, 49)
+position = Vector2(44, 44)
 energy = 1.2
 texture = ExtResource("9_kek77")
 texture_scale = 3.0
 height = 20.0
 metadata/_edit_lock_ = true
 
-[node name="NPCSpawnTimer" type="Timer" parent="."]
+[node name="World" type="Node2D" parent="."]
+
+[node name="SpaceStation" type="Sprite2D" parent="World"]
+material = SubResource("ShaderMaterial_efxa6")
+position = Vector2(184, 179)
+texture = SubResource("CanvasTexture_1bvp3")
+script = ExtResource("4_7mycd")
+rotation_speed = 2.0
+
+[node name="Rooms" type="Node2D" parent="World/SpaceStation"]
+
+[node name="Room" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
+position = Vector2(0, -147)
+
+[node name="Room2" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
+modulate = Color(0, 0, 1, 0.5)
+position = Vector2(147, 0)
+rotation = 1.5708
+color = 1
+
+[node name="Room3" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
+modulate = Color(0.8, 0.45, 0.05, 0.5)
+position = Vector2(0, 147)
+rotation = 3.14159
+color = 3
+
+[node name="Room4" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
+modulate = Color(0.8, 0.05, 0.8, 0.5)
+position = Vector2(-147, 0)
+rotation = 4.71239
+color = 2
+
+[node name="Elevator" parent="World" node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
+position = Vector2(184, 179)
+speed_array = Array[float]([15.0, 45.0, 90.0, 220.0, 360.0])
+current_speed = 2
+snap_duration = 0.3
+space_station = NodePath("../SpaceStation")
+
+[node name="NPCs" type="Node2D" parent="World"]
+metadata/_edit_lock_ = true
+
+[node name="NPCSpawnTimer" type="Timer" parent="World"]
 one_shot = true
 
-[connection signal="timeout" from="NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
+[node name="ControlPanel" type="Panel" parent="."]
+offset_left = 381.0
+offset_top = 25.0
+offset_right = 618.0
+offset_bottom = 338.0
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
+script = ExtResource("11_efxa6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -33.0
+offset_right = 57.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OpenGates" type="Button" parent="ControlPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Open gates"
+
+[node name="CloseGates" type="Button" parent="ControlPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Close gates"
+
+[node name="HSeparator" type="HSeparator" parent="ControlPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="ControlPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Start elevator"
+
+[node name="StopButton" type="Button" parent="ControlPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Stop elevator"
+
+[node name="HSeparator2" type="HSeparator" parent="ControlPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="ControlPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Speed: 1"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="ControlPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[connection signal="timeout" from="World/NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
+[connection signal="pressed" from="ControlPanel/VBoxContainer/OpenGates" to="ControlPanel" method="_on_open_gates_pressed"]
+[connection signal="pressed" from="ControlPanel/VBoxContainer/CloseGates" to="ControlPanel" method="_on_close_gates_pressed"]
+[connection signal="pressed" from="ControlPanel/VBoxContainer/StartButton" to="ControlPanel" method="_on_start_button_pressed"]
+[connection signal="pressed" from="ControlPanel/VBoxContainer/StopButton" to="ControlPanel" method="_on_stop_button_pressed"]
+[connection signal="value_changed" from="ControlPanel/VBoxContainer/HSlider" to="ControlPanel" method="_on_h_slider_value_changed"]
