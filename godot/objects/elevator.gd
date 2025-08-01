@@ -39,6 +39,7 @@ var door_is_open: bool = false
 var _snapping: bool = false
 var _snapped: bool = false
 var _tween: Tween = null
+var _people_are_entering: bool = false
 @onready var _door: Sprite2D = $Door
 
 
@@ -75,7 +76,7 @@ func _process_game(delta: float) -> void:
     elif _snapping:
         _refresh_tween()
 
-    if _snapped:
+    if _snapped and not _people_are_entering:
         if Input.is_action_just_pressed("open_door"):
             if door_is_open:
                 _close_door()
@@ -220,3 +221,10 @@ func on_stop_elevator() -> void:
 
 func get_entrance_position() -> Marker2D:
     return entrance_position
+
+# Called when people start entering
+func start_loading_people() -> void:
+    _people_are_entering = true
+
+func stop_loading_people() -> void:
+    _people_are_entering = false

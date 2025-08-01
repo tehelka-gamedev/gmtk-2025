@@ -18,10 +18,12 @@ func process(delta: float) -> void:
             next_target_pos if _arrived
             else lerp(owner.global_position, next_target_pos, delta * MOVE_SPEED)
     )
-    if owner.global_position.distance_squared_to(next_target_pos) < 10:
+    if not _arrived and owner.global_position.distance_squared_to(next_target_pos) < 10:
         # One target left, we arrived, yay! :D
         if len(_targets) == 1:
             _arrived = true
+            owner.arrived_at_slot.emit()
+            
             if owner.exiting:
                 owner.exit()
         if len(_targets) > 1:

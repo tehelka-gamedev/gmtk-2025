@@ -80,6 +80,7 @@ func _on_elevator_door_opened() -> void:
                 return npcs.pop_at(i)
         return null
 
+    elevator.start_loading_people()
     while not elevator.is_empty():
         # TODO: add a filter to only let people that want to leave out
         npc_to_release = elevator.pop_npc_from_inside(filter_to_room_color)
@@ -95,11 +96,12 @@ func _on_elevator_door_opened() -> void:
             ]
         npc_to_release.exiting = true
         npc_to_release.state_machine.transition_to(
-        NPCStatesUtil.StatesName.move_to,
-        {
-            NPCStatesUtil.Message.target: targets
-        }
-    )
+            NPCStatesUtil.StatesName.move_to,
+            {
+                NPCStatesUtil.Message.target: targets
+            }
+        )
+        await npc_to_release.arrived_at_slot
 
     _on_all_npc_released()
 
@@ -128,7 +130,9 @@ func _on_all_npc_released() -> void:
                 NPCStatesUtil.Message.target: targets
             }
         )
+        await npc_to_enter.arrived_at_slot
         
+    elevator.stop_loading_people()
 
 
 func _on_npc_spawn_timer_timeout() -> void:

@@ -1,6 +1,9 @@
 class_name NPC
 extends Node2D
 
+@warning_ignore("unused_signal")
+signal arrived_at_slot
+
 @export var _skin: NPCSkin
 @export var color: Enum.NPCColors = Enum.NPCColors.RED:
     set(value):
