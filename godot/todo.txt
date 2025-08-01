@@ -1,12 +1,7 @@
 # Gameplay
 
 - Control pannel on the right:
-    - Elevator speed (several speed: 1, 2, 3, 4, 5)
-        -? overheat gauge
-    - Stop elevator
-    - Start elevator
-    - Open gates
-    - Close gates
+    -? overheat gauge
     -? Jingle
     -? Label with the number of passengers correctly transported
     -? Label with passengers and each color 
