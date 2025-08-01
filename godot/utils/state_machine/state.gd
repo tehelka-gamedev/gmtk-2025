@@ -1,6 +1,7 @@
 extends Node
 class_name State
 
+@warning_ignore("unused_private_class_variable")
 @onready var _state_machine := _get_state_machine(self)
 
 var _parent: State = null
@@ -10,19 +11,19 @@ func _ready() -> void:
     if parent is State:
         _parent = parent
 
-func unhandled_input(event: InputEvent) -> void:
+func unhandled_input(_event: InputEvent) -> void:
     pass
     
-func process(delta: float) -> void:
+func process(_delta: float) -> void:
     pass
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
     pass
 
-func enter(msg: = {}) -> void:
+func enter(_msg: = {}) -> void:
     pass
     
-func exit(msg: = {}) -> void:
+func exit(_msg: = {}) -> void:
     pass
 
 func _get_state_machine(node: Node) -> Node:

@@ -7,7 +7,6 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 
 @onready var rooms: Array[Node] = $SpaceStation/Rooms.get_children()
 @onready var _npcs: Node2D = $NPCs
-@onready var _space_station: Sprite2D = $SpaceStation
 
 var current_npc_count: int = 0
 

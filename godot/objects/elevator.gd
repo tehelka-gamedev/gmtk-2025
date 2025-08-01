@@ -74,7 +74,7 @@ func _process_game(delta: float) -> void:
         elif snap_target:
             # we start snapping if we move, otherwise that is we are already stopped
             if moving:
-                snap_to_room(snap_target)
+                snap_to_room()
             else:
                 moving = true
         # else just regular start/stop
@@ -126,7 +126,7 @@ func _on_body_exited(body: Node2D):
         snap_target = null
 
 # for now, just typehint Node2D since we actually give the PhysicsBody2D and not the room...
-func snap_to_room(room: Node2D) -> void:
+func snap_to_room() -> void:
     _snapping = true
     moving = false
     _refresh_tween()

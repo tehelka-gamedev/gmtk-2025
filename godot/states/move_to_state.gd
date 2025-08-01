@@ -16,5 +16,5 @@ func process(delta: float) -> void:
 func enter(msg: = {}) -> void:
     _target = msg.get(NPCStatesUtil.Message.target)
     
-func exit(msg: = {}) -> void:
+func exit(_msg: = {}) -> void:
     _target = null
