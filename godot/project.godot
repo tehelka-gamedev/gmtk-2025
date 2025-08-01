@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 AudioManager="*res://addons/audio_manager/audio_manager.tscn"
 Enum="*res://scripts/Enum.gd"
 SoundBank="*res://audio/SoundBank.tscn"
+Events="*res://scripts/Events.gd"
 
 [display]
 
