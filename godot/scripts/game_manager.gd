@@ -88,7 +88,11 @@ func _on_elevator_door_opened() -> void:
         if npc_to_release == null:
             break
 
-        var targets: Array[Node2D] = [spawn_point]
+        var targets: Array[Node2D] = [
+            elevator.get_entrance_position(),
+            snapped_room.get_entrance_position(),
+            spawn_point,
+            ]
         npc_to_release.exiting = true
         npc_to_release.state_machine.transition_to(
         NPCStatesUtil.StatesName.move_to,
@@ -113,7 +117,17 @@ func _on_all_npc_released() -> void:
         # elevator is not full so there is at least one slot
         var slot = elevator.slot_manager.get_first_available_slot() # not null :)
         elevator.add_npc_inside(npc_to_enter, slot)
-        npc_to_enter.go_to_slot(slot)
+        var targets: Array[Node2D] = [
+            snapped_room.get_entrance_position(),
+            elevator.get_entrance_position(),
+            slot,
+            ]
+        npc_to_enter.state_machine.transition_to(
+            NPCStatesUtil.StatesName.move_to,
+            {
+                NPCStatesUtil.Message.target: targets
+            }
+        )
         
 
 

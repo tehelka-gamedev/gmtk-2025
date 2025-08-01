@@ -9,9 +9,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4lmf"]
 size = Vector2(94, 17)
 
-[node name="Room" type="Node2D" node_paths=PackedStringArray("slot_manager")]
+[node name="Room" type="Node2D" node_paths=PackedStringArray("entrance_position", "slot_manager")]
 modulate = Color(1, 0, 0, 0.5)
 script = ExtResource("1_d4lmf")
+entrance_position = NodePath("EntrancePosition")
 slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
 
@@ -54,3 +55,6 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 28.5)
 scale = Vector2(0.15625, 0.0234375)
 texture = ExtResource("5_c0xyw")
+
+[node name="EntrancePosition" type="Marker2D" parent="."]
+position = Vector2(0, 16)

@@ -9,11 +9,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
 size = Vector2(24, 80)
 
-[node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper", "slot_manager")]
+[node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper", "entrance_position", "slot_manager")]
 script = ExtResource("1_ogmrx")
 inner_pivot = NodePath("Pivot/InnerPivot")
 room_detector = NodePath("Pivot/InnerPivot/RoomDetector")
 look_at_helper = NodePath("lookAtHelper")
+entrance_position = NodePath("Pivot/InnerPivot/EntrancePosition")
 slot_manager = NodePath("Pivot/InnerPivot/SlotManager")
 
 [node name="Pivot" type="Node2D" parent="."]
@@ -50,6 +51,9 @@ script = ExtResource("4_h6q4t")
 [node name="ElevatorSlot4" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
 position = Vector2(-3, 30)
 script = ExtResource("4_h6q4t")
+
+[node name="EntrancePosition" type="Marker2D" parent="Pivot/InnerPivot"]
+position = Vector2(13, 0)
 
 [node name="lookAtHelper" type="Node2D" parent="."]
 

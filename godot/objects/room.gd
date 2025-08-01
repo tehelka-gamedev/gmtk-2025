@@ -9,6 +9,8 @@ class_name Room
         modulate = Enum.color_enum_to_rgb(color)
 
 
+@export var entrance_position:Marker2D = null
+
 @onready var npc_spawn: Marker2D = $NPCSpawn
 @onready var _door: Sprite2D = $Door
 
@@ -23,3 +25,6 @@ func open_door() -> void:
 
 func close_door() -> void:
     _door.show()
+
+func get_entrance_position() -> Marker2D:
+    return entrance_position

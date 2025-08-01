@@ -27,11 +27,14 @@ var door_is_open: bool = false
 @export var inner_pivot:Node2D = null # Where the sprite and object actually is
 @export var room_detector:Area2D = null
 @export var look_at_helper:Node2D = null # used to help in rotation computation
+@export var entrance_position:Marker2D = null
 
 @export_category("Debug")
 @export var show_trajectory: bool = false :
     set(value):
         show_trajectory = value
+
+
 
 var _snapping: bool = false
 var _snapped: bool = false
@@ -213,3 +216,7 @@ func on_stop_elevator() -> void:
     if not moving:
         return
     handle_toggle_movement()
+
+
+func get_entrance_position() -> Marker2D:
+    return entrance_position

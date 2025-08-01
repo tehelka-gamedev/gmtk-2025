@@ -46,3 +46,7 @@ func is_empty() -> bool:
 
 func is_full() -> bool:
     return slot_manager.is_full()
+
+func get_entrance_position() -> Marker2D:
+    push_error("get_entrance_position() not implemented in %s!" % name)
+    return null
