@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c71vbcevhwryy"]
+[gd_scene load_steps=5 format=3 uid="uid://c71vbcevhwryy"]
 
 [ext_resource type="Script" uid="uid://63l2xisdrp54" path="res://audio/sound_bank.gd" id="1_b6b3m"]
+[ext_resource type="AudioStream" uid="uid://cbm8ues6f6j6f" path="res://audio/bgm/spacejam-SLOW2.mp3" id="2_prkgb"]
+[ext_resource type="AudioStream" uid="uid://cw8ilv4mf6d4h" path="res://audio/bgm/spacejam-2.mp3" id="3_epkhj"]
+[ext_resource type="AudioStream" uid="uid://bfsmw0huvhxg4" path="res://audio/bgm/elevatormusic-for-space-jam.mp3" id="4_7t26c"]
 
 [node name="SoundBank" type="Node"]
 script = ExtResource("1_b6b3m")
+background_music = ExtResource("2_prkgb")
+background_music_complicated = ExtResource("3_epkhj")
+elevator_jingle_music = ExtResource("4_7t26c")
