@@ -58,6 +58,7 @@ material = SubResource("ShaderMaterial_efxa6")
 position = Vector2(302, 179)
 texture = SubResource("CanvasTexture_1bvp3")
 script = ExtResource("4_7mycd")
+rotation_speed = 2.0
 
 [node name="Rooms" type="Node2D" parent="SpaceStation"]
 
