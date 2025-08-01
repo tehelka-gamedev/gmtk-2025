@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MessageTypes" load_steps=2 format=3 uid="uid://brgmqpjo34qch"]
+
+[ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_ti0ng"]
+
+[resource]
+script = ExtResource("1_ti0ng")
+message = Array[String](["Operator, I heard people being happy again. That's great.", "Great news, operator. The tension is getting low again. Keep up the good work.", "This is good work, operator. Everything is now back to normal in the station."])
+metadata/_custom_type_script = "uid://u6fwccsjl86o"

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MessageTypes" load_steps=2 format=3 uid="uid://dyx3wqawopdo6"]
+
+[ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_dfdlq"]
+
+[resource]
+script = ExtResource("1_dfdlq")
+message = Array[String](["Warning operator, people are getting angry. Do your job better.", "Operator, people are waiting too long. Be quicker.", "Operator, this is a warning, you must convey people better."])
+metadata/_custom_type_script = "uid://u6fwccsjl86o"

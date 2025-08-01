@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MessageTypes" load_steps=2 format=3 uid="uid://7k5rhofrpd44"]
+
+[ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_ki8rh"]
+
+[resource]
+script = ExtResource("1_ki8rh")
+message = Array[String](["Operator, the situation is still bad, but better. Try your best.", "This is better, operator. But too many passengers are still angry. ", "I didn't think you were capable of turning back the situation operator. Keep going."])
+metadata/_custom_type_script = "uid://u6fwccsjl86o"

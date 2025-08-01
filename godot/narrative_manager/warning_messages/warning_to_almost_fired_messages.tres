@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MessageTypes" load_steps=2 format=3 uid="uid://coo4p0s6xoabp"]
+
+[ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_s86fa"]
+
+[resource]
+script = ExtResource("1_s86fa")
+message = Array[String](["Operator, this is the last warning, do your job or you will get fired.", "Final warning, operator. Your laziness is too big. Start doing your job.", "This is unacceptable, operator. This will be our last warning."])
+metadata/_custom_type_script = "uid://u6fwccsjl86o"
