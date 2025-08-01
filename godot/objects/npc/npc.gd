@@ -21,10 +21,11 @@ func go_to_slot(s: Slot) -> void:
     if s == null:
         push_error("Tried to go to a none slot, something is wrong !")
         return
+    var targets:Array[Node2D] = [s]
     state_machine.transition_to(
         NPCStatesUtil.StatesName.move_to,
         {
-            NPCStatesUtil.Message.target: s
+            NPCStatesUtil.Message.target: targets
         }
     )
 

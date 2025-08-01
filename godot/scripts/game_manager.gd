@@ -88,11 +88,12 @@ func _on_elevator_door_opened() -> void:
         if npc_to_release == null:
             break
 
+        var targets: Array[Node2D] = [spawn_point]
         npc_to_release.exiting = true
         npc_to_release.state_machine.transition_to(
         NPCStatesUtil.StatesName.move_to,
         {
-            NPCStatesUtil.Message.target: spawn_point
+            NPCStatesUtil.Message.target: targets
         }
     )
 
