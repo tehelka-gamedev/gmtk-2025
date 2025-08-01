@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=17 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
 [ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="12_dg77c"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 particles_animation = true
@@ -110,7 +111,10 @@ metadata/_edit_lock_ = true
 [node name="NPCSpawnTimer" type="Timer" parent="World"]
 one_shot = true
 
-[node name="ControlPanel" type="Panel" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ControlPanel" type="Panel" parent="HUD"]
+unique_name_in_owner = true
 offset_left = 381.0
 offset_top = 25.0
 offset_right = 618.0
@@ -119,7 +123,7 @@ size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
 script = ExtResource("11_efxa6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ControlPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/ControlPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -133,39 +137,39 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OpenGates" type="Button" parent="ControlPanel/VBoxContainer"]
+[node name="OpenGates" type="Button" parent="HUD/ControlPanel/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Open gates"
 
-[node name="CloseGates" type="Button" parent="ControlPanel/VBoxContainer"]
+[node name="CloseGates" type="Button" parent="HUD/ControlPanel/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Close gates"
 
-[node name="HSeparator" type="HSeparator" parent="ControlPanel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HUD/ControlPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="ControlPanel/VBoxContainer"]
+[node name="StartButton" type="Button" parent="HUD/ControlPanel/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Start elevator"
 
-[node name="StopButton" type="Button" parent="ControlPanel/VBoxContainer"]
+[node name="StopButton" type="Button" parent="HUD/ControlPanel/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Stop elevator"
 
-[node name="HSeparator2" type="HSeparator" parent="ControlPanel/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="HUD/ControlPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="SpeedLabel" type="Label" parent="ControlPanel/VBoxContainer"]
+[node name="SpeedLabel" type="Label" parent="HUD/ControlPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Speed: 1"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="ControlPanel/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="HUD/ControlPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -173,9 +177,13 @@ min_value = 1.0
 max_value = 5.0
 value = 1.0
 
+[node name="MuteSoundsContainer" parent="HUD" instance=ExtResource("12_dg77c")]
+offset_left = -98.0
+offset_bottom = 63.0
+
 [connection signal="timeout" from="World/NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
-[connection signal="pressed" from="ControlPanel/VBoxContainer/OpenGates" to="ControlPanel" method="_on_open_gates_pressed"]
-[connection signal="pressed" from="ControlPanel/VBoxContainer/CloseGates" to="ControlPanel" method="_on_close_gates_pressed"]
-[connection signal="pressed" from="ControlPanel/VBoxContainer/StartButton" to="ControlPanel" method="_on_start_button_pressed"]
-[connection signal="pressed" from="ControlPanel/VBoxContainer/StopButton" to="ControlPanel" method="_on_stop_button_pressed"]
-[connection signal="value_changed" from="ControlPanel/VBoxContainer/HSlider" to="ControlPanel" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer/OpenGates" to="HUD/ControlPanel" method="_on_open_gates_pressed"]
+[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer/CloseGates" to="HUD/ControlPanel" method="_on_close_gates_pressed"]
+[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer/StartButton" to="HUD/ControlPanel" method="_on_start_button_pressed"]
+[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer/StopButton" to="HUD/ControlPanel" method="_on_stop_button_pressed"]
+[connection signal="value_changed" from="HUD/ControlPanel/VBoxContainer/HSlider" to="HUD/ControlPanel" method="_on_h_slider_value_changed"]
