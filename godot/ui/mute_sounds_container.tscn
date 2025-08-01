@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyiio111ful15"]
+
+[ext_resource type="Texture2D" uid="uid://ctc0hoy4bqna7" path="res://ui/speaker.png" id="1_5n5su"]
+[ext_resource type="Script" uid="uid://bjgsxvioc2i6r" path="res://ui/mute_sounds_container.gd" id="1_n71ba"]
+[ext_resource type="Texture2D" uid="uid://cyksc6qxgxntf" path="res://ui/speaker-off.png" id="2_pkd1h"]
+[ext_resource type="Texture2D" uid="uid://4wa5mfklhtfa" path="res://ui/sound-on.png" id="3_pca6k"]
+[ext_resource type="Texture2D" uid="uid://biwmwxewb30df" path="res://ui/sound-off.png" id="4_sibqc"]
+
+[node name="MuteSoundsContainer" type="MarginContainer" node_paths=PackedStringArray("mute_se_button", "mute_bgm_button")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -127.0
+offset_bottom = 82.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("1_n71ba")
+mute_se_button = NodePath("HBoxContainer/MuteSEButton")
+mute_bgm_button = NodePath("HBoxContainer/MuteBGMButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MuteSEButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("1_5n5su")
+texture_pressed = ExtResource("2_pkd1h")
+stretch_mode = 0
+
+[node name="MuteBGMButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("3_pca6k")
+texture_pressed = ExtResource("4_sibqc")
+stretch_mode = 0
