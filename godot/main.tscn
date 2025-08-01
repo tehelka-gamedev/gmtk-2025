@@ -38,6 +38,7 @@ offset_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("2_7mycd")
+metadata/_edit_lock_ = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_5vw27")
@@ -89,6 +90,7 @@ snap_duration = 0.3
 space_station = NodePath("../SpaceStation")
 
 [node name="NPCs" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(69, 49)
@@ -96,6 +98,7 @@ energy = 1.2
 texture = ExtResource("9_kek77")
 texture_scale = 3.0
 height = 20.0
+metadata/_edit_lock_ = true
 
 [node name="NPCSpawnTimer" type="Timer" parent="."]
 one_shot = true
