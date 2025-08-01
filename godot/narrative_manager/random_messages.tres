@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Messages" load_steps=2 format=3 uid="uid://blnr05to5yo8v"]
+
+[ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_0wufy"]
+
+[resource]
+script = ExtResource("1_0wufy")
+message = Array[String](["Beautiful day, isn't it?", "Operator, your good job exceeds all my expectations.", "Boy do I love pizzas.", "Damn it, these crosswords are getting tougher each day."])
+metadata/_custom_type_script = "uid://u6fwccsjl86o"

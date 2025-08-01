@@ -57,4 +57,5 @@ func go_to_slot(s: Slot) -> void:
 
 # called when exiting the room. For now just queue_free but add fade out later maybe
 func exit() -> void:
+    mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY)
     queue_free()

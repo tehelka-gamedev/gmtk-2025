@@ -12,6 +12,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @onready var _npcs: Node2D = $World/NPCs
 @onready var _npc_spawn_timer: Timer = $World/NPCSpawnTimer
 @onready var _control_panel: Panel = %ControlPanel
+@onready var _narrative_manager: NarrativeManager = $NarrativeManager
 
 var current_npc_count: int = 0
 var _angry_npc_count: int = 0
@@ -40,14 +41,17 @@ func _ready() -> void:
     _control_panel.close_gates_pressed.connect(elevator.on_close_gates)
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
+    _narrative_manager.update.connect(_control_panel.set_panel_message)
 
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
     if new_mood_state == MoodGauge.MoodState.ANGRY:
         _angry_npc_count += 1
+        _narrative_manager.update_angry_npc_count(_angry_npc_count)
         _control_panel.set_angry_npc_count(_angry_npc_count)
     if old_mood_state == MoodGauge.MoodState.ANGRY:
         _angry_npc_count -= 1
+        _narrative_manager.update_angry_npc_count(_angry_npc_count)
         _control_panel.set_angry_npc_count(_angry_npc_count)
 
 func _spawn_npc() -> void:
