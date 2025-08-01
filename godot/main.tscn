@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=14 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://bq8gfnv4drwjg" path="res://sprites/staranimation-Sheet.png" id="3_272bh"]
 [ext_resource type="Texture2D" uid="uid://yb7xrfudbkkw" path="res://sprites/spacestation_n.png" id="3_lquwl"]
+[ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="4_4c57u"]
 [ext_resource type="Script" uid="uid://dqgdl6pik3h05" path="res://objects/space_station.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
@@ -15,6 +16,10 @@ particles_animation = true
 particles_anim_h_frames = 11
 particles_anim_v_frames = 1
 particles_anim_loop = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
+shader = ExtResource("4_4c57u")
+shader_parameter/pixel_scale = 1.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
 diffuse_texture = ExtResource("2_1bvp3")
@@ -46,6 +51,7 @@ anim_speed_min = 0.05
 anim_speed_max = 0.5
 
 [node name="SpaceStation" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_efxa6")
 position = Vector2(302, 179)
 texture = SubResource("CanvasTexture_1bvp3")
 script = ExtResource("4_7mycd")
@@ -81,8 +87,8 @@ space_station = NodePath("../SpaceStation")
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(114, 60)
+position = Vector2(69, 49)
 energy = 1.2
 texture = ExtResource("9_kek77")
 texture_scale = 3.0
-height = 100.0
+height = 20.0
