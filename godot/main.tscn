@@ -27,6 +27,7 @@ normal_texture = ExtResource("3_lquwl")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
+starting_npc_count = 8
 elevator = NodePath("Elevator")
 
 [node name="Background" type="TextureRect" parent="."]
