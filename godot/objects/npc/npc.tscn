@@ -1,11 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://bttrvcujvlunr"]
+[gd_scene load_steps=25 format=3 uid="uid://bttrvcujvlunr"]
 
 [ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
 [ext_resource type="PackedScene" uid="uid://mc17i3n0ujcj" path="res://objects/npc/skin.tscn" id="2_aqpri"]
+[ext_resource type="PackedScene" uid="uid://dnyhuy5b8npld" path="res://sprites/npc_moods/emoji_mood.tscn" id="2_m6gh1"]
 [ext_resource type="Script" uid="uid://bfabaymcuhp74" path="res://utils/state_machine/state_machine.gd" id="2_rn7i7"]
 [ext_resource type="Script" uid="uid://chs00o4pldxek" path="res://states/idle_state.gd" id="3_aqpri"]
 [ext_resource type="Script" uid="uid://h0sp5pu5a2io" path="res://states/move_to_state.gd" id="4_m6gh1"]
 [ext_resource type="Texture2D" uid="uid://baeo0kp17u8pc" path="res://sprites/teleportanimation.png" id="6_aqpri"]
+[ext_resource type="Script" uid="uid://bteouqmd6vc7b" path="res://objects/mood_gauge.gd" id="8_qs0fi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6gh1"]
 atlas = ExtResource("6_aqpri")
@@ -173,13 +175,19 @@ _data = {
 &"spawn": SubResource("Animation_aqpri")
 }
 
-[node name="NPC" type="Node2D" node_paths=PackedStringArray("_skin")]
+[node name="NPC" type="Node2D" node_paths=PackedStringArray("_skin", "mood_gauge", "emoji_position")]
 script = ExtResource("1_rn7i7")
 _skin = NodePath("Pivot/Skin")
+mood_gauge = NodePath("MoodGauge")
+emoji_position = NodePath("Pivot/EmojiPosition")
+emoji_scene = ExtResource("2_m6gh1")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Skin" parent="Pivot" instance=ExtResource("2_aqpri")]
+
+[node name="EmojiPosition" type="Marker2D" parent="Pivot"]
+position = Vector2(0, -8)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("2_rn7i7")
@@ -203,3 +211,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_qs0fi")
 }
 autoplay = "spawn"
+
+[node name="MoodGauge" type="Node2D" parent="."]
+script = ExtResource("8_qs0fi")
+regen_per_tick = -5.0
+metadata/_custom_type_script = "uid://bteouqmd6vc7b"

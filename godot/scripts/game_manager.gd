@@ -42,6 +42,14 @@ func _ready() -> void:
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
 
 
+func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
+    if new_mood_state == MoodGauge.MoodState.ANGRY:
+        _angry_npc_count += 1
+        _control_panel.set_angry_npc_count(_angry_npc_count)
+    if old_mood_state == MoodGauge.MoodState.ANGRY:
+        _angry_npc_count -= 1
+        _control_panel.set_angry_npc_count(_angry_npc_count)
+
 func _spawn_npc() -> void:
     var non_full_rooms: Array[Room] = []
     for room: Room in rooms:
@@ -64,6 +72,8 @@ func _spawn_npc() -> void:
     var slot: Slot = random_room.slot_manager.get_first_available_slot()
     random_room.add_npc_inside(npc, slot)
     npc.go_to_slot(slot)
+
+    npc.mood_gauge.mood_state_changed.connect(_on_npc_mood_state_changed)
 
 func _on_elevator_door_opened() -> void:
     var snapped_room: Room = elevator.get_snapped_room()

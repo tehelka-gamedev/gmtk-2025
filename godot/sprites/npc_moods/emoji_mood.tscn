@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnyhuy5b8npld"]
+
+[ext_resource type="Script" uid="uid://bn4vft16w2bv4" path="res://sprites/npc_moods/emoji_mood.gd" id="1_78u7j"]
+[ext_resource type="Texture2D" uid="uid://btm71tluafut0" path="res://sprites/npc_moods/emoji_angry.png" id="2_nliiq"]
+[ext_resource type="Texture2D" uid="uid://w51yrucmmkuc" path="res://sprites/npc_moods/emoji_grumpy.png" id="3_i61a0"]
+[ext_resource type="Texture2D" uid="uid://dmhfaoj4e7ss6" path="res://sprites/npc_moods/emoji_bored.png" id="4_rmdyu"]
+[ext_resource type="Texture2D" uid="uid://dhk2xed3sjt14" path="res://sprites/npc_moods/emoji_calm.png" id="5_batmm"]
+[ext_resource type="Texture2D" uid="uid://xiurl5px7r1o" path="res://sprites/npc_moods/emoji_happy.png" id="6_f0snk"]
+
+[sub_resource type="Animation" id="Animation_nliiq"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_78u7j"]
+resource_name = "fade_out_moving_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -32)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.633333, 6.5, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333, 1)
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nliiq"]
+_data = {
+&"RESET": SubResource("Animation_nliiq"),
+&"fade_out_moving_up": SubResource("Animation_78u7j")
+}
+
+[node name="EmojiMood" type="Node2D" node_paths=PackedStringArray("sprite", "animation_player")]
+script = ExtResource("1_78u7j")
+emoji_angry = ExtResource("2_nliiq")
+emoji_grumpy = ExtResource("3_i61a0")
+emoji_bored = ExtResource("4_rmdyu")
+emoji_calm = ExtResource("5_batmm")
+emoji_happy = ExtResource("6_f0snk")
+sprite = NodePath("Sprite2D")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("6_f0snk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nliiq")
+}
