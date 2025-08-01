@@ -33,19 +33,6 @@ func get_random_available_slot() -> Slot:
         return null
     return _available_slots[randi_range(0, len(_available_slots)-1)]
 
-func reserve_slot(s:Slot) -> void:
-    if _available_slots.find(s) == -1:
-        push_error("Tried to reserve a slot that was not there!")
-        return
-    _on_slot_reserved(s)
-    
-
-func release_slot(s:Slot) -> void:
-    if _occupied_slots.find(s) == -1:
-        push_error("Tried to release a slot that was not there!")
-        return
-    _on_slot_released(s)
-
 func is_full() -> bool:
     return _available_slots.is_empty() # no available slot
 
