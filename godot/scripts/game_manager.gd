@@ -14,6 +14,8 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @onready var _control_panel: Panel = %ControlPanel
 
 var current_npc_count: int = 0
+var _angry_npc_count: int = 0
+
 
 func _ready() -> void:
     randomize()

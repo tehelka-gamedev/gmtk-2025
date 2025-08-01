@@ -9,11 +9,26 @@ signal speed_cursor_changed(value: int)
 
 @onready var speed_label: Label = %SpeedLabel
 @onready var h_slider: HSlider = %HSlider
+@onready var message_panel: Label = %MessagePanel
+@onready var angry_npc_label: Label = %AngryNPCLabel
+@onready var happy_npc_label: Label = %HappyNPCLabel
 
 
 func set_speed_cursor(value: int) -> void:
     speed_label.text = "Speed: %d" % (value + 1)
     h_slider.value = value + 1
+
+
+func set_panel_message(message: String) -> void:
+    message_panel.text = message
+
+
+func set_angry_npc_count(value: int) -> void:
+    angry_npc_label.text = str(value)
+
+
+func set_happy_npc_count(value: int) -> void:
+    happy_npc_label.text = str(value)
 
 
 func _on_h_slider_value_changed(value: float) -> void:
