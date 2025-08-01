@@ -52,9 +52,21 @@ func _on_elevator_door_opened() -> void:
     var spawn_point:Marker2D = snapped_room.get_spawn_point()
     var npc_to_release: NPC = null
 
+    # Find first npc with matching colour
+    var filter_to_room_color: Callable = func(npcs: Array[NPC]):
+        # iterate backward for better performance (negligible, but still)
+        for i in range(len(npcs)-1, -1, -1):
+            if npcs[i].color == snapped_room.color:
+                return npcs.pop_at(i)
+        return null
+
     while not elevator.is_empty():
         # TODO: add a filter to only let people that want to leave out
-        npc_to_release = elevator.pop_npc_from_inside()
+        npc_to_release = elevator.pop_npc_from_inside(filter_to_room_color)
+        
+        # no more matching the filter, stop
+        if npc_to_release == null:
+            break
 
         npc_to_release.exiting = true
         npc_to_release.state_machine.transition_to(
@@ -64,7 +76,6 @@ func _on_elevator_door_opened() -> void:
         }
     )
 
-    
     _on_all_npc_released()
 
 func _on_all_npc_released() -> void:

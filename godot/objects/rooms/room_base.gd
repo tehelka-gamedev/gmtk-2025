@@ -20,13 +20,17 @@ func add_npc_inside(npc:NPC, slot:Slot) -> void:
     npc.slot = slot
     
 
-# Remove an npc from the (end of the) list and returns it
-# If there are none, returns none and prints an error
-func pop_npc_from_inside() -> NPC:
-    var npc: NPC = npc_inside.pop_back()
+func default_pop_npc(npcs: Array[NPC]) -> NPC:
+    return npcs.pop_back()
+
+# Remove an npc from the list matching the given filter (null if none found)
+# Argument:
+# - filter: a Callable( npcs: Array[NPC]) -> NPC
+# If no filter is given, remove the npc from the (end of the) list and returns it
+func pop_npc_from_inside(filter: Callable = default_pop_npc) -> NPC:
+    var npc: NPC = filter.call(npc_inside)
 
     if not npc:
-        push_error("Tried to pop an npc but there are no left in the elevator, something is wrong!!")
         return null
     npc.slot.release()
 
