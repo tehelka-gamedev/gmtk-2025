@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnvblhf6dxpjt"]
+
+[ext_resource type="Script" uid="uid://bteouqmd6vc7b" path="res://objects/mood_gauge.gd" id="1_4f8c3"]
+
+[node name="MoodGauge" type="Node2D"]
+script = ExtResource("1_4f8c3")
