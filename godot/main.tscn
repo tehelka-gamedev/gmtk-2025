@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=18 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
 [ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://cf2nexjie7s88" path="res://ui/pause/PauseMenu.tscn" id="13_ycdy4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 particles_animation = true
@@ -180,6 +181,9 @@ value = 1.0
 [node name="MuteSoundsContainer" parent="HUD" instance=ExtResource("12_dg77c")]
 offset_left = -98.0
 offset_bottom = 63.0
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("13_ycdy4")]
+visible = false
 
 [connection signal="timeout" from="World/NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
 [connection signal="pressed" from="HUD/ControlPanel/VBoxContainer/OpenGates" to="HUD/ControlPanel" method="_on_open_gates_pressed"]
