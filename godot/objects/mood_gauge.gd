@@ -3,35 +3,25 @@ class_name MoodGauge
 
 enum MoodState
 {
-    ANGRY,  # >:( 
-    GRUMPY, # :(
-    BORED,  # :|
-    CALM,   # :)
-    HAPPY,  # :D
+    ANGRY,          # >:( 
+    IMPATIENT,      # :|
+    HAPPY,          # :D
 }
 
 static func mood_to_state(mood: float) -> MoodState:
-    if mood <= 10:
+    if mood <= 15:
         return MoodState.ANGRY
-    elif mood <= 30:
-        return MoodState.GRUMPY
     elif mood <= 50:
-        return MoodState.BORED
-    elif mood <= 90:
-        return MoodState.CALM
+        return MoodState.IMPATIENT
     else:
         return MoodState.HAPPY
 
 static func state_to_mood(state: MoodState) -> float:
     match state:
         MoodState.ANGRY:
-            return 10.0
-        MoodState.GRUMPY:
-            return 30.0
-        MoodState.BORED:
+            return 15.0
+        MoodState.IMPATIENT:
             return 50.0
-        MoodState.CALM:
-            return 90.0
         MoodState.HAPPY:
             return 100.0
         _:
@@ -51,7 +41,7 @@ signal mood_state_changed(old_mood: MoodState, new_mood: MoodState)
 @export var min_value: int = 0
 @export var max_value: int = 100
 
-var _mood_state: MoodState = MoodState.CALM
+var _mood_state: MoodState = MoodState.HAPPY
 var _tick_counter = 0
 
 

@@ -29,13 +29,14 @@ func _ready() -> void:
     animation_player.play("spawn")
     if mood_gauge == null:
         return
-    mood_gauge.set_mood_state(MoodGauge.MoodState.CALM, false)
+    mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY, false)
     mood_gauge.mood_state_changed.connect(_on_mood_state_changed)
 
 
 func _on_mood_state_changed(_old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
     var emoji: EmojiMood = emoji_scene.instantiate()
     emoji_position.add_child(emoji)
+    emoji.z_index = 1000
 
     var briefly: bool = new_mood_state != MoodGauge.MoodState.ANGRY
     emoji.set_mood(new_mood_state, briefly)
