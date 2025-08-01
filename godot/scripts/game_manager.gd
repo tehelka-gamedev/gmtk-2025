@@ -21,6 +21,10 @@ func _ready() -> void:
         push_error("no elevator")
         return
     
+    AudioManager.play_music(SoundBank.background_music)
+    # mute for now
+    AudioManager.mute_bgm(true)
+
     for i in range(starting_npc_count):
         _spawn_npc()
 
