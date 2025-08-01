@@ -92,3 +92,8 @@ energy = 1.2
 texture = ExtResource("9_kek77")
 texture_scale = 3.0
 height = 20.0
+
+[node name="NPCSpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]

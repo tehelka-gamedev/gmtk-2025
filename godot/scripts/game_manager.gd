@@ -2,11 +2,15 @@ extends Node2D
 
 const NPC_class = preload("res://objects/npc/npc.tscn")
 
+@export var MIN_NPC_RESPAWN_TIME: float = 4.0
+@export var MAX_NPC_RESPAWN_TIME: float = 8.0
+
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
 
 @onready var rooms: Array[Node] = $SpaceStation/Rooms.get_children()
 @onready var _npcs: Node2D = $NPCs
+@onready var _npc_spawn_timer: Timer = $NPCSpawnTimer
 
 var current_npc_count: int = 0
 
@@ -21,6 +25,7 @@ func _ready() -> void:
         _spawn_npc()
 
     elevator.door_opened.connect(_on_elevator_door_opened)
+    _restart_npc_spawn_timer()
 
 
 func _spawn_npc() -> void:
@@ -94,3 +99,13 @@ func _on_all_npc_released() -> void:
         elevator.add_npc_inside(npc_to_enter, slot)
         npc_to_enter.go_to_slot(slot)
         
+
+
+func _on_npc_spawn_timer_timeout() -> void:
+    _spawn_npc()
+    _restart_npc_spawn_timer()
+
+
+func _restart_npc_spawn_timer() -> void:
+    var random_respawn_time: float = randf_range(MIN_NPC_RESPAWN_TIME, MAX_NPC_RESPAWN_TIME)
+    _npc_spawn_timer.start(random_respawn_time)
