@@ -1,3 +1,4 @@
+@tool
 class_name NPC
 extends Node2D
 
@@ -17,6 +18,12 @@ signal arrived_at_slot
 var exiting: bool = false
 
 @onready var state_machine: StateMachine = $StateMachine
+@onready var _teleport_animation: AnimatedSprite2D = $TeleportAnimation
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+
+func _ready() -> void:
+    animation_player.play("spawn")
 
 
 func go_to_slot(s: Slot) -> void:
