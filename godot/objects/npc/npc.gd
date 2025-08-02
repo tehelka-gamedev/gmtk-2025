@@ -51,10 +51,13 @@ func _on_mood_state_changed(_old_mood_state: MoodGauge.MoodState, new_mood_state
 
 func go_to_slot(s: Slot) -> void:
     slot = s
-    if s == null:
+    go_back_to_slot()
+
+func go_back_to_slot() -> void:
+    if slot == null:
         push_error("Tried to go to a none slot, something is wrong !")
         return
-    var targets:Array[Node2D] = [s]
+    var targets:Array[Node2D] = [slot]
     state_machine.transition_to(
         NPCStatesUtil.StatesName.move_to,
         {
