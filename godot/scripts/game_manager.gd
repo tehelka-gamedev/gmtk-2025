@@ -51,6 +51,7 @@ func _ready() -> void:
     var color_array: Array = Enum.NPCColors.values()
     for i: int in len(rooms):
         (rooms[i] as Room).color = color_array[i]
+        (rooms[i] as Room).decal_to_use = i % 2
 
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:

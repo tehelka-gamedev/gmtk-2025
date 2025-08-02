@@ -84,6 +84,7 @@ rotation_speed = 2.0
 
 [node name="Room" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 0.488692
+decal_to_use = true
 
 [node name="Room2" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 1.5708
@@ -92,6 +93,7 @@ color = 4
 [node name="Room3" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 2.6529
 color = 2
+decal_to_use = true
 
 [node name="Room4" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 3.63028
@@ -100,6 +102,7 @@ color = 3
 [node name="Room5" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 4.71239
 color = 1
+decal_to_use = true
 
 [node name="Room6" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 5.79449

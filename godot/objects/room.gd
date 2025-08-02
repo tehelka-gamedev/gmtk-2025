@@ -15,7 +15,7 @@ class_name Room
 @export var entrance_position:Marker2D = null
 @export var decal_to_use: bool = false:
     set(value):
-        if not is_node_ready:
+        if not is_node_ready():
             await ready
         decal_to_use = value
         if decal_to_use:

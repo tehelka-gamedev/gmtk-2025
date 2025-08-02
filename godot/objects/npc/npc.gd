@@ -44,7 +44,7 @@ func _on_mood_state_changed(_old_mood_state: MoodGauge.MoodState, new_mood_state
     emoji_position.add_child(emoji)
     emoji.z_index = 1000
 
-    var briefly: bool = new_mood_state != MoodGauge.MoodState.ANGRY
+    var briefly: bool = new_mood_state != MoodGauge.MoodState.ANGRY and new_mood_state != MoodGauge.MoodState.IMPATIENT
     emoji.set_mood(new_mood_state, briefly)
 
 
