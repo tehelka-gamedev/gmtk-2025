@@ -147,7 +147,8 @@ func _refresh_tween() -> void:
 
 
 func stop_snapping() -> void:
-    _tween.stop()
+    if _tween:
+        _tween.stop()
     _tween = null
     _snapping = false
 
