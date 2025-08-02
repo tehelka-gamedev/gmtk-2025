@@ -73,27 +73,6 @@ size_flags_vertical = 10
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="OpenGates" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-focus_mode = 0
-text = "Open gates"
-
-[node name="CloseGates" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-focus_mode = 0
-text = "Close gates"
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -126,8 +105,6 @@ focus_mode = 0
 max_value = 4.0
 value = 1.0
 
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer/OpenGates" to="." method="_on_open_gates_pressed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer/CloseGates" to="." method="_on_close_gates_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/StopButton" to="." method="_on_stop_button_pressed"]
 [connection signal="value_changed" from="VBoxContainer2/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

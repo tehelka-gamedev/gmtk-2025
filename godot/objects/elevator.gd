@@ -32,8 +32,6 @@ const SNAP_LERP_VALUE: float = 5.0
 
 @export var space_station: SpaceStation
 
-var door_is_open: bool = false
-
 @export_category("Editor variables")
 @export var inner_pivot:Node2D = null # Where the sprite and object actually is
 @export var room_detector:Area2D = null
@@ -42,10 +40,43 @@ var door_is_open: bool = false
 var _snapping: bool = false
 var _snapped: bool = false
 var _people_are_entering: bool = false
-var _door_coyote_time: float = 0.0
-var _door_coyote_flag: bool = false
+
+# door states
+enum DoorState {
+    CLOSED,
+    OPENED,
+    OPENING,
+    CLOSING
+}
+var _current_door_state: DoorState = DoorState.CLOSED
 
 @onready var _door: Sprite2D = $Door
+
+func door_is_open() -> bool:
+    return _current_door_state == DoorState.OPENED
+
+func door_is_closed() -> bool:
+    return _current_door_state == DoorState.CLOSED
+
+func door_is_closing() -> bool:
+    return _current_door_state == DoorState.CLOSING
+
+func door_is_opening() -> bool:
+    return _current_door_state == DoorState.OPENING
+
+func set_door_open() -> void:
+    _current_door_state = DoorState.OPENED
+    _door.hide()
+    door_opened.emit()
+
+func set_door_closed() -> void:
+    _current_door_state = DoorState.CLOSED
+    _door.show()
+    door_closed.emit()
+
+
+
+#### DOOR END  ####
 
 
 func _ready() -> void:
@@ -59,28 +90,23 @@ func _ready() -> void:
     room_detector.body_entered.connect(_on_body_entered)
     room_detector.body_exited.connect(_on_body_exited)
 
+    door_closed.connect(_on_door_closed)
+
 
 func _process(delta: float) -> void:
+    # if Input.is_action_just_pressed("open_door"):
+    # doors have priority
+
     # only can toggle movement if doors are closed
     if Input.is_action_just_pressed("elevator_toggle_movement"):
         handle_toggle_movement()
-            
     elif _snapping:
         _handle_snapping(delta)
-
-    if Input.is_action_just_pressed("open_door"):
-        _handle_open_door()
     
     if moving and not _snapping:
         rotation_degrees -= delta * speed_array[current_speed]
     else:
         rotation_degrees += space_station.rotation_speed * delta
-    
-    if _door_coyote_flag:
-        _door_coyote_time += delta
-        if _door_coyote_time > DOOR_COYOTE_THRESHOLD:
-            _door_coyote_time = 0.0
-            _door_coyote_flag = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -90,18 +116,22 @@ func _unhandled_input(event: InputEvent) -> void:
         current_speed -= 1
 
 func _open_door() -> void:
+    _current_door_state = DoorState.OPENING
+    print("open door!")
+    get_tree().create_timer(0.5).timeout.connect(set_door_open) # Temporary wait, for animation later
+    print("door opened!")
     # play open_door_animation
     # await open__door_animation.finished
-    door_is_open = true
-    _door.hide()
+    
     snap_target.open_door()
-    door_opened.emit()
 
 func _close_door() -> void:
-    door_is_open = false
-    _door.show()
+    _current_door_state = DoorState.CLOSING
+    print("close door !")
+    get_tree().create_timer(0.5).timeout.connect(set_door_closed) # Temporary wait, for animation later
+    print("door closed!")
+    
     snap_target.close_door()
-    door_closed.emit()
 
 func _on_body_entered(body: Node2D):
     # UGLY HACK: refer to the grand-parent room, and fallback to the staticBody2D otherwise
@@ -136,10 +166,8 @@ func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
     _snapped = true
     _snapping = false
-    if _door_coyote_flag && _door_coyote_time <= DOOR_COYOTE_THRESHOLD:
-        _handle_open_door()
-        _door_coyote_time = 0.0
-        _door_coyote_flag = false
+
+    _open_door()
 
 
 func get_snapped_room() -> Room:
@@ -147,16 +175,23 @@ func get_snapped_room() -> Room:
 
 
 func handle_toggle_movement() -> void:
-    if door_is_open:
+    if _people_are_entering:
         return
     
+    if door_is_closing() or door_is_opening():
+        return
+
+    if door_is_open():
+        _close_door()
+        return
+
     toggle_movement_requested.emit()
 
-    
     # if snapping, we can abort and leave
     if _snapping:
         _snapping = false
         moving = true
+
     # otherwise, if we can snap
     elif snap_target:
         # we start snapping if we move, otherwise that is we are already stopped
@@ -174,19 +209,6 @@ func handle_toggle_movement() -> void:
 
 func set_speed_idx_no_signal(value: int) -> void:
     current_speed = value
-
-
-func on_open_gates() -> void:
-    if door_is_open:
-        return
-    _handle_open_door()
-
-
-func on_close_gates() -> void:
-    if not door_is_open:
-        return
-    _handle_open_door()
-
 
 func on_start_elevator() -> void:
     if moving:
@@ -210,11 +232,7 @@ func start_loading_people() -> void:
 func stop_loading_people() -> void:
     _people_are_entering = false
 
-func _handle_open_door() -> void:
-    if _snapped and not _people_are_entering:
-        if door_is_open:
-            _close_door()
-        else:
-            _open_door()
-    elif not _door_coyote_flag and (_snapping or _people_are_entering):
-        _door_coyote_flag = true
+func _on_door_closed() -> void:
+    # go back agaiiiiin
+    print("on door closed")
+    handle_toggle_movement()

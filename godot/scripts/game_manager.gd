@@ -44,8 +44,6 @@ func _ready() -> void:
     ))
 
     _control_panel.speed_cursor_changed.connect(elevator.set_speed_idx_no_signal)
-    _control_panel.open_gates_pressed.connect(elevator.on_open_gates)
-    _control_panel.close_gates_pressed.connect(elevator.on_close_gates)
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)

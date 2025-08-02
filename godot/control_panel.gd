@@ -34,13 +34,6 @@ func _on_h_slider_value_changed(value: float) -> void:
 func update_speed_label(speed_idx: int) -> void:
     speed_label.text = "Speed: %d" % (speed_idx+1)
 
-func _on_open_gates_pressed() -> void:
-    open_gates_pressed.emit()
-
-
-func _on_close_gates_pressed() -> void:
-    close_gates_pressed.emit()
-
 
 func _on_start_button_pressed() -> void:
     start_elevator_pressed.emit()
