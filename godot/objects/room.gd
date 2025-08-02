@@ -4,7 +4,7 @@ class_name Room
 
 
 @export_category("Gameplay variables")
-@export var color: Enum.NPCColors = Enum.NPCColors.RED :
+@export var color: Enum.NPCColors:
     set(value):
         if not is_node_ready():
             await ready
@@ -15,8 +15,8 @@ class_name Room
 @export var entrance_position:Marker2D = null
 @export var decal_to_use: bool = false:
     set(value):
-        if not ready:
-            await is_node_ready()
+        if not is_node_ready:
+            await ready
         decal_to_use = value
         if decal_to_use:
             _decal.region_rect.position.x = 124

@@ -47,6 +47,10 @@ func _ready() -> void:
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)
+    
+    var color_array: Array = Enum.NPCColors.values()
+    for i: int in len(rooms):
+        (rooms[i] as Room).color = color_array[i]
 
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:

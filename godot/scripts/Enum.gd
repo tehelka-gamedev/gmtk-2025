@@ -4,10 +4,10 @@ extends Node
 
 enum NPCColors {
     RED,
-    BLUE,
+    GREEN,
     PINK,
     ORANGE,
-    GREEN,
+    BLUE,
     YELLOW
 }
 
