@@ -23,7 +23,6 @@ const SNAP_LERP_VALUE: float = 5.0
         value = clamp(value, 0, len(speed_array)-1)
         if value != current_speed:
             current_speed = value
-            print("speed is now %d" % current_speed)
             speed_changed.emit(speed_array[current_speed], current_speed)
 
 @export var moving: bool = true
@@ -117,9 +116,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _open_door() -> void:
     _current_door_state = DoorState.OPENING
-    print("open door!")
     get_tree().create_timer(0.5).timeout.connect(set_door_open) # Temporary wait, for animation later
-    print("door opened!")
     # play open_door_animation
     # await open__door_animation.finished
     
@@ -127,9 +124,7 @@ func _open_door() -> void:
 
 func _close_door() -> void:
     _current_door_state = DoorState.CLOSING
-    print("close door !")
     get_tree().create_timer(0.5).timeout.connect(set_door_closed) # Temporary wait, for animation later
-    print("door closed!")
     
     snap_target.close_door()
 
@@ -234,5 +229,4 @@ func stop_loading_people() -> void:
 
 func _on_door_closed() -> void:
     # go back agaiiiiin
-    print("on door closed")
     handle_toggle_movement()
