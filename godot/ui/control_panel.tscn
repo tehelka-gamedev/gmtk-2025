@@ -1,0 +1,151 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyg333imlt7y0"]
+
+[ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="1_t8mf3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+bg_color = Color(0.251301, 0.251302, 0.251301, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
+bg_color = Color(0.168279, 0.32073, 0.0609182, 1)
+
+[node name="ControlPanel" type="Panel"]
+offset_right = 237.0
+offset_bottom = 313.0
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
+script = ExtResource("1_t8mf3")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+
+[node name="MessagePanel" type="Label" parent="VBoxContainer2/MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 100)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Angry NPC"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="AngryNPCLabel" type="Label" parent="VBoxContainer2/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Conveyed NPC"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+
+[node name="ConveyedNPCLabel" type="Label" parent="VBoxContainer2/HBoxContainer2/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="OpenGates" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_mode = 0
+text = "Open gates"
+
+[node name="CloseGates" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_mode = 0
+text = "Close gates"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="StartButton" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+text = "Start elevator"
+
+[node name="StopButton" type="Button" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+text = "Stop elevator"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Speed: 1"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[node name="MessageTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer/OpenGates" to="." method="_on_open_gates_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer/CloseGates" to="." method="_on_close_gates_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer2/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=23 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://dqgdl6pik3h05" path="res://objects/space_station.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
-[ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://cyg333imlt7y0" path="res://ui/control_panel.tscn" id="11_cegan"]
 [ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cf2nexjie7s88" path="res://ui/pause/PauseMenu.tscn" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://cs6dnihsfnd6m" path="res://narrative_manager/narrative_manager.gd" id="14_w48qg"]
@@ -33,12 +33,6 @@ shader_parameter/pixel_scale = 1.0
 [sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
 diffuse_texture = ExtResource("2_1bvp3")
 normal_texture = ExtResource("3_lquwl")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
-bg_color = Color(0.251301, 0.251302, 0.251301, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
-bg_color = Color(0.168279, 0.32073, 0.0609182, 1)
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
@@ -111,7 +105,7 @@ color = 2
 
 [node name="Elevator" parent="World" node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
 position = Vector2(184, 179)
-DOOR_COYOTE_THRESHOLD = null
+DOOR_COYOTE_THRESHOLD = 1.0
 speed_array = Array[float]([15.0, 45.0, 90.0, 220.0, 360.0])
 snap_duration = 0.3
 space_station = NodePath("../SpaceStation")
@@ -124,143 +118,12 @@ one_shot = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="ControlPanel" type="Panel" parent="HUD"]
+[node name="ControlPanel" parent="HUD" instance=ExtResource("11_cegan")]
 unique_name_in_owner = true
 offset_left = 381.0
 offset_top = 25.0
 offset_right = 618.0
 offset_bottom = 338.0
-size_flags_horizontal = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
-script = ExtResource("11_efxa6")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/ControlPanel"]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -57.0
-offset_right = 57.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD/ControlPanel/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_top = 10
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/ControlPanel/VBoxContainer2/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
-
-[node name="MessagePanel" type="Label" parent="HUD/ControlPanel/VBoxContainer2/MarginContainer/PanelContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 100)
-layout_mode = 2
-autowrap_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/ControlPanel/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="HUD/ControlPanel/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "Angry NPC"
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/ControlPanel/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-
-[node name="AngryNPCLabel" type="Label" parent="HUD/ControlPanel/VBoxContainer2/HBoxContainer/PanelContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/ControlPanel/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="HUD/ControlPanel/VBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "Conveyed NPC"
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/ControlPanel/VBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-
-[node name="ConveyedNPCLabel" type="Label" parent="HUD/ControlPanel/VBoxContainer2/HBoxContainer2/PanelContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/ControlPanel/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 10
-
-[node name="HSeparator3" type="HSeparator" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="OpenGates" type="Button" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-focus_mode = 0
-text = "Open gates"
-
-[node name="CloseGates" type="Button" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-focus_mode = 0
-text = "Close gates"
-
-[node name="HSeparator" type="HSeparator" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="StartButton" type="Button" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 6
-focus_mode = 0
-text = "Start elevator"
-
-[node name="StopButton" type="Button" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 6
-focus_mode = 0
-text = "Stop elevator"
-
-[node name="HSeparator2" type="HSeparator" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Speed: 1"
-horizontal_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="HUD/ControlPanel/VBoxContainer2/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_mode = 0
-min_value = 1.0
-max_value = 5.0
-value = 1.0
-
-[node name="MessageTimer" type="Timer" parent="HUD/ControlPanel"]
 
 [node name="MuteSoundsContainer" parent="HUD" instance=ExtResource("12_dg77c")]
 offset_left = -98.0
@@ -278,9 +141,3 @@ warning_to_almost_fired_messages = ExtResource("18_getpj")
 random_message = ExtResource("19_cegan")
 
 [connection signal="timeout" from="World/NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
-[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer/OpenGates" to="HUD/ControlPanel" method="_on_open_gates_pressed"]
-[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer/CloseGates" to="HUD/ControlPanel" method="_on_close_gates_pressed"]
-[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer2/StartButton" to="HUD/ControlPanel" method="_on_start_button_pressed"]
-[connection signal="pressed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HBoxContainer2/StopButton" to="HUD/ControlPanel" method="_on_stop_button_pressed"]
-[connection signal="value_changed" from="HUD/ControlPanel/VBoxContainer2/VBoxContainer/HSlider" to="HUD/ControlPanel" method="_on_h_slider_value_changed"]
-[connection signal="timeout" from="HUD/ControlPanel/MessageTimer" to="HUD/ControlPanel" method="_on_message_timer_timeout"]
