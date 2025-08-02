@@ -16,12 +16,17 @@ const VIP_MESSAGE: String = "Operator, a VIP is about to arrive. Make it a top p
 @onready var _timer: Timer = $Timer
 
 var game_manager: GameManager
+var tech_guy_present: bool = false
 
 var event_function: Array[Callable] = [
     #_play_broken_door_event,
     _play_slow_elevator_event,
     #_play_vip_event,
 ]
+
+var slow_elevator_event: bool = false
+var vip_event: bool = false
+var broken_door_event: bool = false
 
 
 func _ready() -> void:
@@ -34,7 +39,13 @@ func _setup_timer_for_next_event() -> void:
 
 
 func _on_timer_timeout() -> void:
-    event_function.pick_random().call()
+    var possible_event_function: Array[Callable] = []
+    if not slow_elevator_event:
+        possible_event_function.append(_play_slow_elevator_event)
+        
+    if not possible_event_function.is_empty():
+        possible_event_function.pick_random().call()
+        
     _setup_timer_for_next_event()
 
 
@@ -43,6 +54,7 @@ func _play_broken_door_event() -> void:
 
 
 func _play_slow_elevator_event() -> void:
+    slow_elevator_event = true
     game_manager.elevator.set_broken_speed_to(true)
     game_manager._narrative_manager.update_message(BROKEN_ELEVATOR_MESSAGE)
     
@@ -50,7 +62,23 @@ func _play_slow_elevator_event() -> void:
     
     var tech_guy: bool = true
     game_manager._spawn_npc(tech_guy)
+    tech_guy_present = true
     
 
 func _play_vip_event() -> void:
     pass
+
+
+func on_tech_guy_arrived_in_elevator(tech_guy: NPC) -> void:
+    if slow_elevator_event:
+        tech_guy.repair_elevator()
+        await tech_guy.on_repair_finished
+        slow_elevator_event = false
+        game_manager.elevator.set_broken_speed_to(false)
+
+
+func we_still_need_tech_guy() -> bool:
+    if slow_elevator_event or broken_door_event:
+        return true
+    else:
+        return false

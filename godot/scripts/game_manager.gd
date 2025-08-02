@@ -49,6 +49,7 @@ func _ready() -> void:
     for i: int in len(rooms):
         (rooms[i] as Room).color = color_array[i]
         (rooms[i] as Room).decal_to_use = i % 2
+        (rooms[i] as Room).tech_guy_in_elevator.connect(_event_manager.on_tech_guy_arrived_in_elevator)
 
     for i in range(starting_npc_count):
         _spawn_npc()
@@ -121,14 +122,18 @@ func _on_elevator_door_opened() -> void:
     var filter_to_room_color: Callable = func(npcs: Array[NPC]):
         # iterate backward for better performance (negligible, but still)
         for i in range(len(npcs)-1, -1, -1):
-            if npcs[i].color == snapped_room.color:
+            if (
+                npcs[i].tech_guy and not _event_manager.we_still_need_tech_guy()
+                or npcs[i].color == snapped_room.color
+            ):
                 return npcs.pop_at(i)
         return null
 
     elevator.start_loading_people()
     while not elevator.is_empty():
         npc_to_release = elevator.pop_npc_from_inside(filter_to_room_color)
-        
+        if npc_to_release.tech_guy:
+            _event_manager.tech_guy_present = false
         # no more matching the filter, stop
         if npc_to_release == null:
             break
@@ -274,3 +279,5 @@ func _restart_npc_spawn_timer() -> void:
 func _on_npc_arrived_at_target_room() -> void:
     _conveyed_npc_count += 1
     _control_panel.set_conveyed_npc_count(_conveyed_npc_count)
+
+    

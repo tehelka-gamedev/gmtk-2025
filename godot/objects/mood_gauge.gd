@@ -49,6 +49,9 @@ var _tick_counter = 0
 
 
 func _process(delta: float) -> void:
+    if owner.tech_guy:
+        return
+    
     _tick_counter = (_tick_counter + 1) % tick_between_regen
 
     if _tick_counter != 0:

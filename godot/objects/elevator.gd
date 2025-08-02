@@ -242,4 +242,6 @@ func set_broken_speed_to(value: bool) -> void:
     broken_speed = value
     if broken_speed:
         current_speed = 0
+    else:
+        current_speed = 2
         

@@ -1,6 +1,8 @@
 extends Node2D
 class_name EmojiMood
 
+signal animation_finished
+
 const anim_default: String = "default"
 const anim_angry: String = "angry"
 const anim_impatient: String = "impatient"
@@ -27,5 +29,6 @@ func set_mood(mood: MoodGauge.MoodState, briefly: bool = true) -> void:
 
     if briefly:
         get_tree().create_timer(timeout_delay).timeout.connect(func():
+            animation_finished.emit()
             queue_free()
         )

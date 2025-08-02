@@ -4,6 +4,7 @@ extends Node2D
 @warning_ignore("unused_signal")
 signal arrived_at_slot
 signal arrived_at_target_room
+signal on_repair_finished
 
 @export var _skin: NPCSkin
 @export var color: Enum.NPCColors = Enum.NPCColors.RED:
@@ -75,3 +76,14 @@ func exit() -> void:
 
 func set_color_directly(color: Color) -> void:
     _skin.set_color_to(color)
+
+
+func repair_elevator() -> void:
+    var emoji: EmojiMood = emoji_scene.instantiate()
+    emoji_position.add_child(emoji)
+    emoji.z_index = 1000
+    
+    var briefly: bool = true
+    emoji.set_mood(MoodGauge.MoodState.IMPATIENT, briefly)
+    await emoji.animation_finished
+    on_repair_finished.emit()

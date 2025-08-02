@@ -2,6 +2,7 @@
 extends RoomBase
 class_name Room
 
+signal tech_guy_in_elevator(tech_guy: NPC)
 signal npc_is_waiting(room:Room, npc: NPC)
 
 @export_category("Gameplay variables")
@@ -86,7 +87,11 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
         return
     remove_npc_from_room(waiting_npc)
 
-    var slot = room.slot_manager.get_first_available_slot() # not null :)
+    var slot: Slot
+    if waiting_npc.tech_guy:
+        slot = room.slot_manager.get_special_slot(Slot.Type.BROKEN_SPEED)
+    else:
+        slot = room.slot_manager.get_first_available_slot() # not null :)
     room.add_npc_inside(waiting_npc, slot)
     var targets: Array[Node2D] = [
         room.get_entrance_position(),
@@ -99,6 +104,10 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
         }
     )
     await waiting_npc.arrived_at_slot
+    
+    if waiting_npc.tech_guy:
+        tech_guy_in_elevator.emit(waiting_npc)
+    
     cycle_next_people_leaving_idx()
 
 func get_spawn_point() -> Marker2D:
