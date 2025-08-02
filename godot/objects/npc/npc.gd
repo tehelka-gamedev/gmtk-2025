@@ -14,10 +14,15 @@ signal arrived_at_target_room
         _skin.set_color_to(Enum.color_enum_to_rgb(color))
 @export var slot:Slot = null
 
+@export_category("Gameplay variables")
+## Will start with mood from between 100 and 100 - X
+@export var mood_start_variation: float = 5.0
+
 @export_category("Editor variables")
 @export var mood_gauge: MoodGauge = null
 @export var emoji_position: Marker2D = null
 @export var emoji_scene: PackedScene = null
+
 
 ## If true, will queue_free() after reaching its point
 var exiting: bool = false
@@ -30,7 +35,8 @@ func _ready() -> void:
     animation_player.play("spawn")
     if mood_gauge == null:
         return
-    mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY, false)
+    # mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY, false)
+    mood_gauge.set_mood_value(MoodGauge.state_to_mood(MoodGauge.MoodState.HAPPY) - randf_range(0.0, mood_start_variation), false)
     mood_gauge.mood_state_changed.connect(_on_mood_state_changed)
 
 

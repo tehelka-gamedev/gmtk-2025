@@ -35,6 +35,9 @@ signal mood_state_changed(old_mood: MoodState, new_mood: MoodState)
 @export var current_mood_value: float = 100.0
 ## Regen per regen ticks
 @export var regen_per_tick: float = 1.0
+## Variance in the regen. Must be a NON-NEGATIVE number. If set to X
+##, the regen will be regen_per tick +/- variance
+@export var variance_regen: float = 0.0
 
 ## minimum 1
 @export var tick_between_regen: int = 1
@@ -51,9 +54,12 @@ func _process(delta: float) -> void:
     if _tick_counter != 0:
         return
     
-    set_mood_value(current_mood_value + regen_per_tick * delta)
+    set_mood_value(current_mood_value + _get_random_regen_per_tick() * delta)
 
-    
+
+## returns the regen per tick with the eventual variance taken into account
+func _get_random_regen_per_tick() -> float:
+    return regen_per_tick + randf_range(-variance_regen, variance_regen)
 
 
 func set_mood_value(new_mood_value: float, _emit_signal: bool = true) -> void:
