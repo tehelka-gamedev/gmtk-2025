@@ -70,18 +70,14 @@ func _process_editor() -> void:
 
 func _process_game(delta: float) -> void:
     # only can toggle movement if doors are closed
-    if Input.is_action_just_pressed("elevator_toggle_movement") and not door_is_open:
+    if Input.is_action_just_pressed("elevator_toggle_movement"):
         handle_toggle_movement()
             
     elif _snapping:
         _refresh_tween()
 
-    if _snapped and not _people_are_entering:
-        if Input.is_action_just_pressed("open_door"):
-            if door_is_open:
-                _close_door()
-            else:
-                _open_door()
+    if Input.is_action_just_pressed("open_door"):
+        _handle_open_door()
     
     if moving and not _snapping:
         rotation_degrees -= delta * speed_array[current_speed]
@@ -167,6 +163,9 @@ func get_snapped_room() -> Room:
 
 
 func handle_toggle_movement() -> void:
+    if door_is_open:
+        return
+    
     toggle_movement_requested.emit()
 
     # if snapping, we can abort and leave
@@ -197,14 +196,13 @@ func on_speed_value_changed(value: int) -> void:
 func on_open_gates() -> void:
     if door_is_open:
         return
-    if _snapped:
-        _open_door()
+    _handle_open_door()
 
 
 func on_close_gates() -> void:
     if not door_is_open:
         return
-    _close_door()
+    _handle_open_door()
 
 
 func on_start_elevator() -> void:
@@ -228,3 +226,12 @@ func start_loading_people() -> void:
 
 func stop_loading_people() -> void:
     _people_are_entering = false
+
+
+
+func _handle_open_door() -> void:
+    if _snapped and not _people_are_entering:
+        if door_is_open:
+            _close_door()
+        else:
+            _open_door()
