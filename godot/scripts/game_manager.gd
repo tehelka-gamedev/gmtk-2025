@@ -26,8 +26,9 @@ func _ready() -> void:
         return
     
     AudioManager.play_music(SoundBank.background_music)
-    # mute for now
-    AudioManager.mute_bgm(true)
+    
+    if not OS.has_feature("web"):
+        AudioManager.mute_bgm(true)
 
     for i in range(starting_npc_count):
         _spawn_npc()
