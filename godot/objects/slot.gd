@@ -1,10 +1,14 @@
 extends Marker2D
 class_name Slot
 
+
+enum Type {NORMAL, BROKEN_DOOR, BROKEN_SPEED}
+
 signal reserved(slot: Slot)
 signal released(slot: Slot)
 
 @export var available: bool = true
+@export var type: Type
 
 # return true if could be reserved, false otherwise
 func reserve() -> bool:

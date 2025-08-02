@@ -26,6 +26,7 @@ signal arrived_at_target_room
 
 ## If true, will queue_free() after reaching its point
 var exiting: bool = false
+var tech_guy: bool = false
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -70,3 +71,7 @@ func exit() -> void:
     mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY)
     arrived_at_target_room.emit()
     queue_free()
+
+
+func set_color_directly(color: Color) -> void:
+    _skin.set_color_to(color)

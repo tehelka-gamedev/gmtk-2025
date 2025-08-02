@@ -1,5 +1,7 @@
+class_name GameManager
 extends Node2D
 
+const TECH_GUY_COLOR: Color = Color.WHITE
 const NPC_class = preload("res://objects/npc/npc.tscn")
 
 @export var MIN_NPC_RESPAWN_TIME: float = 4.0
@@ -13,10 +15,12 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @onready var _npc_spawn_timer: Timer = $World/NPCSpawnTimer
 @onready var _control_panel: Panel = %ControlPanel
 @onready var _narrative_manager: NarrativeManager = $NarrativeManager
+@onready var _event_manager: EventManager = $EventManager
 
 var current_npc_count: int = 0
 var _angry_npc_count: int = 0
 var _conveyed_npc_count: int = 0
+var _spawning_npc: bool = false
 
 # player choice
 enum PlayerChoice
@@ -62,9 +66,8 @@ func _ready() -> void:
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)
+    _event_manager.game_manager = self
     
-
-
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
     if new_mood_state == MoodGauge.MoodState.ANGRY:
@@ -75,7 +78,6 @@ func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_st
         _angry_npc_count -= 1
         _narrative_manager.update_angry_npc_count(_angry_npc_count)
         _control_panel.set_angry_npc_count(_angry_npc_count)
-
 
 
 ############### PLAYER INPUTS ###############
@@ -188,11 +190,18 @@ func _ask_player_choice() -> PlayerChoice:
 
 ############### NPC SPAWN ###############
 
-func _spawn_npc() -> void:
+func _spawn_npc(tech_guy: bool = false) -> void:
+    _spawning_npc = true
+    
     var non_full_rooms: Array[Room] = []
-    for room: Room in rooms:
-        if not room.slot_manager.is_full():
-            non_full_rooms.append(room)
+    while non_full_rooms.is_empty():
+        for room: Room in rooms:
+            if not room.slot_manager.is_full():
+                non_full_rooms.append(room)
+        if not tech_guy:
+            break
+        else:
+            await get_tree().create_timer(1.0).timeout
 
     if len(non_full_rooms) == 0:
         return
@@ -202,20 +211,58 @@ func _spawn_npc() -> void:
     var npc: NPC = NPC_class.instantiate()
     _npcs.add_child(npc)
     npc.position = spawn_position
+    npc.tech_guy = tech_guy
 
-    var available_colors: Array = Enum.NPCColors.values()
-    available_colors.erase(random_room.color)
-    npc.color = available_colors.pick_random()
+    if tech_guy:
+        npc.set_color_directly(TECH_GUY_COLOR)
+    else:
+        var available_colors: Array = Enum.NPCColors.values()
+        available_colors.erase(random_room.color)
+        npc.color = available_colors.pick_random()
 
     var slot: Slot = random_room.slot_manager.get_first_available_slot()
     random_room.add_npc_inside(npc, slot)
     npc.go_to_slot(slot)
 
-    npc.mood_gauge.mood_state_changed.connect(_on_npc_mood_state_changed)
-    npc.arrived_at_target_room.connect(_on_npc_arrived_at_target_room)
+    if not tech_guy:
+        npc.mood_gauge.mood_state_changed.connect(_on_npc_mood_state_changed)
+        npc.arrived_at_target_room.connect(_on_npc_arrived_at_target_room)
+    
+    _spawning_npc = false
+    
+    
+func _on_all_npc_released() -> void:
+    var snapped_room: Room = elevator.get_snapped_room()
+    if snapped_room == null:
+        return # do nothing, if somehow the door opened without snapping
+
+    # Start entering the elevator
+    var npc_to_enter: NPC = null
+
+    while not elevator.is_full() and not snapped_room.is_empty():
+        npc_to_enter = snapped_room.pop_npc_from_inside()
+
+        # elevator is not full so there is at least one slot
+        var slot = elevator.slot_manager.get_first_available_slot() # not null :)
+        elevator.add_npc_inside(npc_to_enter, slot)
+        var targets: Array[Node2D] = [
+            snapped_room.get_entrance_position(),
+            elevator.get_entrance_position(),
+            slot,
+            ]
+        npc_to_enter.state_machine.transition_to(
+            NPCStatesUtil.StatesName.move_to,
+            {
+                NPCStatesUtil.Message.target: targets
+            }
+        )
+        await npc_to_enter.arrived_at_slot
+        
+    elevator.stop_loading_people()
 
 func _on_npc_spawn_timer_timeout() -> void:
-    _spawn_npc()
+    if not _spawning_npc:
+        _spawn_npc()
     _restart_npc_spawn_timer()
 
 

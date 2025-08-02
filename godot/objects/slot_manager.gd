@@ -4,18 +4,40 @@ class_name SlotManager
 
 var _available_slots: Array[Slot] = []
 var _occupied_slots: Array[Slot] = []
+var _broken_door_slot: Slot = null
+var _broken_speed_slot: Slot = null
+
 
 func _ready() -> void:
     for c in get_children():
         if not c is Slot:
             continue
         var s:Slot = c
-        if s.available:
+        if s.type == Slot.Type.BROKEN_DOOR:
+            _broken_door_slot = s
+        elif s.type == Slot.Type.BROKEN_SPEED:
+            _broken_speed_slot = s
+        elif s.available:
             _available_slots.push_back(s)
         else:
             _occupied_slots.push_back(s)
         s.reserved.connect(_on_slot_reserved)
         s.released.connect(_on_slot_released)
+
+
+func get_special_slot(type: Slot.Type) -> Slot:
+    if type == Slot.Type.BROKEN_DOOR:
+        if not _broken_door_slot:
+            return null
+        else:
+            return _broken_door_slot
+    elif type == Slot.Type.BROKEN_SPEED:
+        if not _broken_speed_slot:
+            return null
+        else:
+            return _broken_speed_slot
+
+    return null
 
 
 func get_first_available_slot() -> Slot:

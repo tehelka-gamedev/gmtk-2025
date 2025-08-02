@@ -67,6 +67,11 @@ script = ExtResource("4_4d8i4")
 position = Vector2(27, 6)
 script = ExtResource("4_4d8i4")
 
+[node name="Marker2D5" type="Marker2D" parent="SlotManager"]
+position = Vector2(0, 47)
+script = ExtResource("4_4d8i4")
+type = 1
+
 [node name="Door" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(0, -115.5)

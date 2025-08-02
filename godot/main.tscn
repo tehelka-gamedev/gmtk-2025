@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=24 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="2_7mycd"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://dyx3wqawopdo6" path="res://narrative_manager/warning_messages/ok_to_warning_messages.tres" id="17_82xsv"]
 [ext_resource type="Resource" uid="uid://coo4p0s6xoabp" path="res://narrative_manager/warning_messages/warning_to_almost_fired_messages.tres" id="18_getpj"]
 [ext_resource type="Resource" uid="uid://blnr05to5yo8v" path="res://narrative_manager/random_messages.tres" id="19_cegan"]
+[ext_resource type="Script" uid="uid://bmfr1pbnsyafi" path="res://event_manager/event_manager.gd" id="20_82xsv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 particles_animation = true
@@ -143,4 +144,10 @@ ok_to_warning_messages = ExtResource("17_82xsv")
 warning_to_almost_fired_messages = ExtResource("18_getpj")
 random_message = ExtResource("19_cegan")
 
+[node name="EventManager" type="Node2D" parent="."]
+script = ExtResource("20_82xsv")
+
+[node name="Timer" type="Timer" parent="EventManager"]
+
 [connection signal="timeout" from="World/NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
+[connection signal="timeout" from="EventManager/Timer" to="EventManager" method="_on_timer_timeout"]

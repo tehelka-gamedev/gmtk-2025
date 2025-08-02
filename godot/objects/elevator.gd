@@ -39,6 +39,7 @@ const SNAP_LERP_VALUE: float = 5.0
 var _snapping: bool = false
 var _snapped: bool = false
 var _people_are_entering: bool = false
+var broken_speed: bool = false
 
 # door states
 enum DoorState {
@@ -110,9 +111,11 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("increase_elevator_speed"):
-        current_speed += 1
+        if not broken_speed:
+            current_speed += 1
     elif event.is_action_pressed("decrease_elevator_speed"):
-        current_speed -= 1
+        if not broken_speed:
+            current_speed -= 1
 
 func _open_door() -> void:
     _current_door_state = DoorState.OPENING
@@ -233,3 +236,10 @@ func stop_loading_people() -> void:
 func _on_door_closed() -> void:
     # go back agaiiiiin
     handle_toggle_movement()
+
+
+func set_broken_speed_to(value: bool) -> void:
+    broken_speed = value
+    if broken_speed:
+        current_speed = 0
+        
