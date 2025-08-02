@@ -111,6 +111,7 @@ color = 2
 
 [node name="Elevator" parent="World" node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
 position = Vector2(184, 179)
+DOOR_COYOTE_THRESHOLD = null
 speed_array = Array[float]([15.0, 45.0, 90.0, 220.0, 360.0])
 snap_duration = 0.3
 space_station = NodePath("../SpaceStation")

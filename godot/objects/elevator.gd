@@ -7,6 +7,7 @@ signal door_closed
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 
+@export var DOOR_COYOTE_THRESHOLD: float = 1.0
 @export var distance_to_pivot_point:float = 60.0 :
     set(value):
         distance_to_pivot_point = value
@@ -40,6 +41,9 @@ var _snapping: bool = false
 var _snapped: bool = false
 var _tween: Tween = null
 var _people_are_entering: bool = false
+var _door_coyote_time: float = 0.0
+var _door_coyote_flag: bool = false
+
 @onready var _door: Sprite2D = $Door
 
 
@@ -83,6 +87,14 @@ func _process_game(delta: float) -> void:
         rotation_degrees -= delta * speed_array[current_speed]
     else:
         rotation_degrees += space_station.rotation_speed * delta
+    
+    if _door_coyote_flag:
+        _door_coyote_time += delta
+        if _door_coyote_time >= DOOR_COYOTE_THRESHOLD:
+            _handle_open_door()
+            _door_coyote_time = 0.0
+            _door_coyote_flag = false
+
 
 func _open_door() -> void:
     # play open_door_animation
@@ -228,10 +240,11 @@ func stop_loading_people() -> void:
     _people_are_entering = false
 
 
-
 func _handle_open_door() -> void:
     if _snapped and not _people_are_entering:
         if door_is_open:
             _close_door()
         else:
             _open_door()
+    elif not _door_coyote_flag and (_snapping or _people_are_entering):
+        _door_coyote_flag = true
