@@ -28,7 +28,6 @@ signal arrived_at_target_room
 var exiting: bool = false
 
 @onready var state_machine: StateMachine = $StateMachine
-@onready var _teleport_animation: AnimatedSprite2D = $TeleportAnimation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
