@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://dd5giy7mmmmxe"]
 
-[ext_resource type="Texture2D" uid="uid://bdg4laa3wc80a" path="res://sprites/room.png" id="1_2vtrl"]
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
+[ext_resource type="Texture2D" uid="uid://jvibyudsrbft" path="res://sprites/room2.png" id="2_c0xyw"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
 [ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_c0xyw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4lmf"]
-size = Vector2(94, 17)
+size = Vector2(64, 19)
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("entrance_position", "slot_manager")]
 modulate = Color(1, 0, 0, 0.5)
@@ -17,21 +17,23 @@ slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
 
 [node name="NPCSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -13)
+position = Vector2(0, -169)
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -156)
 
 [node name="Room" type="Sprite2D" parent="Pivot"]
-texture = ExtResource("1_2vtrl")
+texture = ExtResource("2_c0xyw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Pivot"]
-position = Vector2(0, 28)
+position = Vector2(0, 40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/StaticBody2D"]
-position = Vector2(0, -0.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_d4lmf")
 
 [node name="SlotManager" type="Node2D" parent="."]
+position = Vector2(0, -156)
 script = ExtResource("3_lvljb")
 
 [node name="Marker2D" type="Marker2D" parent="SlotManager"]
@@ -52,9 +54,9 @@ script = ExtResource("4_4d8i4")
 
 [node name="Door" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(0, 28.5)
+position = Vector2(0, -127.5)
 scale = Vector2(0.15625, 0.0234375)
 texture = ExtResource("5_c0xyw")
 
 [node name="EntrancePosition" type="Marker2D" parent="."]
-position = Vector2(0, 16)
+position = Vector2(0, -140)

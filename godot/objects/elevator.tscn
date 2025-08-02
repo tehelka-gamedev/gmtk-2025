@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://bixriv415q58j"]
 
-[ext_resource type="Texture2D" uid="uid://c46t4mgyx75iv" path="res://sprites/elevator.png" id="1_581l7"]
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
+[ext_resource type="Texture2D" uid="uid://pb4mmeiosgej" path="res://sprites/elevator2.png" id="2_h6q4t"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_uinhc"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
 [ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_h6q4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
-size = Vector2(24, 80)
+size = Vector2(24, 64)
 
 [node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "look_at_helper", "entrance_position", "slot_manager")]
 script = ExtResource("1_ogmrx")
@@ -20,14 +20,14 @@ slot_manager = NodePath("Pivot/InnerPivot/SlotManager")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="InnerPivot" type="Node2D" parent="Pivot"]
-position = Vector2(77, 0)
+position = Vector2(46.5, 0)
 
 [node name="Elevator" type="Sprite2D" parent="Pivot/InnerPivot"]
 rotation = 1.5708
-texture = ExtResource("1_581l7")
+texture = ExtResource("2_h6q4t")
 
 [node name="RoomDetector" type="Area2D" parent="Pivot/InnerPivot"]
-position = Vector2(32, 0)
+position = Vector2(56, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/InnerPivot/RoomDetector"]
 shape = SubResource("RectangleShape2D_ogmrx")

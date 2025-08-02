@@ -7,7 +7,8 @@ enum NPCColors {
     BLUE,
     PINK,
     ORANGE,
-    #GREEN,
+    GREEN,
+    YELLOW
 }
 
 func color_enum_to_rgb(col: NPCColors) -> Color:
@@ -20,7 +21,9 @@ func color_enum_to_rgb(col: NPCColors) -> Color:
             return Color(0.8, 0.05, 0.8, 0.5)
         NPCColors.ORANGE:
             return Color(0.8, 0.45, 0.05, 0.5)
-        #NPCColors.GREEN:
-            #return Color(0, 1, 0, 0.5)
+        NPCColors.GREEN:
+            return Color(0, 1, 0, 0.5)
+        NPCColors.YELLOW:
+            return Color(0.922, 0.906, 0.0, 0.502)
         _:
             return Color.WHITE

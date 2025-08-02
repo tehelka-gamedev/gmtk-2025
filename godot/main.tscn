@@ -1,14 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=21 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
-[ext_resource type="Texture2D" uid="uid://b8vqi0ufi13oa" path="res://sprites/spacestation.png" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://bq8gfnv4drwjg" path="res://sprites/staranimation-Sheet.png" id="3_272bh"]
-[ext_resource type="Texture2D" uid="uid://yb7xrfudbkkw" path="res://sprites/spacestation_n.png" id="3_lquwl"]
 [ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="4_4c57u"]
 [ext_resource type="Script" uid="uid://dqgdl6pik3h05" path="res://objects/space_station.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dd5giy7mmmmxe" path="res://objects/room.tscn" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://r37kde8uq8rm" path="res://sprites/spacestation2.png" id="6_074og"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cyg333imlt7y0" path="res://ui/control_panel.tscn" id="11_cegan"]
 [ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="12_dg77c"]
@@ -29,10 +28,6 @@ particles_anim_loop = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
 shader = ExtResource("4_4c57u")
 shader_parameter/pixel_scale = 1.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
-diffuse_texture = ExtResource("2_1bvp3")
-normal_texture = ExtResource("3_lquwl")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
@@ -76,32 +71,39 @@ metadata/_edit_lock_ = true
 [node name="SpaceStation" type="Sprite2D" parent="World"]
 material = SubResource("ShaderMaterial_efxa6")
 position = Vector2(184, 179)
-texture = SubResource("CanvasTexture_1bvp3")
+texture = ExtResource("6_074og")
 script = ExtResource("4_7mycd")
 rotation_speed = 2.0
 
 [node name="Rooms" type="Node2D" parent="World/SpaceStation"]
 
 [node name="Room" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
-position = Vector2(0, -147)
+rotation = 0.488692
 
 [node name="Room2" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0, 0, 1, 0.5)
-position = Vector2(147, 0)
 rotation = 1.5708
 color = 1
 
 [node name="Room3" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0.8, 0.45, 0.05, 0.5)
-position = Vector2(0, 147)
-rotation = 3.14159
+rotation = 2.6529
 color = 3
 
 [node name="Room4" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 modulate = Color(0.8, 0.05, 0.8, 0.5)
-position = Vector2(-147, 0)
-rotation = 4.71239
+rotation = 3.63028
 color = 2
+
+[node name="Room5" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
+modulate = Color(0, 1, 0, 0.5)
+rotation = 4.71239
+color = 4
+
+[node name="Room6" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
+modulate = Color(0.922, 0.906, 0, 0.502)
+rotation = 5.79449
+color = 5
 
 [node name="Elevator" parent="World" node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
 position = Vector2(184, 179)
