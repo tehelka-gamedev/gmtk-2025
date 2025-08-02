@@ -31,17 +31,17 @@ func _process(delta: float) -> void:
 
 
 func update_angry_npc_count(count: int) -> void:
-    if count + 1 >= angry_npc_warning_threshold[0] and _current_state == FiredState.OK:
+    if count - 1 >= angry_npc_warning_threshold[0] and _current_state == FiredState.OK:
         _current_state = FiredState.WARNING
         update_message(_get_message_from(ok_to_warning_messages))
-    elif count + 1 >= angry_npc_warning_threshold[1] and _current_state == FiredState.WARNING:
+    elif count - 1 >= angry_npc_warning_threshold[1] and _current_state == FiredState.WARNING:
         _current_state = FiredState.ALMOST_FIRED
         update_message(_get_message_from(warning_to_almost_fired_messages))
-    elif count - 1 <= angry_npc_warning_threshold[0] and _current_state == FiredState.WARNING:
+    elif count + 1 <= angry_npc_warning_threshold[0] and _current_state == FiredState.WARNING:
         _current_state = FiredState.OK
         _elapsed_time_before_random_message = 0.0
         update_message(_get_message_from(warning_to_ok_messages))
-    elif count - 1 <= angry_npc_warning_threshold[1] and _current_state == FiredState.ALMOST_FIRED:
+    elif count + 1 <= angry_npc_warning_threshold[1] and _current_state == FiredState.ALMOST_FIRED:
         _current_state = FiredState.WARNING
         update_message(_get_message_from(almost_fired_to_warning_messages))
     

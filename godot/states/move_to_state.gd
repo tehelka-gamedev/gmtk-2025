@@ -4,7 +4,7 @@ extends State
 # This is an array [A, B, C] where the npc goes to A.position, then when arrived, to B.position
 # then to C.position and target C.position until otherwise.
 
-const MOVE_SPEED:int = 5
+@export var MOVE_SPEED: int = 7
 
 var _targets: Array[Node2D] = []
 var _arrived: bool = false

@@ -27,7 +27,7 @@ func _ready() -> void:
     
     AudioManager.play_music(SoundBank.background_music)
     
-    if not OS.has_feature("web"):
+    if OS.has_feature("editor"):
         AudioManager.mute_bgm(true)
 
     for i in range(starting_npc_count):

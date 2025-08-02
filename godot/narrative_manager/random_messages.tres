@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_0wufy")
-message = Array[String](["Beautiful day, isn't it?", "Operator, your good job exceeds all my expectations.", "Boy do I love pizzas.", "Damn it, these crosswords are getting tougher each day."])
+message = Array[String](["Beautiful day, isn't it?", "Operator, your good work exceeds all my expectations.", "Boy do I love pizzas.", "Damn it, these crosswords are getting tougher each day."])
 metadata/_custom_type_script = "uid://u6fwccsjl86o"
