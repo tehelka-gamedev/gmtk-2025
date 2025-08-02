@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bixriv415q58j"]
+[gd_scene load_steps=9 format=3 uid="uid://bixriv415q58j"]
 
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
+[ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="2_ff16h"]
 [ext_resource type="Texture2D" uid="uid://pb4mmeiosgej" path="res://sprites/elevator2.png" id="2_h6q4t"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_uinhc"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
 [ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_h6q4t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iex2v"]
+shader = ExtResource("2_ff16h")
+shader_parameter/pixel_scale = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
 size = Vector2(24, 64)
@@ -22,6 +27,7 @@ slot_manager = NodePath("Pivot/InnerPivot/SlotManager")
 position = Vector2(46.5, 0)
 
 [node name="Elevator" type="Sprite2D" parent="Pivot/InnerPivot"]
+material = SubResource("ShaderMaterial_iex2v")
 rotation = 1.5708
 texture = ExtResource("2_h6q4t")
 
