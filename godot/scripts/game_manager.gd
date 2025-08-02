@@ -18,6 +18,16 @@ var current_npc_count: int = 0
 var _angry_npc_count: int = 0
 var _conveyed_npc_count: int = 0
 
+# player choice
+enum PlayerChoice
+{
+    ENTER,
+    DENY,
+    ABORT,
+    NONE
+}
+signal player_choice_made(player_choice: PlayerChoice)
+var _waiting_for_player_choice: bool = false
 
 func _ready() -> void:
     randomize()
@@ -66,6 +76,118 @@ func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_st
         _narrative_manager.update_angry_npc_count(_angry_npc_count)
         _control_panel.set_angry_npc_count(_angry_npc_count)
 
+
+
+############### PLAYER INPUTS ###############
+
+func _unhandled_input(event: InputEvent):
+    handle_pause(event)
+    handle_player_choice(event)
+
+func handle_pause(event: InputEvent):
+    if event.is_action_pressed("ui_cancel"):
+        Events.pause()
+
+func send_player_choice(player_choice:PlayerChoice) -> void:
+    _waiting_for_player_choice = false
+    player_choice_made.emit(player_choice)
+
+func handle_player_choice(event: InputEvent) -> void:
+    if not _waiting_for_player_choice:
+        return
+    
+    if event.is_action_pressed("accept_npc_entering"):
+        send_player_choice(PlayerChoice.ENTER)
+    elif event.is_action_pressed("refuse_npc_entering"):
+        send_player_choice(PlayerChoice.DENY)
+    if event.is_action_pressed("player_choice_abort"):
+        send_player_choice(PlayerChoice.ABORT)
+
+
+############### Management of people exiting and entering elevator ###############
+
+func _on_elevator_door_opened() -> void:
+    var snapped_room: Room = elevator.get_snapped_room()
+    if snapped_room == null:
+        return # do nothing, if somehow the door opened without snapping
+    
+    # Start releasing people
+    var spawn_point:Marker2D = snapped_room.get_spawn_point()
+    var npc_to_release: NPC = null
+
+    # Find first npc with matching colour
+    var filter_to_room_color: Callable = func(npcs: Array[NPC]):
+        # iterate backward for better performance (negligible, but still)
+        for i in range(len(npcs)-1, -1, -1):
+            if npcs[i].color == snapped_room.color:
+                return npcs.pop_at(i)
+        return null
+
+    elevator.start_loading_people()
+    while not elevator.is_empty():
+        npc_to_release = elevator.pop_npc_from_inside(filter_to_room_color)
+        
+        # no more matching the filter, stop
+        if npc_to_release == null:
+            break
+
+        var targets: Array[Node2D] = [
+            elevator.get_entrance_position(),
+            snapped_room.get_entrance_position(),
+            spawn_point,
+            ]
+        npc_to_release.exiting = true
+        npc_to_release.state_machine.transition_to(
+            NPCStatesUtil.StatesName.move_to,
+            {
+                NPCStatesUtil.Message.target: targets
+            }
+        )
+        await npc_to_release.arrived_at_slot
+
+    snapped_room.start_exiting_people()
+    _release_from_snapped_room()
+
+
+#### People delivery from room
+
+func _release_from_snapped_room() -> void:
+    var snapped_room: Room = elevator.get_snapped_room()
+    if snapped_room == null:
+        return # do nothing, if somehow the door opened without snapping
+
+    if not elevator.is_full() and not snapped_room.is_empty():
+        snapped_room.ask_npc_coming()
+        snapped_room.npc_is_waiting.connect(_on_npc_waiting, CONNECT_ONE_SHOT)
+    else:
+        elevator.stop_loading_people()
+
+
+func _on_npc_waiting(room: Room, _npc: NPC) -> void:
+    var player_choice: PlayerChoice = await _ask_player_choice()
+
+    match player_choice:
+        PlayerChoice.ENTER:
+            await room.transfer_waiting_npc_to_room(elevator)
+            _release_from_snapped_room()
+        PlayerChoice.DENY:
+            await room.npc_denied()
+            _release_from_snapped_room()
+        PlayerChoice.ABORT:
+            room.npc_denied()
+            elevator.stop_loading_people()
+        _:
+            push_error("UNKNOWN PLAYER CHOICE %s" % player_choice)
+
+
+func _ask_player_choice() -> PlayerChoice:
+    _waiting_for_player_choice = true
+    return await player_choice_made
+
+        
+
+############### NPC SPAWN ###############
+
 func _spawn_npc() -> void:
     var non_full_rooms: Array[Room] = []
     for room: Room in rooms:
@@ -91,79 +213,6 @@ func _spawn_npc() -> void:
 
     npc.mood_gauge.mood_state_changed.connect(_on_npc_mood_state_changed)
     npc.arrived_at_target_room.connect(_on_npc_arrived_at_target_room)
-    
-
-func _on_elevator_door_opened() -> void:
-    var snapped_room: Room = elevator.get_snapped_room()
-    if snapped_room == null:
-        return # do nothing, if somehow the door opened without snapping
-    
-    # Start releasing people
-    var spawn_point:Marker2D = snapped_room.get_spawn_point()
-    var npc_to_release: NPC = null
-
-    # Find first npc with matching colour
-    var filter_to_room_color: Callable = func(npcs: Array[NPC]):
-        # iterate backward for better performance (negligible, but still)
-        for i in range(len(npcs)-1, -1, -1):
-            if npcs[i].color == snapped_room.color:
-                return npcs.pop_at(i)
-        return null
-
-    elevator.start_loading_people()
-    while not elevator.is_empty():
-        # TODO: add a filter to only let people that want to leave out
-        npc_to_release = elevator.pop_npc_from_inside(filter_to_room_color)
-        
-        # no more matching the filter, stop
-        if npc_to_release == null:
-            break
-
-        var targets: Array[Node2D] = [
-            elevator.get_entrance_position(),
-            snapped_room.get_entrance_position(),
-            spawn_point,
-            ]
-        npc_to_release.exiting = true
-        npc_to_release.state_machine.transition_to(
-            NPCStatesUtil.StatesName.move_to,
-            {
-                NPCStatesUtil.Message.target: targets
-            }
-        )
-        await npc_to_release.arrived_at_slot
-
-    _on_all_npc_released()
-
-func _on_all_npc_released() -> void:
-    var snapped_room: Room = elevator.get_snapped_room()
-    if snapped_room == null:
-        return # do nothing, if somehow the door opened without snapping
-
-    # Start entering the elevator
-    var npc_to_enter: NPC = null
-
-    while not elevator.is_full() and not snapped_room.is_empty():
-        npc_to_enter = snapped_room.pop_npc_from_inside()
-
-        # elevator is not full so there is at least one slot
-        var slot = elevator.slot_manager.get_first_available_slot() # not null :)
-        elevator.add_npc_inside(npc_to_enter, slot)
-        var targets: Array[Node2D] = [
-            snapped_room.get_entrance_position(),
-            elevator.get_entrance_position(),
-            slot,
-            ]
-        npc_to_enter.state_machine.transition_to(
-            NPCStatesUtil.StatesName.move_to,
-            {
-                NPCStatesUtil.Message.target: targets
-            }
-        )
-        await npc_to_enter.arrived_at_slot
-        
-    elevator.stop_loading_people()
-
 
 func _on_npc_spawn_timer_timeout() -> void:
     _spawn_npc()
@@ -174,10 +223,6 @@ func _restart_npc_spawn_timer() -> void:
     var random_respawn_time: float = randf_range(MIN_NPC_RESPAWN_TIME, MAX_NPC_RESPAWN_TIME)
     _npc_spawn_timer.start(random_respawn_time)
 
-func _unhandled_input(event):
-    if event.is_action_pressed("ui_cancel"):
-        Events.pause()
-    
 
 func _on_npc_arrived_at_target_room() -> void:
     _conveyed_npc_count += 1

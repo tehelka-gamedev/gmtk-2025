@@ -36,6 +36,19 @@ func pop_npc_from_inside(filter: Callable = default_pop_npc) -> NPC:
 
     return npc
 
+func number_npc_inside() -> int:
+    return len(npc_inside)
+
+func get_npc_from_inside(idx:int) -> NPC:
+    if idx < 0 or idx >= len(npc_inside):
+        push_error("Trying to get npc from inside at index '%d', invalid. Size='%d'." % len(npc_inside))
+        return null
+    return npc_inside[idx]
+
+func remove_npc_from_room(npc: NPC) -> void:
+    npc_inside.erase(npc)
+    npc.slot.release()
+
 func release_all_npc_inside() -> Array[NPC]:
     var array_to_return:Array[NPC] = npc_inside.duplicate()
     npc_inside = []
