@@ -13,7 +13,7 @@ signal speed_cursor_changed(value: int)
 @onready var h_slider: HSlider = %HSlider
 @onready var message_panel: Label = %MessagePanel
 @onready var angry_npc_label: Label = %AngryNPCLabel
-@onready var happy_npc_label: Label = %HappyNPCLabel
+@onready var conveyed_npc_label: Label = %ConveyedNPCLabel
 @onready var _message_timer: Timer = $MessageTimer
 
 
@@ -32,8 +32,8 @@ func set_angry_npc_count(value: int) -> void:
     angry_npc_label.text = str(value)
 
 
-func set_happy_npc_count(value: int) -> void:
-    happy_npc_label.text = str(value)
+func set_conveyed_npc_count(value: int) -> void:
+    conveyed_npc_label.text = str(value)
 
 
 func _on_h_slider_value_changed(value: float) -> void:

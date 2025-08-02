@@ -16,6 +16,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 
 var current_npc_count: int = 0
 var _angry_npc_count: int = 0
+var _conveyed_npc_count: int = 0
 
 
 func _ready() -> void:
@@ -79,6 +80,8 @@ func _spawn_npc() -> void:
     npc.go_to_slot(slot)
 
     npc.mood_gauge.mood_state_changed.connect(_on_npc_mood_state_changed)
+    npc.arrived_at_target_room.connect(_on_npc_arrived_at_target_room)
+    
 
 func _on_elevator_door_opened() -> void:
     var snapped_room: Room = elevator.get_snapped_room()
@@ -164,3 +167,8 @@ func _restart_npc_spawn_timer() -> void:
 func _unhandled_input(event):
     if event.is_action_pressed("ui_cancel"):
         Events.pause()
+    
+
+func _on_npc_arrived_at_target_room() -> void:
+    _conveyed_npc_count += 1
+    _control_panel.set_conveyed_npc_count(_conveyed_npc_count)

@@ -3,6 +3,7 @@ extends Node2D
 
 @warning_ignore("unused_signal")
 signal arrived_at_slot
+signal arrived_at_target_room
 
 @export var _skin: NPCSkin
 @export var color: Enum.NPCColors = Enum.NPCColors.RED:
@@ -59,4 +60,5 @@ func go_to_slot(s: Slot) -> void:
 # called when exiting the room. For now just queue_free but add fade out later maybe
 func exit() -> void:
     mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY)
+    arrived_at_target_room.emit()
     queue_free()
