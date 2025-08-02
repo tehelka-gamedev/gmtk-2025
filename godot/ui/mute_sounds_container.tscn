@@ -27,6 +27,7 @@ layout_mode = 2
 [node name="MuteSEButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 toggle_mode = true
 texture_normal = ExtResource("1_5n5su")
 texture_pressed = ExtResource("2_pkd1h")
@@ -35,6 +36,7 @@ stretch_mode = 0
 [node name="MuteBGMButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 toggle_mode = true
 texture_normal = ExtResource("3_pca6k")
 texture_pressed = ExtResource("4_sibqc")
