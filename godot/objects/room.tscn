@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd5giy7mmmmxe"]
+[gd_scene load_steps=8 format=3 uid="uid://dd5giy7mmmmxe"]
 
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
 [ext_resource type="Texture2D" uid="uid://jvibyudsrbft" path="res://sprites/room2.png" id="2_c0xyw"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
+[ext_resource type="Texture2D" uid="uid://bmq30wsjws8ar" path="res://sprites/roomdecals.png" id="3_n1ucb"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
 [ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_c0xyw"]
 
@@ -10,7 +11,6 @@
 size = Vector2(64, 19)
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("entrance_position", "slot_manager")]
-modulate = Color(1, 0, 0, 0.5)
 script = ExtResource("1_d4lmf")
 entrance_position = NodePath("EntrancePosition")
 slot_manager = NodePath("SlotManager")
@@ -24,6 +24,12 @@ position = Vector2(0, -156)
 
 [node name="Room" type="Sprite2D" parent="Pivot"]
 texture = ExtResource("2_c0xyw")
+
+[node name="Decal" type="Sprite2D" parent="Pivot"]
+modulate = Color(1, 0, 0, 0.5)
+texture = ExtResource("3_n1ucb")
+region_enabled = true
+region_rect = Rect2(0, 0, 124, 86)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Pivot"]
 position = Vector2(0, 40)

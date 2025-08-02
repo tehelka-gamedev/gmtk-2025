@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MessageTypes" load_steps=2 format=3 uid="uid://coo4p0s6xoabp"]
+[gd_resource type="Resource" script_class="Messages" load_steps=2 format=3 uid="uid://coo4p0s6xoabp"]
 
 [ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_s86fa"]
 
