@@ -38,7 +38,12 @@ func _ready() -> void:
     _restart_npc_spawn_timer()
     
     _control_panel.set_speed_cursor(elevator.current_speed)
-    _control_panel.speed_cursor_changed.connect(elevator.on_speed_value_changed)
+    
+    elevator.speed_changed.connect(func(_new_speed: int, speed_idx: int): (
+        _control_panel.set_speed_cursor(speed_idx)
+    ))
+
+    _control_panel.speed_cursor_changed.connect(elevator.set_speed_idx_no_signal)
     _control_panel.open_gates_pressed.connect(elevator.on_open_gates)
     _control_panel.close_gates_pressed.connect(elevator.on_close_gates)
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
