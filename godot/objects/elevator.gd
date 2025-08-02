@@ -6,6 +6,7 @@ signal door_opened
 signal door_closed
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
+signal speed_changed(new_speed:int, speed_idx:int)
 
 
 const SNAP_LERP_VALUE: float = 5.0
@@ -18,7 +19,14 @@ const SNAP_LERP_VALUE: float = 5.0
             inner_pivot.position.x = distance_to_pivot_point
 
 @export var speed_array: Array[float] = [30.0, 60.0, 90.0, 150.0, 360.0]
-@export var current_speed: int = 2
+@export var current_speed: int = 2 :
+    set(value):
+        value = clamp(value, 0, len(speed_array)-1)
+        if value != current_speed:
+            current_speed = value
+            print("speed is now %d" % current_speed)
+            speed_changed.emit(speed_array[current_speed], current_speed)
+
 @export var moving: bool = true
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
@@ -94,6 +102,12 @@ func _process_game(delta: float) -> void:
             _door_coyote_time = 0.0
             _door_coyote_flag = false
 
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("increase_elevator_speed"):
+        current_speed += 1
+    elif event.is_action_pressed("decrease_elevator_speed"):
+        current_speed -= 1
 
 func _open_door() -> void:
     # play open_door_animation
@@ -185,9 +199,8 @@ func handle_toggle_movement() -> void:
             _snapped = false
         moving = not moving
 
-func on_speed_value_changed(value: int) -> void:
-    if value != current_speed:
-        current_speed = value
+func set_speed_idx_no_signal(value: int) -> void:
+    current_speed = value
 
 
 func on_open_gates() -> void:
