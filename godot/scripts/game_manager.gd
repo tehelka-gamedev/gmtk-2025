@@ -31,6 +31,11 @@ func _ready() -> void:
     if OS.has_feature("editor"):
         AudioManager.mute_bgm(true)
 
+    var color_array: Array = Enum.NPCColors.values()
+    for i: int in len(rooms):
+        (rooms[i] as Room).color = color_array[i]
+        (rooms[i] as Room).decal_to_use = i % 2
+
     for i in range(starting_npc_count):
         _spawn_npc()
 
@@ -48,10 +53,7 @@ func _ready() -> void:
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)
     
-    var color_array: Array = Enum.NPCColors.values()
-    for i: int in len(rooms):
-        (rooms[i] as Room).color = color_array[i]
-        (rooms[i] as Room).decal_to_use = i % 2
+
 
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
