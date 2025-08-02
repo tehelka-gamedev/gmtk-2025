@@ -7,6 +7,9 @@ signal door_closed
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 
+
+const SNAP_LERP_VALUE: float = 5.0
+
 @export var DOOR_COYOTE_THRESHOLD: float = 1.0
 @export var distance_to_pivot_point:float = 60.0 :
     set(value):
@@ -35,11 +38,8 @@ var door_is_open: bool = false
     set(value):
         show_trajectory = value
 
-
-
 var _snapping: bool = false
 var _snapped: bool = false
-var _tween: Tween = null
 var _people_are_entering: bool = false
 var _door_coyote_time: float = 0.0
 var _door_coyote_flag: bool = false
@@ -78,7 +78,7 @@ func _process_game(delta: float) -> void:
         handle_toggle_movement()
             
     elif _snapping:
-        _refresh_tween()
+        _handle_snapping(delta)
 
     if Input.is_action_just_pressed("open_door"):
         _handle_open_door()
@@ -90,8 +90,7 @@ func _process_game(delta: float) -> void:
     
     if _door_coyote_flag:
         _door_coyote_time += delta
-        if _door_coyote_time >= DOOR_COYOTE_THRESHOLD:
-            _handle_open_door()
+        if _door_coyote_time > DOOR_COYOTE_THRESHOLD:
             _door_coyote_time = 0.0
             _door_coyote_flag = false
 
@@ -134,41 +133,26 @@ func _on_body_exited(body: Node2D):
 func snap_to_room() -> void:
     _snapping = true
     moving = false
-    _refresh_tween()
 
 
-func _refresh_tween() -> void:
-    if not snap_target:
-        return
-    
+func _handle_snapping(delta: float) -> void:
     look_at_helper.look_at(snap_target.global_position)
     var target_rotation:float = look_at_helper.global_rotation
-
     target_rotation = lerp_angle(rotation, target_rotation, 1)
-    if abs(target_rotation - rotation) < 0.001:
+    rotation = lerp_angle(rotation, target_rotation, min(delta * SNAP_LERP_VALUE, 1.0))
+    if abs(target_rotation - rotation) < 0.01:
+        rotation = target_rotation
         _on_snap_finished()
-        return
-    if _tween:
-        _tween.stop()
-    _tween = get_tree().create_tween()
-    _tween.tween_property(self, "rotation", target_rotation, snap_duration)
-    _tween.set_trans(Tween.TRANS_ELASTIC)
-    _tween.set_ease(Tween.EASE_IN)
-
-    _tween.finished.connect(_on_snap_finished)
-
-
-func stop_snapping() -> void:
-    if _tween:
-        _tween.stop()
-    _tween = null
-    _snapping = false
 
 
 func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
     _snapped = true
-    stop_snapping()
+    _snapping = false
+    if _door_coyote_flag && _door_coyote_time <= DOOR_COYOTE_THRESHOLD:
+        _handle_open_door()
+        _door_coyote_time = 0.0
+        _door_coyote_flag = false
 
 
 func get_snapped_room() -> Room:
@@ -183,7 +167,7 @@ func handle_toggle_movement() -> void:
 
     # if snapping, we can abort and leave
     if _snapping:
-        stop_snapping()
+        _snapping = false
         moving = true
 
     # otherwise, if we can snap
@@ -239,7 +223,6 @@ func start_loading_people() -> void:
 
 func stop_loading_people() -> void:
     _people_are_entering = false
-
 
 func _handle_open_door() -> void:
     if _snapped and not _people_are_entering:
