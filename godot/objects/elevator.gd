@@ -1,4 +1,3 @@
-@tool
 extends RoomBase
 class_name Elevator
 
@@ -41,11 +40,6 @@ var door_is_open: bool = false
 @export var look_at_helper:Node2D = null # used to help in rotation computation
 @export var entrance_position:Marker2D = null
 
-@export_category("Debug")
-@export var show_trajectory: bool = false :
-    set(value):
-        show_trajectory = value
-
 var _snapping: bool = false
 var _snapped: bool = false
 var _people_are_entering: bool = false
@@ -69,18 +63,8 @@ func _ready() -> void:
     room_detector.body_entered.connect(_on_body_entered)
     room_detector.body_exited.connect(_on_body_exited)
 
-    
 
 func _process(delta: float) -> void:
-    if Engine.is_editor_hint():
-        _process_editor()
-    else:
-        _process_game(delta)
-
-func _process_editor() -> void:
-    queue_redraw()
-
-func _process_game(delta: float) -> void:
     # only can toggle movement if doors are closed
     if Input.is_action_just_pressed("elevator_toggle_movement"):
         handle_toggle_movement()
@@ -122,12 +106,6 @@ func _close_door() -> void:
     _door.show()
     snap_target.close_door()
     door_closed.emit()
-
-func _draw():
-    if Engine.is_editor_hint():
-        if show_trajectory:
-            var filled:bool = false
-            draw_circle(Vector2.ZERO, distance_to_pivot_point, Color.RED, filled)
 
 func _on_body_entered(body: Node2D):
     # UGLY HACK: refer to the grand-parent room, and fallback to the staticBody2D otherwise
