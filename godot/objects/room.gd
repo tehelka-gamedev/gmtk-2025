@@ -13,6 +13,7 @@ class_name Room
 
 @onready var npc_spawn: Marker2D = $NPCSpawn
 @onready var _door: Sprite2D = $Door
+@onready var pivot: Node2D = $Pivot
 
 
 func get_spawn_point() -> Marker2D:

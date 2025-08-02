@@ -54,9 +54,9 @@ script = ExtResource("4_4d8i4")
 
 [node name="Door" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(0, -127.5)
+position = Vector2(0, -115.5)
 scale = Vector2(0.15625, 0.0234375)
 texture = ExtResource("5_c0xyw")
 
 [node name="EntrancePosition" type="Marker2D" parent="."]
-position = Vector2(0, -140)
+position = Vector2(0, -125)

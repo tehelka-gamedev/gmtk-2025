@@ -1,4 +1,3 @@
-@tool
 extends RoomBase
 class_name Elevator
 
@@ -38,7 +37,6 @@ var door_is_open: bool = false
 @export_category("Editor variables")
 @export var inner_pivot:Node2D = null # Where the sprite and object actually is
 @export var room_detector:Area2D = null
-@export var look_at_helper:Node2D = null # used to help in rotation computation
 @export var entrance_position:Marker2D = null
 
 @export_category("Debug")
@@ -62,14 +60,10 @@ func _ready() -> void:
     if not inner_pivot:
         push_error("No inner pivot in elevator!")
         return
-    if not look_at_helper:
-        push_error("No look_at_helper in elevator!")
-        return
     
     room_detector.body_entered.connect(_on_body_entered)
     room_detector.body_exited.connect(_on_body_exited)
-
-    
+ 
 
 func _process(delta: float) -> void:
     if Engine.is_editor_hint():
@@ -150,8 +144,7 @@ func snap_to_room() -> void:
 
 
 func _handle_snapping(delta: float) -> void:
-    look_at_helper.look_at(snap_target.global_position)
-    var target_rotation:float = look_at_helper.global_rotation
+    var target_rotation: float = inner_pivot.position.normalized().angle_to((snap_target.pivot.global_position - global_position).normalized())
     target_rotation = lerp_angle(rotation, target_rotation, 1)
     rotation = lerp_angle(rotation, target_rotation, min(delta * SNAP_LERP_VALUE, 1.0))
     if abs(target_rotation - rotation) < 0.01:
@@ -179,11 +172,11 @@ func handle_toggle_movement() -> void:
     
     toggle_movement_requested.emit()
 
+    
     # if snapping, we can abort and leave
     if _snapping:
         _snapping = false
         moving = true
-
     # otherwise, if we can snap
     elif snap_target:
         # we start snapping if we move, otherwise that is we are already stopped
