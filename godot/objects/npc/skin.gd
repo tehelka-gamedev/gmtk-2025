@@ -32,17 +32,6 @@ func _ready() -> void:
     set_orientation_to(NPCSkin.Orientation.DOWN)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("ui_right"):
-        set_orientation_to(NPCSkin.Orientation.RIGHT)
-    elif event.is_action_pressed("ui_left"):
-        set_orientation_to(NPCSkin.Orientation.LEFT)
-    elif event.is_action_pressed("ui_up"):
-        set_orientation_to(NPCSkin.Orientation.UP)
-    elif event.is_action_pressed("ui_down"):
-        set_orientation_to(NPCSkin.Orientation.DOWN)
-
-
 func set_color_to(color: Color) -> void:
     _body.modulate = color
 

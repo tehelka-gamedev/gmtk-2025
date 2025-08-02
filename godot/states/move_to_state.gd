@@ -14,6 +14,10 @@ func process(delta: float) -> void:
         push_error("'%s' trying to move to targets but there is none!" % name)
         return
     var next_target_pos:Vector2 = _targets[0].global_position
+    
+    if not _arrived:
+        (owner as NPC)._skin.set_orientation_to(_get_closest_orientation((next_target_pos - owner.global_position).normalized()))
+
     owner.global_position = (
             next_target_pos if _arrived
             else lerp(owner.global_position, next_target_pos, delta * MOVE_SPEED)
@@ -22,6 +26,7 @@ func process(delta: float) -> void:
         # One target left, we arrived, yay! :D
         if len(_targets) == 1:
             _arrived = true
+            (owner as NPC)._skin.set_orientation_to(NPCSkin.Orientation.DOWN)
             owner.arrived_at_slot.emit()
             
             if owner.exiting:
@@ -36,3 +41,21 @@ func enter(msg: = {}) -> void:
 func exit(_msg: = {}) -> void:
     _targets = []
     _arrived = false
+
+
+func _get_closest_orientation(vector: Vector2) -> NPCSkin.Orientation:
+    var angle = vector.angle()
+
+    if angle < 0:
+        angle += 2 * PI
+
+    if angle < PI / 4 or angle > 7 * PI / 4:
+        return NPCSkin.Orientation.RIGHT
+    elif angle < 3 * PI / 4:
+        return NPCSkin.Orientation.DOWN
+    elif angle < 5 * PI / 4:
+        return NPCSkin.Orientation.LEFT
+    elif angle < 7 * PI / 4:
+        return NPCSkin.Orientation.UP
+    else:
+        return NPCSkin.Orientation.DOWN
