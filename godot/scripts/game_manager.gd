@@ -43,7 +43,7 @@ func _ready() -> void:
     _control_panel.close_gates_pressed.connect(elevator.on_close_gates)
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
-    _narrative_manager.update.connect(_control_panel.set_panel_message)
+    _narrative_manager.update.connect(_control_panel.message_panel.set_message)
 
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:

@@ -1,12 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyg333imlt7y0"]
 
 [ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="1_t8mf3"]
+[ext_resource type="PackedScene" uid="uid://bdtucpsb5og61" path="res://ui/control_panel/MessagePanel.tscn" id="2_f7rkx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
 bg_color = Color(0.251301, 0.251302, 0.251301, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
-bg_color = Color(0.168279, 0.32073, 0.0609182, 1)
 
 [node name="ControlPanel" type="Panel"]
 offset_right = 237.0
@@ -26,21 +24,9 @@ offset_right = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_top = 10
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
-
-[node name="MessagePanel" type="Label" parent="VBoxContainer2/MarginContainer/PanelContainer"]
+[node name="MessagePanel" parent="VBoxContainer2" instance=ExtResource("2_f7rkx")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 100)
 layout_mode = 2
-autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
@@ -141,11 +127,8 @@ min_value = 1.0
 max_value = 5.0
 value = 1.0
 
-[node name="MessageTimer" type="Timer" parent="."]
-
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer/OpenGates" to="." method="_on_open_gates_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer/CloseGates" to="." method="_on_close_gates_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/HBoxContainer2/StopButton" to="." method="_on_stop_button_pressed"]
 [connection signal="value_changed" from="VBoxContainer2/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

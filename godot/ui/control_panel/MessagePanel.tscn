@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdtucpsb5og61"]
+
+[ext_resource type="Script" uid="uid://cg7yjq02ve1e5" path="res://ui/control_panel/message_panel.gd" id="1_04ugw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
+bg_color = Color(0.168279, 0.32073, 0.0609182, 1)
+
+[node name="MessagePanel" type="MarginContainer" node_paths=PackedStringArray("message_label", "_message_timer")]
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+script = ExtResource("1_04ugw")
+message_label = NodePath("PanelContainer/MessageLabel")
+_message_timer = NodePath("MessageTimer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+
+[node name="MessageLabel" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(20, 100)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="MessageTimer" type="Timer" parent="."]
