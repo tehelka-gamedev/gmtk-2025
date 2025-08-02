@@ -1,8 +1,5 @@
 extends Panel
 
-
-signal open_gates_pressed
-signal close_gates_pressed
 signal start_elevator_pressed
 signal stop_elevator_pressed
 signal speed_cursor_changed(value: int)
