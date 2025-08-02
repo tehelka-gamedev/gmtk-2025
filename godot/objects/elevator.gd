@@ -151,7 +151,10 @@ func snap_to_room() -> void:
 func _handle_snapping(delta: float) -> void:
     var target_rotation: float = inner_pivot.position.normalized().angle_to((snap_target.pivot.global_position - global_position).normalized())
     target_rotation = lerp_angle(rotation, target_rotation, 1)
-    rotation = lerp_angle(rotation, target_rotation, min(delta * SNAP_LERP_VALUE, 1.0))
+    
+    var snaping_factor = speed_array[current_speed] / speed_array[2]
+    
+    rotation = lerp_angle(rotation, target_rotation, min(delta * SNAP_LERP_VALUE * snaping_factor, 1.0))
     if abs(target_rotation - rotation) < 0.01:
         rotation = target_rotation
         _on_snap_finished()
