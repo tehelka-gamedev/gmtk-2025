@@ -91,7 +91,7 @@ color = 4
 
 [node name="Room3" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 2.6529
-color = 1
+color = 2
 
 [node name="Room4" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 3.63028
@@ -99,7 +99,7 @@ color = 3
 
 [node name="Room5" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 4.71239
-color = 2
+color = 1
 
 [node name="Room6" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 5.79449
