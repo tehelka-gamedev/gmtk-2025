@@ -35,7 +35,7 @@ var next_people_leaving_idx: int = 0
 var waiting_npc: NPC = null
 
 func cycle_next_people_leaving_idx() -> void:
-    next_people_leaving_idx = posmod((next_people_leaving_idx-1), number_npc_inside())
+    next_people_leaving_idx = posmod((next_people_leaving_idx-1), number_npc_inside()) if number_npc_inside() > 0 else 0
     waiting_npc = null
 
 
