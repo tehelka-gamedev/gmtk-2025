@@ -109,6 +109,7 @@ text = "Play"
 
 [node name="ButtonCredits" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+focus_mode = 0
 text = "Credits
 "
 
