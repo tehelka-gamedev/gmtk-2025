@@ -76,6 +76,7 @@ func go_back_to_slot() -> void:
 func exit() -> void:
     mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY)
     if not type == Type.TECH_GUY:
+        AudioManager.play_sound_effect(SoundBank.accept_npc)
         arrived_at_target_room.emit()
     queue_free()
 
