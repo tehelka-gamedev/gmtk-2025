@@ -107,7 +107,6 @@ colors = PackedColorArray(0.87451, 0.87451, 0.690196, 1, 0.406495, 0.402755, 0.2
 [node name="Room" type="Node2D" node_paths=PackedStringArray("entrance_position", "slot_manager")]
 script = ExtResource("1_d4lmf")
 entrance_position = NodePath("EntrancePosition")
-decal_to_use = false
 slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
 

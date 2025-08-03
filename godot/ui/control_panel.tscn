@@ -12,7 +12,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -8.0
-offset_bottom = -3.0
+offset_right = -338.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -42,7 +43,8 @@ columns = 2
 [node name="Label" type="Label" parent="VBoxContainer2/NPCStatsLines/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Angry NPC"
+text = "Angry
+People"
 
 [node name="AngryNPCDigitDisplay" parent="VBoxContainer2/NPCStatsLines/GridContainer" instance=ExtResource("3_3b57c")]
 layout_mode = 2
@@ -51,7 +53,9 @@ digit_color = Color(1, 0, 0, 1)
 [node name="Label2" type="Label" parent="VBoxContainer2/NPCStatsLines/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Conveyed NPC"
+text = "Conveyed
+People"
+horizontal_alignment = 1
 
 [node name="ConveyedNPCDigitDisplay" parent="VBoxContainer2/NPCStatsLines/GridContainer" instance=ExtResource("3_3b57c")]
 layout_mode = 2

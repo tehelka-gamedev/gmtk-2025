@@ -82,7 +82,6 @@ rotation_speed = 2.0
 
 [node name="Room" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 0.488692
-decal_to_use = 0
 
 [node name="Room2" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 1.5708
@@ -127,9 +126,10 @@ unique_name_in_owner = true
 light_mask = 0
 anchors_preset = 11
 anchor_left = 1.0
-offset_left = -234.0
+offset_left = -249.0
 offset_top = 1.0
 offset_right = -1.0
+offset_bottom = -5.0
 grow_horizontal = 0
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("13_ycdy4")]
