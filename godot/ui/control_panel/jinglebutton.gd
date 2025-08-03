@@ -22,3 +22,8 @@ func refresh_light(toggled_on: bool) -> void:
         SmallLight.LightTemplate.OK if toggled_on
         else SmallLight.LightTemplate.NOT_OK
     )
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("toggle_jingle"):
+        check_button.button_pressed = not check_button.button_pressed
+        
