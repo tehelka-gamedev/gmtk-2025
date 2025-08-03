@@ -29,12 +29,17 @@ signal npc_is_waiting(room:Room, npc: NPC)
 @onready var _door: Sprite2D = $Door
 @onready var pivot: Node2D = $Pivot
 @onready var _decal: Sprite2D = $Pivot/Decal
+@onready var _broken_room_mask: Sprite2D = $Pivot/BrokenRoomMask
 
 
 # people exit management
 var next_people_leaving_idx: int = 0
 var waiting_npc: NPC = null
 var door_broken: bool = false
+
+
+func _ready() -> void:
+    _broken_room_mask.hide()
 
 
 func cycle_next_people_leaving_idx() -> void:
@@ -139,6 +144,6 @@ func get_entrance_position() -> Marker2D:
 func set_broken_to(value: bool) -> void:
     door_broken = value
     if door_broken:
-        modulate = Color.SLATE_GRAY
+        _broken_room_mask.show()
     else:
-        modulate = Color.WHITE
+        _broken_room_mask.hide()

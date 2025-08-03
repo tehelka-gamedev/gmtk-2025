@@ -19,7 +19,7 @@ slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
 
 [node name="NPCSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -169)
+position = Vector2(0, -177)
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(0, -156)
@@ -34,6 +34,12 @@ texture = ExtResource("3_n1ucb")
 region_enabled = true
 region_rect = Rect2(0, 0, 124, 86)
 
+[node name="BrokenRoomMask" type="Sprite2D" parent="Pivot"]
+modulate = Color(0.184314, 0.184314, 0.184314, 0.741176)
+light_mask = 0
+z_index = 10
+texture = ExtResource("2_c0xyw")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="Pivot"]
 position = Vector2(0, 40)
 
@@ -46,19 +52,19 @@ position = Vector2(0, -156)
 script = ExtResource("3_lvljb")
 
 [node name="Marker2D" type="Marker2D" parent="SlotManager"]
-position = Vector2(-27, 6)
+position = Vector2(-32, 15)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D2" type="Marker2D" parent="SlotManager"]
-position = Vector2(-11, 6)
+position = Vector2(-13, 0)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D3" type="Marker2D" parent="SlotManager"]
-position = Vector2(11, 6)
+position = Vector2(13, 0)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D4" type="Marker2D" parent="SlotManager"]
-position = Vector2(27, 6)
+position = Vector2(32, 15)
 script = ExtResource("4_4d8i4")
 
 [node name="Marker2D5" type="Marker2D" parent="SlotManager"]

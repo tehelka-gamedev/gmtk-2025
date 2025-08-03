@@ -43,27 +43,27 @@ script = ExtResource("3_uinhc")
 metadata/_edit_lock_ = true
 
 [node name="ElevatorSlot1" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-3, -40)
+position = Vector2(-7, -40)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot2" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-3, -24)
+position = Vector2(0, -24)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot3" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-3, -8)
+position = Vector2(7, -8)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot4" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-3, 8)
+position = Vector2(7, 8)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot5" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-3, 24)
+position = Vector2(0, 24)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot6" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
-position = Vector2(-3, 40)
+position = Vector2(-7, 40)
 script = ExtResource("4_h6q4t")
 
 [node name="ElevatorSlot7" type="Marker2D" parent="Pivot/InnerPivot/SlotManager"]
