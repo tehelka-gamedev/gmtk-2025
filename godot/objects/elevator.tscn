@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bixriv415q58j"]
+[gd_scene load_steps=22 format=3 uid="uid://bixriv415q58j"]
 
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
 [ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="2_ff16h"]
 [ext_resource type="Texture2D" uid="uid://pb4mmeiosgej" path="res://sprites/elevator2.png" id="2_h6q4t"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_uinhc"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
-[ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_h6q4t"]
+[ext_resource type="Texture2D" uid="uid://sow4omtn7nbs" path="res://sprites/door/elevatordoor.png" id="6_iex2v"]
 [ext_resource type="Texture2D" uid="uid://dchiyyxal4b8v" path="res://sprites/particles/explosion/Explosion_Sheet.png" id="7_iex2v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iex2v"]
@@ -14,6 +14,87 @@ shader_parameter/pixel_scale = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
 size = Vector2(24, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iex2v"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(66, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qa0y"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(44, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ly52"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(22, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs4al"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(0, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgfa1"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(0, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnvw8"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(0, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5ck8"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(22, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxumn"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(44, 0, 22, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgdjj"]
+atlas = ExtResource("6_iex2v")
+region = Rect2(66, 0, 22, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qa0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iex2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qa0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ly52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs4al")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgfa1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnvw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5ck8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxumn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgdjj")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bgfa1"]
 particles_animation = true
@@ -84,12 +165,13 @@ type = 2
 [node name="EntrancePosition" type="Marker2D" parent="Pivot/InnerPivot"]
 position = Vector2(48, 0)
 
-[node name="Door" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(103, 1.19209e-07)
-rotation = 1.57079
-scale = Vector2(0.15625, 0.0234375)
-texture = ExtResource("5_h6q4t")
+[node name="Door" type="AnimatedSprite2D" parent="."]
+position = Vector2(103, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_5qa0y")
+animation = &"open"
+autoplay = "default"
+speed_scale = 1.5
 
 [node name="BrokenSpeedParticles" type="CPUParticles2D" parent="."]
 light_mask = 0

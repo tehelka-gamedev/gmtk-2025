@@ -1,17 +1,98 @@
-[gd_scene load_steps=12 format=3 uid="uid://dd5giy7mmmmxe"]
+[gd_scene load_steps=22 format=3 uid="uid://dd5giy7mmmmxe"]
 
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
 [ext_resource type="Texture2D" uid="uid://jvibyudsrbft" path="res://sprites/room2.png" id="2_c0xyw"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
 [ext_resource type="Texture2D" uid="uid://bmq30wsjws8ar" path="res://sprites/roomdecals.png" id="3_n1ucb"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
-[ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_c0xyw"]
+[ext_resource type="Texture2D" uid="uid://d2jv1qmenxydg" path="res://sprites/door/roomdoor.png" id="6_8rv7e"]
 [ext_resource type="Texture2D" uid="uid://dchiyyxal4b8v" path="res://sprites/particles/explosion/Explosion_Sheet.png" id="7_r2kp8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r2kp8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4lmf"]
 size = Vector2(64, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcjuh"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(78, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4clh"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(52, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1p5a"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(26, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u462d"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(0, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rh0e"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(0, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5w1p"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(0, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6c48"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(26, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36pm0"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(52, 0, 26, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjvuh"]
+atlas = ExtResource("6_8rv7e")
+region = Rect2(78, 0, 26, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8jdt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcjuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4clh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1p5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u462d")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rh0e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5w1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6c48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36pm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjvuh")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r2kp8"]
 particles_animation = true
@@ -85,11 +166,12 @@ position = Vector2(0, 47)
 script = ExtResource("4_4d8i4")
 type = 1
 
-[node name="Door" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(0, -115.5)
-scale = Vector2(0.15625, 0.0234375)
-texture = ExtResource("5_c0xyw")
+[node name="Door" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -116)
+sprite_frames = SubResource("SpriteFrames_h8jdt")
+animation = &"close"
+autoplay = "default"
+speed_scale = 1.5
 
 [node name="EntrancePosition" type="Marker2D" parent="."]
 visible = false
@@ -111,3 +193,5 @@ scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_r2kp8")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

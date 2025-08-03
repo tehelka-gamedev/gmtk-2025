@@ -50,7 +50,7 @@ enum DoorState {
 }
 var _current_door_state: DoorState = DoorState.CLOSED
 
-@onready var _door: Sprite2D = $Door
+@onready var _door: AnimatedSprite2D = $Door
 @onready var _broken_speed_particles: CPUParticles2D = $BrokenSpeedParticles
 
 func door_is_open() -> bool:
@@ -67,12 +67,14 @@ func door_is_opening() -> bool:
 
 func set_door_open() -> void:
     _current_door_state = DoorState.OPENED
-    _door.hide()
+    _door.play("open")
+    await _door.animation_finished
     door_opened.emit()
 
 func set_door_closed() -> void:
     _current_door_state = DoorState.CLOSED
-    _door.show()
+    _door.play("close")
+    await _door.animation_finished
     door_closed.emit()
 
 

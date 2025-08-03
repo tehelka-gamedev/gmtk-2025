@@ -13,7 +13,6 @@ signal npc_is_waiting(room:Room, npc: NPC)
         color = value
         _decal.modulate = Enum.color_enum_to_rgb(color)
 
-
 @export var entrance_position:Marker2D = null
 @export var decal_to_use: bool = false:
     set(value):
@@ -26,7 +25,7 @@ signal npc_is_waiting(room:Room, npc: NPC)
             _decal.region_rect.position.x = 0
 
 @onready var npc_spawn: Marker2D = $NPCSpawn
-@onready var _door: Sprite2D = $Door
+@onready var _door: AnimatedSprite2D = $Door
 @onready var pivot: Node2D = $Pivot
 @onready var _decal: Sprite2D = $Pivot/Decal
 @onready var _broken_room_mask: Sprite2D = $Pivot/BrokenRoomMask
@@ -132,11 +131,12 @@ func get_tech_guy_point() -> Marker2D:
     
 
 func open_door() -> void:
-    _door.hide()
+    _door.play("open")
 
 
 func close_door() -> void:
-    _door.show()
+    _door.play("close")
+    
 
 func get_entrance_position() -> Marker2D:
     return entrance_position
