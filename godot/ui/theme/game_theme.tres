@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://blxe4jooyhds0" path="res://ui/theme/lever/lever_pressed.png" id="6_lma5b"]
 [ext_resource type="Texture2D" uid="uid://b4bfsioo4c7dr" path="res://ui/theme/screen/screentemplate.png" id="6_xyriv"]
 [ext_resource type="Texture2D" uid="uid://dj4fc6d6p6lyj" path="res://ui/theme/lever/lever_normal.png" id="7_xfrak"]
-[ext_resource type="FontFile" uid="uid://dxr1rsl7b7yq5" path="res://ui/theme/font/9x9-pix.otf" id="8_fh0ds"]
+[ext_resource type="FontFile" uid="uid://brleurrpe7rcf" path="res://ui/theme/font/Minimal5x7.ttf" id="8_fh0ds"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0hud"]
 
@@ -79,7 +79,7 @@ JingleButton/styles/hover_pressed = SubResource("StyleBoxEmpty_t3k5t")
 JingleButton/styles/normal = SubResource("StyleBoxEmpty_lma5b")
 JingleButton/styles/pressed = SubResource("StyleBoxEmpty_xfrak")
 Label/constants/line_spacing = 0
-Label/font_sizes/font_size = 7
+Label/font_sizes/font_size = 25
 Label/fonts/font = ExtResource("8_fh0ds")
 Lever/base_type = &"CheckButton"
 Lever/icons/checked = ExtResource("6_lma5b")
@@ -95,4 +95,4 @@ Screen/base_type = &"PanelContainer"
 Screen/styles/panel = SubResource("StyleBoxTexture_v4iik")
 ScreenLabel/base_type = &"Label"
 ScreenLabel/colors/font_color = Color(0, 0.466667, 0, 1)
-ScreenLabel/font_sizes/font_size = 7
+ScreenLabel/font_sizes/font_size = 20
