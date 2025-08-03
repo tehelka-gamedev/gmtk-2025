@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
-[ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="2_7mycd"]
+[ext_resource type="Texture2D" uid="uid://erjmfm4qxnmx" path="res://sprites/spacebackground.png" id="2_cegan"]
 [ext_resource type="PackedScene" uid="uid://bixriv415q58j" path="res://objects/elevator.tscn" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://bq8gfnv4drwjg" path="res://sprites/particles/staranimation-Sheet.png" id="3_272bh"]
 [ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="4_4c57u"]
@@ -44,7 +44,7 @@ offset_right = 640.0
 offset_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("2_7mycd")
+texture = ExtResource("2_cegan")
 metadata/_edit_lock_ = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -82,29 +82,32 @@ rotation_speed = 2.0
 
 [node name="Room" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 0.488692
-decal_to_use = true
+decal_to_use = 0
 
 [node name="Room2" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 1.5708
 color = 4
+decal_to_use = 1
 
 [node name="Room3" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 2.6529
 color = 2
-decal_to_use = true
+decal_to_use = 2
 
 [node name="Room4" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 3.63028
 color = 3
+decal_to_use = 3
 
 [node name="Room5" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 4.71239
 color = 1
-decal_to_use = true
+decal_to_use = 4
 
 [node name="Room6" parent="World/SpaceStation/Rooms" instance=ExtResource("4_272bh")]
 rotation = 5.79449
 color = 5
+decal_to_use = 5
 
 [node name="Elevator" parent="World" node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
 position = Vector2(184, 179)

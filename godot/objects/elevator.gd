@@ -65,20 +65,6 @@ func door_is_closing() -> bool:
 func door_is_opening() -> bool:
     return _current_door_state == DoorState.OPENING
 
-func set_door_open() -> void:
-    _current_door_state = DoorState.OPENED
-    _door.play("open")
-    await _door.animation_finished
-    door_opened.emit()
-
-func set_door_closed() -> void:
-    _current_door_state = DoorState.CLOSED
-    _door.play("close")
-    await _door.animation_finished
-    door_closed.emit()
-
-
-
 #### DOOR END  ####
 
 
@@ -123,7 +109,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _open_door() -> void:
     _current_door_state = DoorState.OPENING
-    get_tree().create_timer(0.5).timeout.connect(set_door_open) # Temporary wait, for animation later
+    _door.play("open")
+    await _door.animation_finished
+    _current_door_state = DoorState.OPENED
+    door_opened.emit()
     # play open_door_animation
     # await open__door_animation.finished
     
@@ -131,7 +120,10 @@ func _open_door() -> void:
 
 func _close_door() -> void:
     _current_door_state = DoorState.CLOSING
-    get_tree().create_timer(0.5).timeout.connect(set_door_closed) # Temporary wait, for animation later
+    _door.play("close")
+    await _door.animation_finished
+    _current_door_state = DoorState.CLOSED
+    door_closed.emit()
     
     snap_target.close_door()
 

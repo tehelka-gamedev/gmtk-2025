@@ -2,6 +2,7 @@
 extends RoomBase
 class_name Room
 
+signal door_opened
 signal tech_guy_in_elevator(tech_guy: NPC)
 signal npc_is_waiting(room:Room, npc: NPC)
 
@@ -14,15 +15,12 @@ signal npc_is_waiting(room:Room, npc: NPC)
         _decal.modulate = Enum.color_enum_to_rgb(color)
 
 @export var entrance_position:Marker2D = null
-@export var decal_to_use: bool = false:
+@export_range(0, 5) var decal_to_use: int = 0:
     set(value):
         if not is_node_ready():
             await ready
         decal_to_use = value
-        if decal_to_use:
-            _decal.region_rect.position.x = 124
-        else:
-            _decal.region_rect.position.x = 0
+        _decal.region_rect.position.x = 126 * decal_to_use
 
 @onready var npc_spawn: Marker2D = $NPCSpawn
 @onready var _door: AnimatedSprite2D = $Door
@@ -131,7 +129,10 @@ func get_tech_guy_point() -> Marker2D:
     
 
 func open_door() -> void:
-    _door.play("open")
+    if not door_broken:
+        _door.play("open")
+        await _door.animation_finished
+        door_opened.emit()
 
 
 func close_door() -> void:
@@ -150,3 +151,4 @@ func set_broken_to(value: bool) -> void:
     else:
         _broken_room_mask.hide()
         _broken_door_particles.emitting = false
+        

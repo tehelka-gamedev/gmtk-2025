@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dd5giy7mmmmxe"]
+[gd_scene load_steps=23 format=3 uid="uid://dd5giy7mmmmxe"]
 
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
+[ext_resource type="Texture2D" uid="uid://b8o5mt6petkpy" path="res://sprites/room3.png" id="2_8rv7e"]
 [ext_resource type="Texture2D" uid="uid://jvibyudsrbft" path="res://sprites/room2.png" id="2_c0xyw"]
+[ext_resource type="Texture2D" uid="uid://piefel3bd5p7" path="res://sprites/roomdecals2.png" id="3_8rv7e"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
-[ext_resource type="Texture2D" uid="uid://bmq30wsjws8ar" path="res://sprites/roomdecals.png" id="3_n1ucb"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
 [ext_resource type="Texture2D" uid="uid://d2jv1qmenxydg" path="res://sprites/door/roomdoor.png" id="6_8rv7e"]
 [ext_resource type="Texture2D" uid="uid://dchiyyxal4b8v" path="res://sprites/particles/explosion/Explosion_Sheet.png" id="7_r2kp8"]
@@ -106,6 +107,7 @@ colors = PackedColorArray(0.87451, 0.87451, 0.690196, 1, 0.406495, 0.402755, 0.2
 [node name="Room" type="Node2D" node_paths=PackedStringArray("entrance_position", "slot_manager")]
 script = ExtResource("1_d4lmf")
 entrance_position = NodePath("EntrancePosition")
+decal_to_use = false
 slot_manager = NodePath("SlotManager")
 metadata/_edit_group_ = true
 
@@ -116,12 +118,15 @@ position = Vector2(0, -177)
 position = Vector2(0, -156)
 
 [node name="Room" type="Sprite2D" parent="Pivot"]
-texture = ExtResource("2_c0xyw")
+light_mask = 0
+position = Vector2(0, 3)
+texture = ExtResource("2_8rv7e")
 
 [node name="Decal" type="Sprite2D" parent="Pivot"]
 modulate = Color(1, 0, 0, 0.5)
 material = SubResource("ShaderMaterial_r2kp8")
-texture = ExtResource("3_n1ucb")
+position = Vector2(-1, -4)
+texture = ExtResource("3_8rv7e")
 region_enabled = true
 region_rect = Rect2(0, 0, 124, 86)
 
@@ -167,7 +172,7 @@ script = ExtResource("4_4d8i4")
 type = 1
 
 [node name="Door" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -116)
+position = Vector2(0, -112)
 sprite_frames = SubResource("SpriteFrames_h8jdt")
 autoplay = "default"
 speed_scale = 2.0
@@ -180,7 +185,7 @@ position = Vector2(0, -125)
 light_mask = 0
 z_index = 15
 material = SubResource("CanvasItemMaterial_r2kp8")
-position = Vector2(0, -116)
+position = Vector2(0, -108)
 emitting = false
 texture = ExtResource("7_r2kp8")
 lifetime = 0.5

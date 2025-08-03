@@ -321,6 +321,8 @@ func _on_broken_room_repaired(room: Room) -> void:
     if snapped_room == null:
         return # do nothing, if somehow the door opened without snapping
     elif room == snapped_room:
+        snapped_room.open_door()
+        await snapped_room.door_opened
         _on_elevator_door_opened()
 
 
