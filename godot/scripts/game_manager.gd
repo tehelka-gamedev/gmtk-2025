@@ -11,7 +11,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @onready var rooms: Array[Node] = $World/SpaceStation/Rooms.get_children()
 @onready var _npcs: Node2D = $World/NPCs
 @onready var _npc_spawn_timer: Timer = $World/NPCSpawnTimer
-@onready var _control_panel: Panel = %ControlPanel
+@onready var _control_panel: ControlPanel = %ControlPanel
 @onready var _narrative_manager: NarrativeManager = $NarrativeManager
 
 var current_npc_count: int = 0
