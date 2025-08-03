@@ -53,24 +53,24 @@ theme_override_constants/margin_bottom = 20
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 5
+theme_override_font_sizes/font_size = 17
 text = "Dear Operator #61235,
 
 Well, well. Looks like your application actually went through.
 Welcome to Space Crossroad. You're now officially part of the interstellar transit mess we call a business.
 
-Before you get too excited — or too comfortable — let’s get something straight:
+Before you get too excited - or too comfortable - let’s get something straight:
 You’ve got a job to do, and we expect you to do it like your contract (and your dignity) depends on it. Because it does.
 
 Your mission:
 Keep passengers moving, keep complaints low, and absolutely do not ignore system messages. They’re there to help you. And also to monitor you. Mostly the second thing.
 
 
-Further instructions will appear on your management screen as you process. Read them. Follow them. Pretend to understand them — whatever works.
+Further instructions will appear on your management screen as you process. Read them. Follow them. Pretend to understand them - whatever works.
 Fail to keep up? We will replace you. Swiftly. Mercilessly. With a smile.
 
 Welcome aboard,
-– Space Crossroad  CEO"
+- Space Crossroad  CEO"
 autowrap_mode = 3
 
 [node name="Button" type="Button" parent="MarginContainer/PanelContainer/PanelContainer/MarginContainer"]

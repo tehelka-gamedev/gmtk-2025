@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dxr1rsl7b7yq5"
-path="res://.godot/imported/9x9-pix.otf-4a16c6a98edaaad3220604a64c96b91e.fontdata"
+uid="uid://brleurrpe7rcf"
+path="res://.godot/imported/Minimal5x7.ttf-23a48efd1b9213417138c3264d6c8b8b.fontdata"
 
 [deps]
 
-source_file="res://ui/theme/font/9x9-pix.otf"
-dest_files=["res://.godot/imported/9x9-pix.otf-4a16c6a98edaaad3220604a64c96b91e.fontdata"]
+source_file="res://ui/theme/font/Minimal5x7.ttf"
+dest_files=["res://.godot/imported/Minimal5x7.ttf-23a48efd1b9213417138c3264d6c8b8b.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
