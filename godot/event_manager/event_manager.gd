@@ -43,7 +43,6 @@ func _on_timer_timeout() -> void:
         possible_event_function.append(_play_slow_elevator_event)
         possible_event_function.append(_play_broken_door_event)
     if game_manager.current_npc_count + VIP_NUMBER + 1 < game_manager.max_npc_count:
-        print(game_manager.current_npc_count, "/", game_manager.max_npc_count)
         possible_event_function.append(_play_vip_event)
         
     if possible_event_function.is_empty():
@@ -99,7 +98,6 @@ func _play_vip_event() -> void:
 
 func on_vip_conveyed() -> void:
     vip_conveyed += 1
-    print("vip conveyed ", vip_conveyed)
     if vip_conveyed == VIP_NUMBER:
         _on_all_vip_conveyed()
 

@@ -57,8 +57,6 @@ func _refresh_textures() -> void:
     var tens: int = (value/10) % 10
     var units: int = value % 10
 
-    print(tens, units)
-
     if turned_on:
         if tens > 0:
             _set_texture_digit(_first_digit_atlas, tens)
