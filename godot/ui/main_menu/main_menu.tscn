@@ -24,7 +24,7 @@ particles_anim_loop = false
 shader = ExtResource("2_3c04x")
 shader_parameter/pixel_scale = 1.0
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("button_play", "button_credits", "_background")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("button_play", "_background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +34,6 @@ grow_vertical = 2
 script = ExtResource("1_u184e")
 intro_scene = ExtResource("2_w2r0d")
 button_play = NodePath("MarginContainer/VBoxContainer/Buttons/ButtonPlay")
-button_credits = NodePath("MarginContainer/VBoxContainer/Buttons/ButtonCredits")
 background_scroll_speed = 4.0
 _background = NodePath("Background")
 fade_in_time = 0.25
@@ -106,11 +105,6 @@ alignment = 1
 [node name="ButtonPlay" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Play"
-
-[node name="ButtonCredits" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
-layout_mode = 2
-text = "Credits
-"
 
 [node name="MuteSoundsContainer" parent="." instance=ExtResource("6_joh67")]
 layout_mode = 1
