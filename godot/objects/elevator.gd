@@ -8,6 +8,7 @@ signal toggle_movement_requested
 signal speed_changed(new_speed:int, speed_idx:int)
 signal broken_speed_changed(broken: bool)
 
+signal moving_changed(new_state:bool)
 const SNAP_LERP_VALUE: float = 5.0
 
 @export var DOOR_COYOTE_THRESHOLD: float = 1.0
@@ -25,7 +26,12 @@ const SNAP_LERP_VALUE: float = 5.0
             current_speed = value
             speed_changed.emit(speed_array[current_speed], current_speed)
 
-@export var moving: bool = true
+@export var moving: bool = true :
+    set(value):
+        if value != moving:
+            moving = value
+            moving_changed.emit(moving)
+
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
 
@@ -207,17 +213,8 @@ func handle_toggle_movement() -> void:
 func set_speed_idx_no_signal(value: int) -> void:
     current_speed = value
 
-func on_start_elevator() -> void:
-    if moving:
-        return
+func on_elevator_toggle_movement_from_ui() -> void:
     handle_toggle_movement()
-
-
-func on_stop_elevator() -> void:
-    if not moving:
-        return
-    handle_toggle_movement()
-
 
 func get_entrance_position() -> Marker2D:
     return entrance_position
