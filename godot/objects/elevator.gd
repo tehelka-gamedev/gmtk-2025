@@ -99,7 +99,7 @@ func _process(delta: float) -> void:
     # only can toggle movement if doors are closed
     if Input.is_action_just_pressed("elevator_toggle_movement"):
         handle_toggle_movement()
-    elif _snapping:
+    elif snap_target and _snapping:
         _handle_snapping(delta)
     
     if moving and not _snapping:

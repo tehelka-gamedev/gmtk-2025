@@ -61,10 +61,13 @@ func play_music(stream:AudioStream, fade_in_time:float=0.25) -> void:
 
 func play_sound_effect(stream:AudioStream) -> AudioStreamPlayer:
     var sound_player:AudioStreamPlayer = AudioStreamPlayer.new()
+    
     sound_player.stream = stream
     sound_player.bus = se_bus_name
     sound_player.finished.connect(sound_player.queue_free)
     add_child(sound_player)
+    if stream == SoundBank.engine_track:
+        sound_player.volume_db -= 10
     sound_player.play()
     return sound_player
 
