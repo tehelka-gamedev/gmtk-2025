@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyg333imlt7y0"]
+[gd_scene load_steps=7 format=3 uid="uid://cyg333imlt7y0"]
 
 [ext_resource type="Script" uid="uid://pteuo8nbo47t" path="res://control_panel.gd" id="1_t8mf3"]
 [ext_resource type="PackedScene" uid="uid://bdtucpsb5og61" path="res://ui/control_panel/MessagePanel.tscn" id="2_f7rkx"]
 [ext_resource type="PackedScene" uid="uid://cgxr6hkptdhwl" path="res://ui/digit_display.tscn" id="3_3b57c"]
+[ext_resource type="PackedScene" uid="uid://ccbsvshjcj1sr" path="res://ui/control_panel/mute_audio_buttons/MuteSEButton.tscn" id="4_3b57c"]
+[ext_resource type="PackedScene" uid="uid://cdk0d1bdl4b6u" path="res://ui/control_panel/jinglebutton.tscn" id="4_wqfgl"]
+[ext_resource type="PackedScene" uid="uid://bxj3lllige5pr" path="res://ui/control_panel/mute_audio_buttons/MuteBGMButton.tscn" id="5_wheia"]
 
 [node name="ControlPanel" type="PanelContainer" node_paths=PackedStringArray("angry_npc_digit_display", "conveyed_npc_digit_display", "elevator_movement_lever", "speed_slider")]
 anchors_preset = 15
@@ -78,14 +81,23 @@ theme_override_constants/margin_left = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
+alignment = 1
 
 [node name="ElevatorMovementLever" type="CheckButton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"Lever"
 
-[node name="JingleButton" type="CheckButton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Jinglebutton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("4_wqfgl")]
 layout_mode = 2
-theme_type_variation = &"JingleButton"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MuteSeButton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_3b57c")]
+layout_mode = 2
+
+[node name="MuteBGMButton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_wheia")]
+layout_mode = 2
 
 [connection signal="value_changed" from="VBoxContainer2/VBoxContainer/SpeedSlider" to="." method="_on_h_slider_value_changed"]

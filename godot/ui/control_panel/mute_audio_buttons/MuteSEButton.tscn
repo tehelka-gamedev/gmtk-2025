@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccbsvshjcj1sr"]
+
+[ext_resource type="Texture2D" uid="uid://c1fqmfsitxsd8" path="res://ui/audio/audioOn.png" id="1_6d5is"]
+[ext_resource type="Script" uid="uid://b3w3ffebscidf" path="res://ui/control_panel/mute_audio_buttons/mute_se_button.gd" id="1_h7kdn"]
+[ext_resource type="PackedScene" uid="uid://cpa4hqax3xmrd" path="res://ui/theme/small_light/small_light.tscn" id="2_6d5is"]
+
+[node name="MuteSeButton" type="MarginContainer" node_paths=PackedStringArray("button", "small_light")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -595.0
+offset_bottom = -334.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_h7kdn")
+button = NodePath("HBoxContainer/Button")
+small_light = NodePath("HBoxContainer/SmallLight")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_6d5is")
+icon_alignment = 1
+
+[node name="SmallLight" parent="HBoxContainer" instance=ExtResource("2_6d5is")]
+layout_mode = 2
+color = Color(0, 0.698, 0.357, 0.953)

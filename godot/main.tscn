@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=23 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="2_7mycd"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://yb7xrfudbkkw" path="res://sprites/spacestation_n.png" id="7_cegan"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cyg333imlt7y0" path="res://ui/control_panel.tscn" id="11_cegan"]
-[ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cf2nexjie7s88" path="res://ui/pause/PauseMenu.tscn" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://cs6dnihsfnd6m" path="res://narrative_manager/narrative_manager.gd" id="14_w48qg"]
 [ext_resource type="Resource" uid="uid://7k5rhofrpd44" path="res://narrative_manager/warning_messages/almost_fired_to_warning.tres" id="15_074og"]
@@ -129,16 +128,6 @@ offset_left = -234.0
 offset_top = 1.0
 offset_right = -1.0
 grow_horizontal = 0
-
-[node name="MuteSoundsContainer" parent="HUD" instance=ExtResource("12_dg77c")]
-anchors_preset = 3
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -124.0
-offset_top = -83.0
-offset_right = -26.0
-offset_bottom = -20.0
-grow_vertical = 0
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("13_ycdy4")]
 visible = false

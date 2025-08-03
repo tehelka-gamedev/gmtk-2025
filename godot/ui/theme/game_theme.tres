@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=3 uid="uid://d27k22jm27g7c"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://d27k22jm27g7c"]
 
 [ext_resource type="StyleBox" uid="uid://dv6085oim66i4" path="res://ui/theme/button/button_normal_stylebox.tres" id="1_h7gvb"]
 [ext_resource type="Texture2D" uid="uid://xtmlm80i1u2j" path="res://ui/theme/ui background.png" id="1_v71op"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://b4bfsioo4c7dr" path="res://ui/theme/screen/screentemplate.png" id="6_xyriv"]
 [ext_resource type="FontFile" uid="uid://beu7fieodb1w4" path="res://ui/theme/screen/Xirod.otf" id="7_v4iik"]
 [ext_resource type="Texture2D" uid="uid://dj4fc6d6p6lyj" path="res://ui/theme/lever/lever_normal.png" id="7_xfrak"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0hud"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v71op"]
 texture = ExtResource("1_v71op")
@@ -53,6 +55,7 @@ region_rect = Rect2(0, 0, 48, 48)
 
 [resource]
 Button/colors/font_color = Color(0.151276, 0.151276, 0.151276, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_t0hud")
 Button/styles/hover = ExtResource("1_h7gvb")
 Button/styles/normal = ExtResource("1_h7gvb")
 Button/styles/pressed = ExtResource("2_xyriv")
