@@ -7,6 +7,7 @@ var va_sound: AudioStreamPlayer = null
 
 
 func _ready() -> void:
+    AudioManager.play_music(SoundBank.background_music)
     AudioManager.set_bgm_volume(AudioManager.bgm_volume_during_VA)
     va_sound = AudioManager.play_sound_effect(SoundBank.intro_bossletter)
     va_sound.finished.connect(func():

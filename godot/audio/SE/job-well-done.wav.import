@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://gcnlwvk5iub8"
-path="res://.godot/imported/job-well-done.wav-be1673c040b3b1d874fe4cdb7bd5e99d.sample"
+path="res://.godot/imported/job-well-done.wav-766699ba5dd507b2390c7fb35cb848dc.sample"
 
 [deps]
 
-source_file="res://audio/SE/job-well-done.wav"
-dest_files=["res://.godot/imported/job-well-done.wav-be1673c040b3b1d874fe4cdb7bd5e99d.sample"]
+source_file="res://audio/se/job-well-done.wav"
+dest_files=["res://.godot/imported/job-well-done.wav-766699ba5dd507b2390c7fb35cb848dc.sample"]
 
 [params]
 
