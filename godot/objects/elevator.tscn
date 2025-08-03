@@ -178,6 +178,7 @@ light_mask = 0
 material = SubResource("CanvasItemMaterial_bgfa1")
 position = Vector2(53, 0)
 rotation = 1.5708
+emitting = false
 amount = 24
 texture = ExtResource("7_iex2v")
 lifetime = 0.5

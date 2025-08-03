@@ -13,6 +13,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
+@export var background_scroll_speed: float = 4
 
 @onready var rooms: Array[Node] = $World/SpaceStation/Rooms.get_children()
 @onready var _npcs: Node2D = $World/NPCs
@@ -20,6 +21,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @onready var _control_panel: ControlPanel = %ControlPanel
 @onready var _narrative_manager: NarrativeManager = $NarrativeManager
 @onready var _event_manager: EventManager = $EventManager
+@onready var _background: TextureRect = $Background
 
 var current_npc_count: int = 0
 var _angry_npc_count: int = 0
@@ -95,6 +97,7 @@ func _process(delta: float) -> void:
         if _current_time_before_respawn_time_decrease >= TIME_BEFORE_RESPAWN_TIME_DECREASE:
             _respawn_time_idx += 1
             _current_time_before_respawn_time_decrease = 0.0
+    (_background.texture as AtlasTexture).region.position.x += delta * background_scroll_speed
 
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:

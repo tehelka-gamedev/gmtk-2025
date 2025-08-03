@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=24 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://erjmfm4qxnmx" path="res://sprites/spacebackground.png" id="2_cegan"]
@@ -20,6 +20,10 @@
 [ext_resource type="Resource" uid="uid://blnr05to5yo8v" path="res://narrative_manager/random_messages.tres" id="19_cegan"]
 [ext_resource type="Script" uid="uid://bmfr1pbnsyafi" path="res://event_manager/event_manager.gd" id="20_82xsv"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
+atlas = ExtResource("2_cegan")
+region = Rect2(0, 0, 640, 360)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 particles_animation = true
 particles_anim_h_frames = 11
@@ -40,12 +44,12 @@ starting_npc_count = 8
 elevator = NodePath("World/Elevator")
 
 [node name="Background" type="TextureRect" parent="."]
+texture_repeat = 2
 offset_right = 640.0
 offset_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("2_cegan")
-metadata/_edit_lock_ = true
+texture = SubResource("AtlasTexture_cegan")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_5vw27")
