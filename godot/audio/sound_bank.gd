@@ -9,6 +9,12 @@ extends Node
 @export_category("SE")
 @export var job_well_done: AudioStream = null
 @export var message_bip: AudioStream = null
+@export var door_opening: AudioStream = null
+@export var door_closing: AudioStream = null
+@export var engine_track: AudioStream = null
+@export var switch1: AudioStream = null
+@export var switch2: AudioStream = null
+@export var warning_beep_slow: AudioStream = null
 
 @export_category("Voice Acting")
 @export var intro_bossletter: AudioStream = null

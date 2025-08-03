@@ -10,6 +10,7 @@ small_light = NodePath("SmallLight")
 
 [node name="JingleCheckButton" type="CheckButton" parent="."]
 layout_mode = 2
+focus_mode = 0
 theme_type_variation = &"JingleButton"
 
 [node name="SmallLight" parent="." instance=ExtResource("1_3dqqu")]

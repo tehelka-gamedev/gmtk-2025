@@ -131,12 +131,14 @@ func get_tech_guy_point() -> Marker2D:
 
 func open_door() -> void:
     if not door_broken:
+        AudioManager.play_sound_effect(SoundBank.door_opening)
         _door.play("open")
         await _door.animation_finished
         door_opened.emit()
 
 
 func close_door() -> void:
+    AudioManager.play_sound_effect(SoundBank.door_closing)
     _door.play("close")
     await _door.animation_finished
     door_closed.emit()

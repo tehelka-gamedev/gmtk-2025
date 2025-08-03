@@ -114,6 +114,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _open_door() -> void:
     _current_door_state = DoorState.OPENING
     _door.play("open")
+    AudioManager.play_sound_effect(SoundBank.door_opening)
     await _door.animation_finished
    
     if not (snap_target as Room).door_broken:
@@ -126,6 +127,7 @@ func _open_door() -> void:
 func _close_door() -> void:
     _current_door_state = DoorState.CLOSING
     _door.play("close")
+    AudioManager.play_sound_effect(SoundBank.door_closing)
     await _door.animation_finished    
     snap_target.close_door()
     await (snap_target as Room).door_closed
