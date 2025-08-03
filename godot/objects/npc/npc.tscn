@@ -230,5 +230,4 @@ autoplay = "spawn"
 
 [node name="MoodGauge" type="Node2D" parent="."]
 script = ExtResource("8_qs0fi")
-regen_per_tick = -1.0
 metadata/_custom_type_script = "uid://bteouqmd6vc7b"

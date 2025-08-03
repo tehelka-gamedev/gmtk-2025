@@ -9,6 +9,8 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @export var MAX_NPC_RESPAWN_TIME: Array[float] = [8.0, 7.0, 6.0, 5.0, 4.0] 
 @export var TIME_BEFORE_RESPAWN_TIME_DECREASE: float = 60.0
 
+@export var CONVEYED_NPC_TO_WIN: int = 50
+
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
 
@@ -27,7 +29,6 @@ var max_npc_count: int = 0
 
 var _current_time_before_respawn_time_decrease: float = 0.0
 var _respawn_time_idx: int = 0
-
 
 
 # player choice
@@ -80,6 +81,8 @@ func _ready() -> void:
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)
+    _narrative_manager.fired.connect(_on_lose_condition)
+    
     _event_manager.game_manager = self
     _event_manager.broken_room_repaired.connect(_on_broken_room_repaired)
     
@@ -307,6 +310,8 @@ func _restart_npc_spawn_timer() -> void:
 func _on_npc_arrived_at_target_room() -> void:
     _conveyed_npc_count += 1
     _control_panel.set_conveyed_npc_count(_conveyed_npc_count)
+    if _conveyed_npc_count >= CONVEYED_NPC_TO_WIN:
+        _on_win_condition()
 
     
 func _on_broken_room_repaired(room: Room) -> void:
@@ -315,3 +320,11 @@ func _on_broken_room_repaired(room: Room) -> void:
         return # do nothing, if somehow the door opened without snapping
     elif room == snapped_room:
         _on_elevator_door_opened()
+
+
+func _on_lose_condition() -> void:
+    print("You lose")
+
+
+func _on_win_condition() -> void:
+    print("You win")

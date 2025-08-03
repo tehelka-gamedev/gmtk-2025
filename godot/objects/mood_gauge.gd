@@ -34,7 +34,7 @@ signal mood_state_changed(old_mood: MoodState, new_mood: MoodState)
 
 @export var current_mood_value: float = 100.0
 ## Regen per regen ticks
-@export var regen_per_tick: float = 1.0
+@export var regen_per_tick: float = -1.0
 ## Variance in the regen. Must be a NON-NEGATIVE number. If set to X
 ##, the regen will be regen_per tick +/- variance
 @export var variance_regen: float = 0.0

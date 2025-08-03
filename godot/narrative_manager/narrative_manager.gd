@@ -5,10 +5,11 @@ extends Node2D
 enum FiredState {OK, WARNING, ALMOST_FIRED}
 
 signal update(message: String)
+signal fired
 
 @export var TIME_BEFORE_RANDOM_MESSAGE: float = 30.0
 
-@export var angry_npc_warning_threshold: Array[int] = [5, 10, 15]
+@export var angry_npc_warning_threshold: Array[int] = [8, 14, 20]
 
 @export var almost_fired_to_warning_messages: Messages
 @export var warning_to_ok_messages: Messages
@@ -44,6 +45,8 @@ func update_angry_npc_count(count: int) -> void:
     elif count + 1 <= angry_npc_warning_threshold[1] and _current_state == FiredState.ALMOST_FIRED:
         _current_state = FiredState.WARNING
         update_message(_get_message_from(almost_fired_to_warning_messages))
+    elif count > angry_npc_warning_threshold[2]:
+        fired.emit()
     
 
 func _get_message_from(messages: Messages) -> String:
