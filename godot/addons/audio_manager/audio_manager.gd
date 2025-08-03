@@ -33,6 +33,9 @@ var _tween:Tween = null
 ## AudioStreamPlayer used for background music
 @onready var _music_player : AudioStreamPlayer = $MusicPlayer
 
+var elevator: Elevator
+
+
 func _ready():
     _music_player.bus = bgm_bus_name
     set_bgm_volume(default_bgm_volume)
@@ -68,6 +71,7 @@ func play_sound_effect(stream:AudioStream) -> AudioStreamPlayer:
     add_child(sound_player)
     if stream == SoundBank.engine_track:
         sound_player.volume_db -= 10
+        sound_player.pitch_scale = elevator.speed_array[elevator.current_speed] / elevator.speed_array[2]
     sound_player.play()
     return sound_player
 

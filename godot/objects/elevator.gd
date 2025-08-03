@@ -89,8 +89,9 @@ func _ready() -> void:
     room_detector.body_exited.connect(_on_body_exited)
 
     _broken_speed_particles.emitting = false
+    AudioManager.elevator = self
     engine_sound = AudioManager.play_sound_effect(SoundBank.engine_track)
-
+    
 
 func _process(delta: float) -> void:
     # if Input.is_action_just_pressed("open_door"):
@@ -221,6 +222,9 @@ func handle_toggle_movement() -> void:
 
 func set_speed_idx_no_signal(value: int) -> void:
     current_speed = value
+    engine_sound.stop()
+    engine_sound = AudioManager.play_sound_effect(SoundBank.engine_track)
+    
 
 func on_elevator_toggle_movement_from_ui() -> void:
     handle_toggle_movement()
