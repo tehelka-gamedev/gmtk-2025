@@ -18,6 +18,7 @@
 
 [node name="SoundBank" type="Node"]
 script = ExtResource("1_b6b3m")
+main_menu_music = ExtResource("2_prkgb")
 background_music = ExtResource("2_prkgb")
 background_music_complicated = ExtResource("3_epkhj")
 elevator_jingle_music = ExtResource("4_7t26c")
