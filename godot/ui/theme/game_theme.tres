@@ -9,8 +9,8 @@
 [ext_resource type="StyleBox" uid="uid://b5acq0mc0sm4l" path="res://ui/theme/slider/slider_stylebox.tres" id="5_noaot"]
 [ext_resource type="Texture2D" uid="uid://blxe4jooyhds0" path="res://ui/theme/lever/lever_pressed.png" id="6_lma5b"]
 [ext_resource type="Texture2D" uid="uid://b4bfsioo4c7dr" path="res://ui/theme/screen/screentemplate.png" id="6_xyriv"]
-[ext_resource type="FontFile" uid="uid://beu7fieodb1w4" path="res://ui/theme/screen/Xirod.otf" id="7_v4iik"]
 [ext_resource type="Texture2D" uid="uid://dj4fc6d6p6lyj" path="res://ui/theme/lever/lever_normal.png" id="7_xfrak"]
+[ext_resource type="FontFile" uid="uid://bpaybxaa4ig5r" path="res://ui/theme/font/Kenney Rocket.ttf" id="8_noaot"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0hud"]
 
@@ -20,6 +20,10 @@ texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0
 texture_margin_bottom = 19.0
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
@@ -74,6 +78,8 @@ JingleButton/styles/hover = SubResource("StyleBoxEmpty_7hpn0")
 JingleButton/styles/hover_pressed = SubResource("StyleBoxEmpty_t3k5t")
 JingleButton/styles/normal = SubResource("StyleBoxEmpty_lma5b")
 JingleButton/styles/pressed = SubResource("StyleBoxEmpty_xfrak")
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("8_noaot")
 Lever/base_type = &"CheckButton"
 Lever/icons/checked = ExtResource("6_lma5b")
 Lever/icons/unchecked = ExtResource("7_xfrak")
@@ -86,5 +92,5 @@ Screen/base_type = &"PanelContainer"
 Screen/styles/panel = SubResource("StyleBoxTexture_v4iik")
 ScreenLabel/base_type = &"Label"
 ScreenLabel/colors/font_color = Color(0.899258, 0.899258, 0.899258, 1)
-ScreenLabel/font_sizes/font_size = 14
-ScreenLabel/fonts/font = ExtResource("7_v4iik")
+ScreenLabel/font_sizes/font_size = 12
+ScreenLabel/fonts/font = ExtResource("8_noaot")
