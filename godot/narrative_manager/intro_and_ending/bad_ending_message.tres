@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Message" load_steps=2 format=3 uid="uid://cutip58qhilrb"]
+
+[ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_hjax5"]
+
+[resource]
+script = ExtResource("1_hjax5")
+message = ""
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"

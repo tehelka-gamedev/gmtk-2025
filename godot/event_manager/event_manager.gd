@@ -67,7 +67,9 @@ func _play_broken_door_event() -> void:
     var broken_room: Room = non_broken_nor_docked_room.pick_random()
     broken_room.set_broken_to(true)
     
-    game_manager._narrative_manager.update_message(BROKEN_ROOM_MESSAGE)
+    var message: VAMessage = VAMessage.new()
+    message.text = BROKEN_ROOM_MESSAGE
+    game_manager._narrative_manager.update_message(message)
     
     if not tech_guy_present:
         _spawn_tech_guy()
@@ -80,7 +82,9 @@ func _play_slow_elevator_event() -> void:
     current_event = EventType.BROKEN_SPEED
     game_manager.elevator.set_broken_speed_to(true)
     
-    game_manager._narrative_manager.update_message(BROKEN_ELEVATOR_MESSAGE)
+    var message: VAMessage = VAMessage.new()
+    message.text = BROKEN_ELEVATOR_MESSAGE
+    game_manager._narrative_manager.update_message(message)
     
     if not tech_guy_present:
         _spawn_tech_guy()
@@ -92,7 +96,10 @@ func _play_vip_event() -> void:
     
     game_manager._npc_spawn_timer.stop()
     current_event = EventType.VIP
-    game_manager._narrative_manager.update_message(VIP_MESSAGE)
+    
+    var message: VAMessage = VAMessage.new()
+    message.text = VIP_MESSAGE
+    game_manager._narrative_manager.update_message(message)
     
     for i in range(VIP_NUMBER):
         game_manager._spawn_npc(NPC.Type.VIP)

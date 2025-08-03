@@ -1,8 +1,37 @@
-[gd_resource type="Resource" script_class="Messages" load_steps=2 format=3 uid="uid://coo4p0s6xoabp"]
+[gd_resource type="Resource" script_class="Messages" load_steps=11 format=3 uid="uid://coo4p0s6xoabp"]
 
+[ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_iy1fu"]
 [ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_s86fa"]
+[ext_resource type="AudioStream" uid="uid://00lrhkn1rylf" path="res://audio/voice_acting/boss-warning-to-almostfired.ogg" id="2_126d3"]
+[ext_resource type="AudioStream" uid="uid://br3pcpn6bqi3j" path="res://audio/voice_acting/boss-warning-to-almostfired2.ogg" id="3_47qqi"]
+[ext_resource type="AudioStream" uid="uid://57c3rbqaq56c" path="res://audio/voice_acting/boss-warning-to-almostfired3.ogg" id="4_l21uc"]
+[ext_resource type="AudioStream" uid="uid://daf2d140gusj8" path="res://audio/voice_acting/boss-warning-to-almostfired4.ogg" id="5_svqt3"]
+
+[sub_resource type="Resource" id="Resource_nlmuo"]
+script = ExtResource("1_iy1fu")
+text = "Last warning operator. Impress me, or pack up."
+audio_va = ExtResource("2_126d3")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_md8f3"]
+script = ExtResource("1_iy1fu")
+text = "This is it. Focus. Deliver, or you're toast."
+audio_va = ExtResource("3_47qqi")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_7r8w2"]
+script = ExtResource("1_iy1fu")
+text = "Absolutely unacceptable. If this keeps up, you're done."
+audio_va = ExtResource("4_l21uc")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_x1mqy"]
+script = ExtResource("1_iy1fu")
+text = "You're dangling by a thread, operator."
+audio_va = ExtResource("5_svqt3")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
 
 [resource]
 script = ExtResource("1_s86fa")
-message = Array[String](["Operator, this is the last warning, do your job or you will get fired.", "Final warning, operator. Your laziness is too big. Start doing your job.", "This is unacceptable, operator. This will be our last warning."])
+message = Array[ExtResource("1_iy1fu")]([SubResource("Resource_nlmuo"), SubResource("Resource_md8f3"), SubResource("Resource_7r8w2"), SubResource("Resource_x1mqy")])
 metadata/_custom_type_script = "uid://u6fwccsjl86o"

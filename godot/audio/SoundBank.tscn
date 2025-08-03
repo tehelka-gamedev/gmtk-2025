@@ -1,12 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://c71vbcevhwryy"]
+[gd_scene load_steps=16 format=3 uid="uid://c71vbcevhwryy"]
 
 [ext_resource type="Script" uid="uid://63l2xisdrp54" path="res://audio/sound_bank.gd" id="1_b6b3m"]
 [ext_resource type="AudioStream" uid="uid://cbm8ues6f6j6f" path="res://audio/bgm/spacejam-SLOW2.mp3" id="2_prkgb"]
 [ext_resource type="AudioStream" uid="uid://cw8ilv4mf6d4h" path="res://audio/bgm/spacejam-2.mp3" id="3_epkhj"]
 [ext_resource type="AudioStream" uid="uid://bfsmw0huvhxg4" path="res://audio/bgm/elevatormusic-for-space-jam.mp3" id="4_7t26c"]
+[ext_resource type="AudioStream" uid="uid://d364ohvcwc7ib" path="res://audio/voice_acting/intro-bossletter.ogg" id="5_epkhj"]
+[ext_resource type="AudioStream" uid="uid://bmsno5bdrby0q" path="res://audio/voice_acting/badending-boss.ogg" id="6_7t26c"]
+[ext_resource type="AudioStream" uid="uid://42jpck4cw71a" path="res://audio/voice_acting/good-ending-boss.ogg" id="7_viw73"]
+[ext_resource type="AudioStream" uid="uid://dm43xd2acttlg" path="res://audio/voice_acting/boss-ok-to-warning.ogg" id="8_pgeft"]
+[ext_resource type="AudioStream" uid="uid://dt1kcjho30hgd" path="res://audio/voice_acting/boss-ok-to-warning-2.ogg" id="9_qj4qh"]
+[ext_resource type="AudioStream" uid="uid://b2ajk6jd0c8g3" path="res://audio/voice_acting/boss-ok-to-warning-3.ogg" id="10_r0qqt"]
+[ext_resource type="AudioStream" uid="uid://00lrhkn1rylf" path="res://audio/voice_acting/boss-warning-to-almostfired.ogg" id="11_qj4qh"]
+[ext_resource type="AudioStream" uid="uid://br3pcpn6bqi3j" path="res://audio/voice_acting/boss-warning-to-almostfired2.ogg" id="12_r0qqt"]
+[ext_resource type="AudioStream" uid="uid://57c3rbqaq56c" path="res://audio/voice_acting/boss-warning-to-almostfired3.ogg" id="13_86x5a"]
+[ext_resource type="AudioStream" uid="uid://daf2d140gusj8" path="res://audio/voice_acting/boss-warning-to-almostfired4.ogg" id="14_lop8p"]
+[ext_resource type="AudioStream" uid="uid://dipq8450spver" path="res://audio/voice_acting/boss-warning-to-ok.ogg" id="15_1587a"]
 
 [node name="SoundBank" type="Node"]
 script = ExtResource("1_b6b3m")
 background_music = ExtResource("2_prkgb")
 background_music_complicated = ExtResource("3_epkhj")
 elevator_jingle_music = ExtResource("4_7t26c")
+intro_bossletter = ExtResource("5_epkhj")
+bad_ending = ExtResource("6_7t26c")
+good_ending = ExtResource("7_viw73")
+ok_to_warning1 = ExtResource("8_pgeft")
+ok_to_warning2 = ExtResource("9_qj4qh")
+ok_to_warning3 = ExtResource("10_r0qqt")
+warning_to_almostfired1 = ExtResource("11_qj4qh")
+warning_to_almostfired2 = ExtResource("12_r0qqt")
+warning_to_almostfired3 = ExtResource("13_86x5a")
+warning_to_almostfired4 = ExtResource("14_lop8p")
+warning_to_ok = ExtResource("15_1587a")

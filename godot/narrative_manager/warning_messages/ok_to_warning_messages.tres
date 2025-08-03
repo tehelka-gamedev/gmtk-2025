@@ -1,8 +1,30 @@
-[gd_resource type="Resource" script_class="Messages" load_steps=2 format=3 uid="uid://dyx3wqawopdo6"]
+[gd_resource type="Resource" script_class="Messages" load_steps=9 format=3 uid="uid://dyx3wqawopdo6"]
 
 [ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_dfdlq"]
+[ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_xpnqv"]
+[ext_resource type="AudioStream" uid="uid://dm43xd2acttlg" path="res://audio/voice_acting/boss-ok-to-warning.ogg" id="2_brmvo"]
+[ext_resource type="AudioStream" uid="uid://dt1kcjho30hgd" path="res://audio/voice_acting/boss-ok-to-warning-2.ogg" id="3_pnnxb"]
+[ext_resource type="AudioStream" uid="uid://b2ajk6jd0c8g3" path="res://audio/voice_acting/boss-ok-to-warning-3.ogg" id="4_ddkvw"]
+
+[sub_resource type="Resource" id="Resource_wdedk"]
+script = ExtResource("1_xpnqv")
+text = "Careful operator, people are starting to grumble. And I'm not in the mood."
+audio_va = ExtResource("2_brmvo")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_0r7e3"]
+script = ExtResource("1_xpnqv")
+text = "This isn't a waiting room. Get it together, or they'll riot. And I won't stop them."
+audio_va = ExtResource("3_pnnxb")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_vv7wi"]
+script = ExtResource("1_xpnqv")
+text = "Tension's rising. Fix it. Or else..."
+audio_va = ExtResource("4_ddkvw")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
 
 [resource]
 script = ExtResource("1_dfdlq")
-message = Array[String](["Warning operator, people are getting angry. Do your job better.", "Operator, people are waiting too long. Be quicker.", "Operator, this is a warning, you must convey people better."])
+message = Array[ExtResource("1_xpnqv")]([SubResource("Resource_wdedk"), SubResource("Resource_0r7e3"), SubResource("Resource_vv7wi")])
 metadata/_custom_type_script = "uid://u6fwccsjl86o"

@@ -100,6 +100,7 @@ light_mask = 0
 z_index = 15
 material = SubResource("CanvasItemMaterial_r2kp8")
 position = Vector2(0, -116)
+emitting = false
 texture = ExtResource("7_r2kp8")
 lifetime = 0.5
 emission_shape = 3

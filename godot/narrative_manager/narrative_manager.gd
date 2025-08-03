@@ -49,9 +49,13 @@ func update_angry_npc_count(count: int) -> void:
         fired.emit()
     
 
-func _get_message_from(messages: Messages) -> String:
+func _get_message_from(messages: Messages) -> VAMessage:
     return messages.message.pick_random()
 
 
-func update_message(message: String) -> void:
-    update.emit(message)
+func update_message(message: VAMessage) -> void:
+    if message.text != "":
+        update.emit(message.text)
+    if message.audio_va != null:
+        AudioManager.play_sound_effect(message.audio_va)
+    
