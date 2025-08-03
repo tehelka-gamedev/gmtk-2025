@@ -7,12 +7,16 @@ enum Type {WIN, LOSE}
 
 signal continue_pressed
 
+
+@export_file("*.tscn") var main_menu_path: String
+
 @export var win_message: VAMessage = null
 @export var lose_message: VAMessage = null
 
 @onready var _text_label: Label = %TextLabel
 
 var end_type: Type
+var audio_va: AudioStreamPlayer = null
 
 
 func show_end(type: Type) -> void:
@@ -28,14 +32,15 @@ func set_message(message: VAMessage) -> void:
     if message.text:
         _text_label.text = message.text
     if message.audio_va != null:
-        AudioManager.play_sound_effect(message.audio_va)
+        audio_va = AudioManager.play_sound_effect(message.audio_va)
 
 
 func _on_button_pressed() -> void:
-    print(end_type)
+    hide()
+    if audio_va:
+        audio_va.stop()
+        
     if end_type == Type.WIN:
-        hide()
         continue_pressed.emit()
     elif end_type == Type.LOSE:
-        pass
-        # go back to main menu
+        get_tree().change_scene_to_file(main_menu_path)
