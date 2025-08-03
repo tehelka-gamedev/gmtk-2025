@@ -8,6 +8,7 @@ offset_bottom = 103.0
 size_flags_vertical = 2
 theme_type_variation = &"Screen"
 script = ExtResource("1_04ugw")
+MESSAGE_TIMER = 10.0
 message_label = NodePath("MessageLabel")
 _message_timer = NodePath("MessageTimer")
 
@@ -15,7 +16,8 @@ _message_timer = NodePath("MessageTimer")
 custom_minimum_size = Vector2(20, 84)
 layout_mode = 2
 theme_type_variation = &"ScreenLabel"
-text = "blablabla"
+text = "
+"
 autowrap_mode = 3
 
 [node name="MessageTimer" type="Timer" parent="."]
