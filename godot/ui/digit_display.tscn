@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://12rn2qj1wvid" path="res://ui/theme/digit/digit-spritesheet.png" id="2_xhhfi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c64vb"]
+resource_local_to_scene = true
 atlas = ExtResource("2_xhhfi")
 region = Rect2(0, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xhhfi"]
+resource_local_to_scene = true
 atlas = ExtResource("2_xhhfi")
 region = Rect2(0, 0, 32, 48)
 
