@@ -1,9 +1,29 @@
-[gd_resource type="Resource" script_class="Messages" load_steps=3 format=3 uid="uid://blnr05to5yo8v"]
+[gd_resource type="Resource" script_class="Messages" load_steps=7 format=3 uid="uid://blnr05to5yo8v"]
 
 [ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_0wufy"]
 [ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_kh7f7"]
 
+[sub_resource type="Resource" id="Resource_kh7f7"]
+script = ExtResource("1_kh7f7")
+text = "Beautiful day, isn't it?"
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_q5aof"]
+script = ExtResource("1_kh7f7")
+text = "Operator, your good work exceeds all my expectations."
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_8brkf"]
+script = ExtResource("1_kh7f7")
+text = "Boy do I love pizzas."
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_egr4v"]
+script = ExtResource("1_kh7f7")
+text = "Damn it, these crosswords are getting tougher each day."
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
 [resource]
 script = ExtResource("1_0wufy")
-message = Array[ExtResource("1_kh7f7")]([])
+message = Array[ExtResource("1_kh7f7")]([SubResource("Resource_kh7f7"), SubResource("Resource_q5aof"), SubResource("Resource_8brkf"), SubResource("Resource_egr4v")])
 metadata/_custom_type_script = "uid://u6fwccsjl86o"

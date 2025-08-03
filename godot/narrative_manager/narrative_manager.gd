@@ -54,7 +54,7 @@ func _get_message_from(messages: Messages) -> VAMessage:
 
 
 func update_message(message: VAMessage) -> void:
-    if message.text != "":
+    if message.text:
         update.emit(message.text)
     if message.audio_va != null:
         AudioManager.play_sound_effect(message.audio_va)

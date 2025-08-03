@@ -169,9 +169,8 @@ type = 1
 [node name="Door" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -116)
 sprite_frames = SubResource("SpriteFrames_h8jdt")
-animation = &"close"
 autoplay = "default"
-speed_scale = 1.5
+speed_scale = 2.0
 
 [node name="EntrancePosition" type="Marker2D" parent="."]
 visible = false
