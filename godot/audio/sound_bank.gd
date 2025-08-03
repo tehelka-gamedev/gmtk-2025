@@ -7,7 +7,8 @@ extends Node
 @export var elevator_jingle_music: AudioStream = null
 
 @export_category("SE")
-
+@export var job_well_done: AudioStream = null
+@export var message_bip: AudioStream = null
 
 @export_category("Voice Acting")
 @export var intro_bossletter: AudioStream = null

@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func set_message(message: String) -> void:
     _message_timer.stop()
+    AudioManager.play_sound_effect(SoundBank.message_bip)
     message_label.text = message
     _message_timer.start(MESSAGE_TIMER)
 

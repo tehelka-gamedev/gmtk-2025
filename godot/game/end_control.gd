@@ -22,6 +22,7 @@ var audio_va: AudioStreamPlayer = null
 func show_end(type: Type) -> void:
     end_type = type
     if type == Type.WIN:
+        AudioManager.play_sound_effect(SoundBank.job_well_done)
         set_message(win_message)
     elif type == Type.LOSE:
         set_message(lose_message)
