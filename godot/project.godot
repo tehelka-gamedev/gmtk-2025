@@ -35,6 +35,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/audio_manager/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://d27k22jm27g7c"
+
 [input]
 
 elevator_toggle_movement={

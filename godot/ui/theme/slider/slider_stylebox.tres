@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b5acq0mc0sm4l"]
+
+[ext_resource type="Texture2D" uid="uid://4d8efpirdxkr" path="res://ui/theme/slider/slidertile.png" id="1_ysalv"]
+
+[resource]
+texture = ExtResource("1_ysalv")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

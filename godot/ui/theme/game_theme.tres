@@ -1,0 +1,87 @@
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://d27k22jm27g7c"]
+
+[ext_resource type="StyleBox" uid="uid://dv6085oim66i4" path="res://ui/theme/button/button_normal_stylebox.tres" id="1_h7gvb"]
+[ext_resource type="Texture2D" uid="uid://xtmlm80i1u2j" path="res://ui/theme/ui background.png" id="1_v71op"]
+[ext_resource type="StyleBox" uid="uid://h007l0iabgf" path="res://ui/theme/button/button_pressed_stylebox.tres" id="2_xyriv"]
+[ext_resource type="Texture2D" uid="uid://b4m10rx6k8oj5" path="res://ui/theme/slider/Slider.png" id="4_fh0ds"]
+[ext_resource type="Texture2D" uid="uid://dtf0x4qu4jcqh" path="res://ui/theme/button/jinglebutton_pressed.png" id="4_v4iik"]
+[ext_resource type="Texture2D" uid="uid://pt3w1evf6sxf" path="res://ui/theme/button/jinglebutton_normal.png" id="5_ct6ne"]
+[ext_resource type="StyleBox" uid="uid://b5acq0mc0sm4l" path="res://ui/theme/slider/slider_stylebox.tres" id="5_noaot"]
+[ext_resource type="Texture2D" uid="uid://blxe4jooyhds0" path="res://ui/theme/lever/lever_pressed.png" id="6_lma5b"]
+[ext_resource type="Texture2D" uid="uid://b4bfsioo4c7dr" path="res://ui/theme/screen/screentemplate.png" id="6_xyriv"]
+[ext_resource type="FontFile" uid="uid://beu7fieodb1w4" path="res://ui/theme/screen/Xirod.otf" id="7_v4iik"]
+[ext_resource type="Texture2D" uid="uid://dj4fc6d6p6lyj" path="res://ui/theme/lever/lever_normal.png" id="7_xfrak"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v71op"]
+texture = ExtResource("1_v71op")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 19.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r4e6v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7hpn0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t3k5t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lma5b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xfrak"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bk6v0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ys8k0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ofqw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fh0ds"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_noaot"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v4iik"]
+texture = ExtResource("6_xyriv")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 48, 48)
+
+[resource]
+Button/colors/font_color = Color(0.151276, 0.151276, 0.151276, 1)
+Button/styles/hover = ExtResource("1_h7gvb")
+Button/styles/normal = ExtResource("1_h7gvb")
+Button/styles/pressed = ExtResource("2_xyriv")
+ControlPanel/base_type = &"PanelContainer"
+ControlPanel/styles/panel = SubResource("StyleBoxTexture_v71op")
+HSlider/icons/grabber = ExtResource("4_fh0ds")
+HSlider/icons/grabber_disabled = ExtResource("4_fh0ds")
+HSlider/icons/grabber_highlight = ExtResource("4_fh0ds")
+HSlider/styles/slider = ExtResource("5_noaot")
+JingleButton/base_type = &"CheckButton"
+JingleButton/colors/icon_normal_color = Color(0, 0, 0, 1)
+JingleButton/icons/checked = ExtResource("4_v4iik")
+JingleButton/icons/unchecked = ExtResource("5_ct6ne")
+JingleButton/styles/focus = SubResource("StyleBoxEmpty_r4e6v")
+JingleButton/styles/hover = SubResource("StyleBoxEmpty_7hpn0")
+JingleButton/styles/hover_pressed = SubResource("StyleBoxEmpty_t3k5t")
+JingleButton/styles/normal = SubResource("StyleBoxEmpty_lma5b")
+JingleButton/styles/pressed = SubResource("StyleBoxEmpty_xfrak")
+Lever/base_type = &"CheckButton"
+Lever/icons/checked = ExtResource("6_lma5b")
+Lever/icons/unchecked = ExtResource("7_xfrak")
+Lever/styles/focus = SubResource("StyleBoxEmpty_bk6v0")
+Lever/styles/hover = SubResource("StyleBoxEmpty_ys8k0")
+Lever/styles/hover_pressed = SubResource("StyleBoxEmpty_5ofqw")
+Lever/styles/normal = SubResource("StyleBoxEmpty_fh0ds")
+Lever/styles/pressed = SubResource("StyleBoxEmpty_noaot")
+Screen/base_type = &"PanelContainer"
+Screen/styles/panel = SubResource("StyleBoxTexture_v4iik")
+ScreenLabel/base_type = &"Label"
+ScreenLabel/colors/font_color = Color(0.899258, 0.899258, 0.899258, 1)
+ScreenLabel/font_sizes/font_size = 14
+ScreenLabel/fonts/font = ExtResource("7_v4iik")
