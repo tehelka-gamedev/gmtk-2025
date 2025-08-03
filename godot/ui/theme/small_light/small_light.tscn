@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpa4hqax3xmrd"]
+
+[ext_resource type="Script" uid="uid://ckiohk6j73pd8" path="res://ui/theme/small_light/small_light.gd" id="1_nmics"]
+[ext_resource type="Texture2D" uid="uid://dgqv2b4wbb4cd" path="res://ui/theme/small_light/smalllightbase.png" id="1_xq8n0"]
+[ext_resource type="Texture2D" uid="uid://bba4062pwpcmj" path="res://ui/theme/small_light/smalllight.png" id="2_nmics"]
+
+[node name="SmallLight" type="CenterContainer" node_paths=PackedStringArray("light")]
+script = ExtResource("1_nmics")
+light = NodePath("Light")
+
+[node name="LightBase" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_xq8n0")
+
+[node name="Light" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_nmics")
