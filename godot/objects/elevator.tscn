@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bixriv415q58j"]
+[gd_scene load_steps=12 format=3 uid="uid://bixriv415q58j"]
 
 [ext_resource type="Script" uid="uid://swsjnrl4wcgr" path="res://objects/elevator.gd" id="1_ogmrx"]
 [ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="2_ff16h"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_uinhc"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_h6q4t"]
 [ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_h6q4t"]
+[ext_resource type="Texture2D" uid="uid://dchiyyxal4b8v" path="res://sprites/particles/explosion/Explosion_Sheet.png" id="7_iex2v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iex2v"]
 shader = ExtResource("2_ff16h")
@@ -13,6 +14,15 @@ shader_parameter/pixel_scale = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogmrx"]
 size = Vector2(24, 64)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bgfa1"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_5qa0y"]
+colors = PackedColorArray(0.692565, 0.327305, 0.267438, 1, 0.232407, 0.229921, 0.111152, 1)
 
 [node name="Elevator" type="Node2D" node_paths=PackedStringArray("inner_pivot", "room_detector", "entrance_position", "slot_manager")]
 script = ExtResource("1_ogmrx")
@@ -80,3 +90,20 @@ position = Vector2(103, 1.19209e-07)
 rotation = 1.57079
 scale = Vector2(0.15625, 0.0234375)
 texture = ExtResource("5_h6q4t")
+
+[node name="BrokenSpeedParticles" type="CPUParticles2D" parent="."]
+light_mask = 0
+material = SubResource("CanvasItemMaterial_bgfa1")
+position = Vector2(53, 0)
+rotation = 1.5708
+amount = 24
+texture = ExtResource("7_iex2v")
+lifetime = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(25, 4)
+gravity = Vector2(0, 0)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_5qa0y")
+anim_speed_min = 1.0
+anim_speed_max = 1.0

@@ -30,6 +30,7 @@ signal npc_is_waiting(room:Room, npc: NPC)
 @onready var pivot: Node2D = $Pivot
 @onready var _decal: Sprite2D = $Pivot/Decal
 @onready var _broken_room_mask: Sprite2D = $Pivot/BrokenRoomMask
+@onready var _broken_door_particles: CPUParticles2D = $BrokenDoorParticles
 
 
 # people exit management
@@ -39,7 +40,7 @@ var door_broken: bool = false
 
 
 func _ready() -> void:
-    _broken_room_mask.hide()
+    set_broken_to(false)
 
 
 func cycle_next_people_leaving_idx() -> void:
@@ -145,5 +146,7 @@ func set_broken_to(value: bool) -> void:
     door_broken = value
     if door_broken:
         _broken_room_mask.show()
+        _broken_door_particles.emitting = true
     else:
         _broken_room_mask.hide()
+        _broken_door_particles.emitting = false

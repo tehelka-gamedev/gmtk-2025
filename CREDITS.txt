@@ -6,3 +6,4 @@ Other credits (external assets):
 - Delapouite (CC-BY 3.0) (from game-icons.net)
 	- sound-on and sound-off icons
 	- speaker and speaker-off icons
+- Particle effect from https://github.com/PlayWithFurcifer/godot-particle-systems-guide/tree/main

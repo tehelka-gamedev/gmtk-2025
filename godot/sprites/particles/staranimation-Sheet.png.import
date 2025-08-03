@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bq8gfnv4drwjg"
-path="res://.godot/imported/staranimation-Sheet.png-a7a418a94be1ed353da1c1d079331837.ctex"
+path="res://.godot/imported/staranimation-Sheet.png-7bbb2c59134a012c966912f520e12c1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/staranimation-Sheet.png"
-dest_files=["res://.godot/imported/staranimation-Sheet.png-a7a418a94be1ed353da1c1d079331837.ctex"]
+source_file="res://sprites/particles/staranimation-Sheet.png"
+dest_files=["res://.godot/imported/staranimation-Sheet.png-7bbb2c59134a012c966912f520e12c1d.ctex"]
 
 [params]
 

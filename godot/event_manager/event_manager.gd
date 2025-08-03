@@ -10,7 +10,7 @@ const TIME_BEFORE_TECH_GUY: float = 3.0
 
 const NPC_class = preload("res://objects/npc/npc.tscn")
 
-const TIME_BEFORE_FIRST_EVENT: float = 15.0
+const TIME_BEFORE_FIRST_EVENT: float = 30.0
 const MIN_WINDOW: float = 20.0
 const MAX_WINDOW: float = 30.0
 const VIP_NUMBER: int = 3

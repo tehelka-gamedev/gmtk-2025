@@ -51,6 +51,7 @@ enum DoorState {
 var _current_door_state: DoorState = DoorState.CLOSED
 
 @onready var _door: Sprite2D = $Door
+@onready var _broken_speed_particles: CPUParticles2D = $BrokenSpeedParticles
 
 func door_is_open() -> bool:
     return _current_door_state == DoorState.OPENED
@@ -91,6 +92,7 @@ func _ready() -> void:
     room_detector.body_exited.connect(_on_body_exited)
 
     door_closed.connect(_on_door_closed)
+    _broken_speed_particles.emitting = false
 
 
 func _process(delta: float) -> void:
@@ -242,7 +244,9 @@ func set_broken_speed_to(value: bool) -> void:
     broken_speed = value
     if broken_speed:
         current_speed = 0
+        _broken_speed_particles.emitting = true
     else:
         current_speed = 2
+        _broken_speed_particles.emitting = false
     broken_speed_changed.emit(value)
         
