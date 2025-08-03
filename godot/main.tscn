@@ -80,7 +80,7 @@ metadata/_edit_lock_ = true
 
 [node name="SpaceStation" type="Sprite2D" parent="World"]
 material = SubResource("ShaderMaterial_efxa6")
-position = Vector2(184, 179)
+position = Vector2(199, 179)
 texture = SubResource("CanvasTexture_074og")
 script = ExtResource("4_7mycd")
 rotation_speed = 2.0
@@ -116,7 +116,7 @@ color = 5
 decal_to_use = 5
 
 [node name="Elevator" parent="World" node_paths=PackedStringArray("space_station") instance=ExtResource("3_7mycd")]
-position = Vector2(184, 179)
+position = Vector2(199, 179)
 speed_array = Array[float]([15.0, 45.0, 90.0, 220.0, 360.0])
 space_station = NodePath("../SpaceStation")
 
