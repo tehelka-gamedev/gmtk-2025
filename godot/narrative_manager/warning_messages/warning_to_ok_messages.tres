@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="Messages" load_steps=5 format=3 uid="uid://brgmqpjo34qch"]
+[gd_resource type="Resource" script_class="Messages" load_steps=9 format=3 uid="uid://brgmqpjo34qch"]
 
 [ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_04dda"]
 [ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_ti0ng"]
 [ext_resource type="AudioStream" uid="uid://dipq8450spver" path="res://audio/voice_acting/boss-warning-to-ok.ogg" id="2_5ac5j"]
+[ext_resource type="AudioStream" uid="uid://c5cl4mu7ypns5" path="res://audio/voice_acting/last_va/boss-warning-to-ok1.ogg" id="3_yva7j"]
+[ext_resource type="AudioStream" uid="uid://b7w51k2t4gsqc" path="res://audio/voice_acting/last_va/boss-warning-to-ok2.ogg" id="4_inr1o"]
 
 [sub_resource type="Resource" id="Resource_oqxh0"]
 script = ExtResource("1_04dda")
@@ -10,7 +12,19 @@ text = "You're holding it together. Miraculously."
 audio_va = ExtResource("2_5ac5j")
 metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
 
+[sub_resource type="Resource" id="Resource_2cvqx"]
+script = ExtResource("1_04dda")
+text = "This is solid work, operator. The station is calm... For once."
+audio_va = ExtResource("3_yva7j")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_iy66y"]
+script = ExtResource("1_04dda")
+text = "Good. Tension is dropping. Maybe I'll stop glaring at your screen now."
+audio_va = ExtResource("4_inr1o")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
 [resource]
 script = ExtResource("1_ti0ng")
-message = Array[ExtResource("1_04dda")]([SubResource("Resource_oqxh0")])
+message = Array[ExtResource("1_04dda")]([SubResource("Resource_oqxh0"), SubResource("Resource_2cvqx"), SubResource("Resource_iy66y")])
 metadata/_custom_type_script = "uid://u6fwccsjl86o"

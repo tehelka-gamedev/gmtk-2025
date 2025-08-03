@@ -1,9 +1,23 @@
-[gd_resource type="Resource" script_class="Messages" load_steps=3 format=3 uid="uid://7k5rhofrpd44"]
+[gd_resource type="Resource" script_class="Messages" load_steps=7 format=3 uid="uid://7k5rhofrpd44"]
 
 [ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_jqhp0"]
 [ext_resource type="Script" uid="uid://u6fwccsjl86o" path="res://narrative_manager/messages.gd" id="1_ki8rh"]
+[ext_resource type="AudioStream" uid="uid://cr3rxcd0wt6e5" path="res://audio/voice_acting/last_va/boss-almostfired-to-warning.ogg" id="2_b87dk"]
+[ext_resource type="AudioStream" uid="uid://dvp7c5xlwgyhr" path="res://audio/voice_acting/last_va/boss-almostfired-to-warning2.ogg" id="3_t0bi6"]
+
+[sub_resource type="Resource" id="Resource_t0bi6"]
+script = ExtResource("1_jqhp0")
+text = "You barely pulled it back. Don't get cocky. People are still pissed."
+audio_va = ExtResource("2_b87dk")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
+
+[sub_resource type="Resource" id="Resource_xm0pf"]
+script = ExtResource("1_jqhp0")
+text = "Did not think you had it in you! Keep proving me wrong, it's entertaining"
+audio_va = ExtResource("3_t0bi6")
+metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"
 
 [resource]
 script = ExtResource("1_ki8rh")
-message = Array[ExtResource("1_jqhp0")]([])
+message = Array[ExtResource("1_jqhp0")]([SubResource("Resource_t0bi6"), SubResource("Resource_xm0pf")])
 metadata/_custom_type_script = "uid://u6fwccsjl86o"
