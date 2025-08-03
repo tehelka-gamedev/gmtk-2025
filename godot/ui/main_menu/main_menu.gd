@@ -3,7 +3,6 @@ extends Control
 @export var intro_scene: PackedScene = null
 
 @export var button_play: Button = null
-@export var button_credits: Button = null
 
 @export var background_scroll_speed: float = 5.0
 @export var _background: TextureRect = null
