@@ -1,8 +1,7 @@
 extends PanelContainer
 class_name ControlPanel
 
-signal start_elevator_pressed
-signal stop_elevator_pressed
+signal toggle_elevator_movement
 signal speed_cursor_changed(value: int)
 
 
@@ -39,20 +38,8 @@ func _on_h_slider_value_changed(value: float) -> void:
 func update_speed_label(speed_idx: int) -> void:
     speed_label.text = "Speed: %d" % (speed_idx+1)
 
-
-func _on_start_button_pressed() -> void:
-    start_elevator_pressed.emit()
-
-
-func _on_stop_button_pressed() -> void:
-    stop_elevator_pressed.emit()
-
-func _on_elevator_movement_lever_toggled(toggled_on: bool):
-    # do not want to refactor now...
-    if toggled_on:
-        start_elevator_pressed.emit()
-    else:
-        stop_elevator_pressed.emit()
+func _on_elevator_movement_lever_toggled(_toggled_on: bool):
+    toggle_elevator_movement.emit()
 
 func _on_elevator_broken_set_to(broken: bool) -> void:
     if broken:

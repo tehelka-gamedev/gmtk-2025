@@ -178,6 +178,7 @@ func get_snapped_room() -> Room:
 
 
 func handle_toggle_movement() -> void:
+    print("handle_toggle_movement")
     if _people_are_entering:
         return
     
@@ -213,17 +214,8 @@ func handle_toggle_movement() -> void:
 func set_speed_idx_no_signal(value: int) -> void:
     current_speed = value
 
-func on_start_elevator() -> void:
-    if moving:
-        return
+func on_elevator_toggle_movement_from_ui() -> void:
     handle_toggle_movement()
-
-
-func on_stop_elevator() -> void:
-    if not moving:
-        return
-    handle_toggle_movement()
-
 
 func get_entrance_position() -> Marker2D:
     return entrance_position
