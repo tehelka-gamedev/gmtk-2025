@@ -34,6 +34,8 @@ signal npc_is_waiting(room:Room, npc: NPC)
 # people exit management
 var next_people_leaving_idx: int = 0
 var waiting_npc: NPC = null
+var door_broken: bool = false
+
 
 func cycle_next_people_leaving_idx() -> void:
     next_people_leaving_idx = posmod((next_people_leaving_idx-1), number_npc_inside()) if number_npc_inside() > 0 else 0
@@ -47,9 +49,14 @@ func reset_waiting_npc() -> void:
 func start_exiting_people():
     reset_waiting_npc()
 
-func ask_npc_coming() -> void:
+
+func ask_npc_coming(tech_guy: bool = false) -> void:
     # Ask NPC to come
-    waiting_npc = get_npc_from_inside(next_people_leaving_idx)
+    if tech_guy:
+        # This should always return the tech guy as we ensure a tech guy is in the room before calling `ask_npc_coming(true)`
+        waiting_npc = get_tech_guy_from_inside()
+    else:
+        waiting_npc = get_npc_from_inside(next_people_leaving_idx)
 
     var targets: Array[Node2D] = [
             get_entrance_position()
@@ -88,7 +95,7 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
     remove_npc_from_room(waiting_npc)
 
     var slot: Slot
-    if waiting_npc.tech_guy:
+    if waiting_npc.type == NPC.Type.TECH_GUY:
         slot = room.slot_manager.get_special_slot(Slot.Type.BROKEN_SPEED)
     else:
         slot = room.slot_manager.get_first_available_slot() # not null :)
@@ -105,7 +112,7 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
     )
     await waiting_npc.arrived_at_slot
     
-    if waiting_npc.tech_guy:
+    if waiting_npc.type == NPC.Type.TECH_GUY:
         tech_guy_in_elevator.emit(waiting_npc)
     
     cycle_next_people_leaving_idx()
@@ -113,6 +120,10 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
 func get_spawn_point() -> Marker2D:
     return npc_spawn
 
+
+func get_tech_guy_point() -> Marker2D:
+    return slot_manager.get_special_slot(Slot.Type.BROKEN_DOOR) as Marker2D
+    
 
 func open_door() -> void:
     _door.hide()
@@ -123,3 +134,11 @@ func close_door() -> void:
 
 func get_entrance_position() -> Marker2D:
     return entrance_position
+
+
+func set_broken_to(value: bool) -> void:
+    door_broken = value
+    if door_broken:
+        modulate = Color.SLATE_GRAY
+    else:
+        modulate = Color.WHITE

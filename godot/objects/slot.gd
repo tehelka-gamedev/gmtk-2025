@@ -15,6 +15,7 @@ func reserve() -> bool:
     if not available:
         push_error("Tried to reserve a slot (%s) that was not available!" % [name])
         return false
+        
     available = false
     reserved.emit(self)
     return true
@@ -25,6 +26,7 @@ func release() -> bool:
     if available:
         push_error("Tried to release a slot (%s) that was already available!"% [name] )
         return false
+
     available = true
     released.emit(self)
     return true

@@ -45,6 +45,18 @@ func get_npc_from_inside(idx:int) -> NPC:
         return null
     return npc_inside[idx]
 
+func is_tech_guy_in_room() -> bool:
+    for npc: NPC in npc_inside:
+        if npc.type == NPC.Type.TECH_GUY:
+            return true
+    return false
+
+func get_tech_guy_from_inside() -> NPC:
+    for npc: NPC in npc_inside:
+        if npc.type == NPC.Type.TECH_GUY:
+            return npc
+    return null
+
 func remove_npc_from_room(npc: NPC) -> void:
     npc_inside.erase(npc)
     npc.slot.release()

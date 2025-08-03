@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bttrvcujvlunr"]
+[gd_scene load_steps=26 format=3 uid="uid://bttrvcujvlunr"]
 
 [ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
 [ext_resource type="PackedScene" uid="uid://mc17i3n0ujcj" path="res://objects/npc/skin.tscn" id="2_aqpri"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://chs00o4pldxek" path="res://states/idle_state.gd" id="3_aqpri"]
 [ext_resource type="Script" uid="uid://h0sp5pu5a2io" path="res://states/move_to_state.gd" id="4_m6gh1"]
 [ext_resource type="Texture2D" uid="uid://baeo0kp17u8pc" path="res://sprites/teleportanimation.png" id="6_aqpri"]
+[ext_resource type="Script" uid="uid://dgbk83r6l6nt4" path="res://states/repair_state.gd" id="7_1ynp0"]
 [ext_resource type="Script" uid="uid://bteouqmd6vc7b" path="res://objects/mood_gauge.gd" id="8_qs0fi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6gh1"]
@@ -182,6 +183,17 @@ mood_gauge = NodePath("MoodGauge")
 emoji_position = NodePath("Pivot/EmojiPosition")
 emoji_scene = ExtResource("2_m6gh1")
 
+[node name="TypeLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -14.0
+offset_top = 5.0
+offset_right = 14.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 10
+text = "TECH"
+horizontal_alignment = 1
+
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Skin" parent="Pivot" instance=ExtResource("2_aqpri")]
@@ -202,6 +214,10 @@ metadata/_custom_type_script = "uid://b7yur33qvtvau"
 script = ExtResource("4_m6gh1")
 metadata/_custom_type_script = "uid://b7yur33qvtvau"
 
+[node name="Repair" type="Node" parent="StateMachine"]
+script = ExtResource("7_1ynp0")
+metadata/_custom_type_script = "uid://b7yur33qvtvau"
+
 [node name="TeleportAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_0atl2")
@@ -214,5 +230,5 @@ autoplay = "spawn"
 
 [node name="MoodGauge" type="Node2D" parent="."]
 script = ExtResource("8_qs0fi")
-regen_per_tick = -2.0
+regen_per_tick = -1.0
 metadata/_custom_type_script = "uid://bteouqmd6vc7b"

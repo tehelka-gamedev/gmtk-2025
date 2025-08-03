@@ -148,6 +148,7 @@ random_message = ExtResource("19_cegan")
 script = ExtResource("20_82xsv")
 
 [node name="Timer" type="Timer" parent="EventManager"]
+one_shot = true
 
 [connection signal="timeout" from="World/NPCSpawnTimer" to="." method="_on_npc_spawn_timer_timeout"]
 [connection signal="timeout" from="EventManager/Timer" to="EventManager" method="_on_timer_timeout"]

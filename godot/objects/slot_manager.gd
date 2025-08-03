@@ -56,15 +56,29 @@ func get_random_available_slot() -> Slot:
     return _available_slots[randi_range(0, len(_available_slots)-1)]
 
 func is_full() -> bool:
-    return _available_slots.is_empty() # no available slot
+    return _available_slots.is_empty()
+    #return (
+        #_available_slots.is_empty()
+        #and (not _broken_door_slot or (_broken_door_slot and not _broken_door_slot.available))
+        #and (not _broken_speed_slot or (_broken_speed_slot and not _broken_speed_slot.available))
+    #)
 
 func is_empty() -> bool:
-    return _occupied_slots.is_empty() # nothing occupied
+    return _occupied_slots.is_empty()
+    #return (
+        #_occupied_slots.is_empty()
+        #and (not _broken_door_slot or (_broken_door_slot and _broken_door_slot.available))
+        #and (not _broken_speed_slot or (_broken_speed_slot and _broken_speed_slot.available))
+    #)
 
 func _on_slot_reserved(s: Slot) -> void:
+    if s.type == Slot.Type.BROKEN_DOOR or s.type == Slot.Type.BROKEN_SPEED:
+        return
     _available_slots.erase(s)
     _occupied_slots.append(s)
 
 func _on_slot_released(s: Slot) -> void:
+    if s.type == Slot.Type.BROKEN_DOOR or s.type == Slot.Type.BROKEN_SPEED:
+        return
     _available_slots.append(s)
     _occupied_slots.erase(s)

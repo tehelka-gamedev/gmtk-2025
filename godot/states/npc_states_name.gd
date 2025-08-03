@@ -6,3 +6,4 @@ class Message:
 
 class StatesName:
     const move_to:String = "MoveTo"
+    const repair: String = "Repair"

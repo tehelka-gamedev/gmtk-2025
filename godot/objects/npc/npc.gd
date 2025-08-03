@@ -1,6 +1,8 @@
 class_name NPC
 extends Node2D
 
+enum Type {NORMAL, TECH_GUY, VIP}
+
 @warning_ignore("unused_signal")
 signal arrived_at_slot
 signal arrived_at_target_room
@@ -27,7 +29,8 @@ signal on_repair_finished
 
 ## If true, will queue_free() after reaching its point
 var exiting: bool = false
-var tech_guy: bool = false
+var repairing: bool = false
+var type: Type = Type.NORMAL
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -70,15 +73,17 @@ func go_back_to_slot() -> void:
 # called when exiting the room. For now just queue_free but add fade out later maybe
 func exit() -> void:
     mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY)
-    arrived_at_target_room.emit()
+    if not type == Type.TECH_GUY:
+        arrived_at_target_room.emit()
     queue_free()
 
 
-func set_color_directly(color: Color) -> void:
-    _skin.set_color_to(color)
+func set_color_directly(_color: Color) -> void:
+    _skin.set_color_to(_color)
 
 
-func repair_elevator() -> void:
+func repair() -> void:
+    repairing = true
     var emoji: EmojiMood = emoji_scene.instantiate()
     emoji_position.add_child(emoji)
     emoji.z_index = 1000
@@ -86,4 +91,13 @@ func repair_elevator() -> void:
     var briefly: bool = true
     emoji.set_mood(MoodGauge.MoodState.IMPATIENT, briefly)
     await emoji.animation_finished
+    repairing = false
     on_repair_finished.emit()
+
+
+func show_type_label() -> void:
+    if type == NPC.Type.TECH_GUY:
+        %TypeLabel.text = "TECH"
+    elif type == NPC.Type.VIP:
+        %TypeLabel.text = "VIP"
+    %TypeLabel.show()

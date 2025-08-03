@@ -1,16 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dd5giy7mmmmxe"]
+[gd_scene load_steps=9 format=3 uid="uid://dd5giy7mmmmxe"]
 
 [ext_resource type="Script" uid="uid://bc64r08fcwb8g" path="res://objects/room.gd" id="1_d4lmf"]
 [ext_resource type="Texture2D" uid="uid://jvibyudsrbft" path="res://sprites/room2.png" id="2_c0xyw"]
-[ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="2_r2kp8"]
 [ext_resource type="Script" uid="uid://5gunqk2qmled" path="res://objects/slot_manager.gd" id="3_lvljb"]
 [ext_resource type="Texture2D" uid="uid://bmq30wsjws8ar" path="res://sprites/roomdecals.png" id="3_n1ucb"]
 [ext_resource type="Script" uid="uid://cjd6a7ud0c8av" path="res://objects/slot.gd" id="4_4d8i4"]
 [ext_resource type="Texture2D" uid="uid://71hdcfob7ujv" path="res://icon.svg" id="5_c0xyw"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rv7e"]
-shader = ExtResource("2_r2kp8")
-shader_parameter/pixel_scale = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r2kp8"]
 
@@ -30,7 +25,6 @@ position = Vector2(0, -169)
 position = Vector2(0, -156)
 
 [node name="Room" type="Sprite2D" parent="Pivot"]
-material = SubResource("ShaderMaterial_8rv7e")
 texture = ExtResource("2_c0xyw")
 
 [node name="Decal" type="Sprite2D" parent="Pivot"]

@@ -172,7 +172,7 @@ func _on_snap_finished() -> void:
 
 
 func get_snapped_room() -> Room:
-    return snap_target as Room if snap_target else null
+    return snap_target as Room if _snapped else null
 
 
 func handle_toggle_movement() -> void:
