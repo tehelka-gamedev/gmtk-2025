@@ -80,6 +80,7 @@ func npc_denied() -> void:
     if waiting_npc == null:
         push_error("Asked %s to deny npc waiting but no one is waiting, something is wrong" % name)
         return
+    AudioManager.play_sound_effect(SoundBank.reject_npc)
     waiting_npc.hide_key_helper()
     waiting_npc.go_back_to_slot()
     await waiting_npc.arrived_at_slot
@@ -101,6 +102,7 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
         return
     remove_npc_from_room(waiting_npc)
 
+    AudioManager.play_sound_effect(SoundBank.accept_npc)
     waiting_npc.hide_key_helper()
     var slot: Slot
     if waiting_npc.type == NPC.Type.TECH_GUY:

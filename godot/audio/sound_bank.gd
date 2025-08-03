@@ -15,6 +15,9 @@ extends Node
 @export var switch1: AudioStream = null
 @export var switch2: AudioStream = null
 @export var warning_beep_slow: AudioStream = null
+@export var accept_npc: AudioStream = null
+@export var reject_npc: AudioStream = null
+@export var incoming_npc: AudioStream = null
 
 @export_category("Voice Acting")
 @export var intro_bossletter: AudioStream = null
