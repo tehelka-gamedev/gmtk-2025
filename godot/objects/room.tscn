@@ -35,6 +35,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 124, 86)
 
 [node name="BrokenRoomMask" type="Sprite2D" parent="Pivot"]
+visible = false
 modulate = Color(0.184314, 0.184314, 0.184314, 0.741176)
 light_mask = 0
 z_index = 10

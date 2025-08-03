@@ -1,11 +1,8 @@
 # Gameplay
 
-- FAIRE en sorte qu'il n'y ait qu'un seul tech guy possible
-- Griser le modulate de NPC dans une salle broken door
 - S'assurer que quand il y a l'event broken elevator on ne puisse psa changer la vitesse depuis l'UI
 - Changer l'animation impatient du tech guy pour une animation emoji de clé à molette
 - Rendre le tech_guy plus visible/marqué
-- Les NPC qui spawn dans une salle où on est dockée ne s'avance pas pour rentrer
 - Voir pour soit augmenter le nombre de npc par room ou bien alterner les event speed et door broken
 
 - Control pannel on the right:

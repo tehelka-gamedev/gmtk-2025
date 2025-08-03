@@ -37,7 +37,6 @@ normal_texture = ExtResource("7_cegan")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
-MIN_NPC_RESPAWN_TIME = 5.0
 starting_npc_count = 8
 elevator = NodePath("World/Elevator")
 

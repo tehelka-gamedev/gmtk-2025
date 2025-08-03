@@ -5,8 +5,9 @@ const TECH_GUY_COLOR: Color = Color.WHITE
 
 const NPC_class = preload("res://objects/npc/npc.tscn")
 
-@export var MIN_NPC_RESPAWN_TIME: float = 4.0
-@export var MAX_NPC_RESPAWN_TIME: float = 8.0
+@export var MIN_NPC_RESPAWN_TIME: Array[float] = [4.0, 3.5, 3.0, 2.5, 2.0]
+@export var MAX_NPC_RESPAWN_TIME: Array[float] = [8.0, 7.0, 6.0, 5.0, 4.0] 
+@export var TIME_BEFORE_RESPAWN_TIME_DECREASE: float = 60.0
 
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
@@ -24,6 +25,11 @@ var _conveyed_npc_count: int = 0
 var _spawning_npc: bool = false
 var max_npc_count: int = 0
 
+var _current_time_before_respawn_time_decrease: float = 0.0
+var _respawn_time_idx: int = 0
+
+
+
 # player choice
 enum PlayerChoice
 {
@@ -38,6 +44,8 @@ var _waiting_for_player_choice: bool = false
 func _ready() -> void:
     randomize()
 
+    assert(len(MIN_NPC_RESPAWN_TIME) == len(MAX_NPC_RESPAWN_TIME), "MIN_NPC_RESPAWN_TIME and MAX_NPC_RESPAWN_TIME should have the same length")
+    
     if elevator == null:
         push_error("no elevator")
         return
@@ -75,6 +83,14 @@ func _ready() -> void:
     _event_manager.game_manager = self
     _event_manager.broken_room_repaired.connect(_on_broken_room_repaired)
     
+
+func _process(delta: float) -> void:
+    if _respawn_time_idx < len(MIN_NPC_RESPAWN_TIME) - 1:
+        _current_time_before_respawn_time_decrease += delta
+        if _current_time_before_respawn_time_decrease >= TIME_BEFORE_RESPAWN_TIME_DECREASE:
+            _respawn_time_idx += 1
+            _current_time_before_respawn_time_decrease = 0.0
+
 
 func _on_npc_mood_state_changed(old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
     if new_mood_state == MoodGauge.MoodState.ANGRY:
@@ -281,7 +297,10 @@ func _on_npc_spawn_timer_timeout() -> void:
 
 
 func _restart_npc_spawn_timer() -> void:
-    var random_respawn_time: float = randf_range(MIN_NPC_RESPAWN_TIME, MAX_NPC_RESPAWN_TIME)
+    var random_respawn_time: float = randf_range(
+        MIN_NPC_RESPAWN_TIME[_respawn_time_idx],
+        MAX_NPC_RESPAWN_TIME[_respawn_time_idx]
+    )
     _npc_spawn_timer.start(random_respawn_time)
 
 
