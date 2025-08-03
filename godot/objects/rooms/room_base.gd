@@ -29,7 +29,7 @@ func default_pop_npc(npcs: Array[NPC]) -> NPC:
 # If no filter is given, remove the npc from the (end of the) list and returns it
 func pop_npc_from_inside(filter: Callable = default_pop_npc) -> NPC:
     var npc: NPC = filter.call(npc_inside)
-
+    
     if not npc:
         return null
     npc.slot.release()

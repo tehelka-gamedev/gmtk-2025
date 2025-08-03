@@ -162,7 +162,7 @@ func _on_elevator_door_opened() -> void:
             if (
                 npcs[i].type == NPC.Type.TECH_GUY and snapped_room.door_broken
                 or (npcs[i].type == NPC.Type.TECH_GUY and not _event_manager.we_still_need_tech_guy())
-                or (npcs[i].color == snapped_room.color and not snapped_room.door_broken)
+                or (not npcs[i].type == NPC.Type.TECH_GUY and npcs[i].color == snapped_room.color and not snapped_room.door_broken)
             ):
                 return npcs.pop_at(i)
         return null
