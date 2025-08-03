@@ -233,7 +233,6 @@ func _on_npc_waiting(room: Room, _npc: NPC) -> void:
         PlayerChoice.ABORT:
             room.npc_denied()
             elevator.stop_loading_people()
-            print("abort")
         _:
             push_error("UNKNOWN PLAYER CHOICE %s" % player_choice)
 

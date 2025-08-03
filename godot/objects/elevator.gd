@@ -184,7 +184,6 @@ func get_snapped_room() -> Room:
 
 
 func handle_toggle_movement() -> void:
-    print("handle_toggle_movement")
     if _people_are_entering:
         return
     
