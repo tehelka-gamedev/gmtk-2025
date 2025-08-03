@@ -2,6 +2,7 @@
 extends RoomBase
 class_name Room
 
+signal door_closed
 signal door_opened
 signal tech_guy_in_elevator(tech_guy: NPC)
 signal npc_is_waiting(room:Room, npc: NPC)
@@ -137,6 +138,8 @@ func open_door() -> void:
 
 func close_door() -> void:
     _door.play("close")
+    await _door.animation_finished
+    door_closed.emit()
     
 
 func get_entrance_position() -> Marker2D:

@@ -2,7 +2,6 @@ extends RoomBase
 class_name Elevator
 
 signal door_opened
-signal door_closed
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 signal speed_changed(new_speed:int, speed_idx:int)
@@ -85,7 +84,6 @@ func _ready() -> void:
     room_detector.body_entered.connect(_on_body_entered)
     room_detector.body_exited.connect(_on_body_exited)
 
-    door_closed.connect(_on_door_closed)
     _broken_speed_particles.emitting = false
 
 
@@ -117,21 +115,22 @@ func _open_door() -> void:
     _current_door_state = DoorState.OPENING
     _door.play("open")
     await _door.animation_finished
+   
+    snap_target.open_door()
+    await (snap_target as Room).door_opened
     _current_door_state = DoorState.OPENED
     door_opened.emit()
-    # play open_door_animation
-    # await open__door_animation.finished
     
-    snap_target.open_door()
 
 func _close_door() -> void:
     _current_door_state = DoorState.CLOSING
     _door.play("close")
-    await _door.animation_finished
-    _current_door_state = DoorState.CLOSED
-    door_closed.emit()
-    
+    await _door.animation_finished    
     snap_target.close_door()
+    await (snap_target as Room).door_closed
+    _current_door_state = DoorState.CLOSED
+    handle_toggle_movement()
+
 
 func _on_body_entered(body: Node2D):
     # UGLY HACK: refer to the grand-parent room, and fallback to the staticBody2D otherwise
@@ -225,10 +224,6 @@ func start_loading_people() -> void:
 
 func stop_loading_people() -> void:
     _people_are_entering = false
-
-func _on_door_closed() -> void:
-    # go back agaiiiiin
-    handle_toggle_movement()
 
 
 func set_broken_speed_to(value: bool) -> void:
