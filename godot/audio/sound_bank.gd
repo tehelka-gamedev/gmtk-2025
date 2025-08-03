@@ -18,6 +18,7 @@ extends Node
 @export var accept_npc: AudioStream = null
 @export var reject_npc: AudioStream = null
 @export var incoming_npc: AudioStream = null
+@export var conveyed_npc: AudioStream = null
 
 @export_category("Voice Acting")
 @export var intro_bossletter: AudioStream = null

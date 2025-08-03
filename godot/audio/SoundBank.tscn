@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c71vbcevhwryy"]
+[gd_scene load_steps=29 format=3 uid="uid://c71vbcevhwryy"]
 
 [ext_resource type="Script" uid="uid://63l2xisdrp54" path="res://audio/sound_bank.gd" id="1_b6b3m"]
 [ext_resource type="AudioStream" uid="uid://cbm8ues6f6j6f" path="res://audio/bgm/spacejam-SLOW2.mp3" id="2_prkgb"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://daf2d140gusj8" path="res://audio/voice_acting/boss-warning-to-almostfired4.ogg" id="14_lop8p"]
 [ext_resource type="AudioStream" uid="uid://dipq8450spver" path="res://audio/voice_acting/boss-warning-to-ok.ogg" id="15_1587a"]
 [ext_resource type="AudioStream" uid="uid://c55yok05rn50k" path="res://audio/se/incoming_npc.wav" id="15_nsh4k"]
+[ext_resource type="AudioStream" uid="uid://cq66np5cfjshm" path="res://audio/se/conveyed_npc.wav" id="17_nsh4k"]
 
 [node name="SoundBank" type="Node"]
 script = ExtResource("1_b6b3m")
@@ -45,6 +46,7 @@ warning_beep_slow = ExtResource("10_frnej")
 accept_npc = ExtResource("13_frnej")
 reject_npc = ExtResource("14_1j2k0")
 incoming_npc = ExtResource("15_nsh4k")
+conveyed_npc = ExtResource("17_nsh4k")
 intro_bossletter = ExtResource("5_epkhj")
 bad_ending = ExtResource("6_7t26c")
 good_ending = ExtResource("7_viw73")
