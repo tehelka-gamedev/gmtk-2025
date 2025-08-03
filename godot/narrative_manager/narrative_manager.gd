@@ -57,5 +57,9 @@ func update_message(message: VAMessage) -> void:
     if message.text:
         update.emit(message.text)
     if message.audio_va != null:
-        AudioManager.play_sound_effect(message.audio_va)
+        AudioManager.set_bgm_volume(AudioManager.bgm_volume_during_VA)
+        var sound_player: AudioStreamPlayer = AudioManager.play_sound_effect(message.audio_va)
+        sound_player.finished.connect(func():
+            AudioManager.set_bgm_volume(AudioManager.default_bgm_volume)
+        )
     

@@ -13,6 +13,9 @@ signal BGM_mute_state_changed(is_muted:bool)
 ## Signal emitted when the SE mute state changes
 signal SE_mute_state_changed(is_muted:bool)
 
+@export_range(0, 100, 1) var default_bgm_volume: int = 100
+@export_range(0, 100, 1) var bgm_volume_during_VA: int = 20
+
 @export_category("Plugin settings")
 ## Bus name for background music (BGM)
 @export var bgm_bus_name:String = "BGM" # Custom property, see _validate_property() for more info
@@ -32,6 +35,7 @@ var _tween:Tween = null
 
 func _ready():
     _music_player.bus = bgm_bus_name
+    set_bgm_volume(default_bgm_volume)
 
 #### Public API ####
 func play_music(stream:AudioStream, fade_in_time:float=0.25) -> void:
