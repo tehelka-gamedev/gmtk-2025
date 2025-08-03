@@ -21,7 +21,7 @@ theme_type_variation = &"ControlPanel"
 script = ExtResource("1_t8mf3")
 angry_npc_digit_display = NodePath("VBoxContainer2/NPCStatsLines/GridContainer/AngryNPCDigitDisplay")
 conveyed_npc_digit_display = NodePath("VBoxContainer2/NPCStatsLines/GridContainer/ConveyedNPCDigitDisplay")
-elevator_movement_lever = NodePath("VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/ElevatorMovementLever")
+elevator_movement_lever = NodePath("VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/ElevatorMovementLever")
 speed_slider = NodePath("VBoxContainer2/VBoxContainer/VBoxContainer/SpeedSlider")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
@@ -72,7 +72,11 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="SpeedLabel" type="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MetalLabel"
@@ -94,11 +98,23 @@ layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="ElevatorMovementLever" type="CheckButton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="ElevatorMovementLever" type="CheckButton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 theme_type_variation = &"Lever"
+
+[node name="Shortcut" type="Label" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"MetalLabel"
+theme_override_font_sizes/font_size = 4
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Jinglebutton" parent="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("4_wqfgl")]
 layout_mode = 2
@@ -113,3 +129,5 @@ layout_mode = 2
 layout_mode = 2
 
 [connection signal="value_changed" from="VBoxContainer2/VBoxContainer/VBoxContainer/SpeedSlider" to="." method="_on_h_slider_value_changed"]
+
+[editable path="VBoxContainer2/VBoxContainer/MarginContainer/HBoxContainer/Jinglebutton"]
