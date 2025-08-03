@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cg7yjq02ve1e5" path="res://ui/control_panel/message_panel.gd" id="1_04ugw"]
 
 [node name="MessagePanel" type="PanelContainer" node_paths=PackedStringArray("message_label", "_message_timer")]
-offset_right = 640.0
-offset_bottom = 103.0
-size_flags_vertical = 2
+offset_right = 169.0
+offset_bottom = 239.0
+size_flags_vertical = 3
 theme_type_variation = &"Screen"
 script = ExtResource("1_04ugw")
 MESSAGE_TIMER = 10.0
@@ -15,7 +15,9 @@ _message_timer = NodePath("MessageTimer")
 [node name="MessageLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(20, 84)
 layout_mode = 2
+size_flags_vertical = 0
 theme_type_variation = &"ScreenLabel"
-autowrap_mode = 3
+text = "	"
+autowrap_mode = 2
 
 [node name="MessageTimer" type="Timer" parent="."]

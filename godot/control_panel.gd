@@ -33,17 +33,17 @@ func set_conveyed_npc_count(value: int) -> void:
 
 
 func set_speed_cursor(value: int) -> void:
-    update_speed_label(value)
+    # update_speed_label(value)
     speed_slider.value = value
 
 
 func _on_h_slider_value_changed(value: float) -> void:
-    update_speed_label(int(value))
+    # update_speed_label(int(value))
     speed_cursor_changed.emit(int(value))
 
         
-func update_speed_label(speed_idx: int) -> void:
-    speed_label.text = "Speed: %d" % (speed_idx+1)
+# func update_speed_label(speed_idx: int) -> void:
+#     speed_label.text = "Speed: %d" % (speed_idx+1)
 
 func _on_elevator_movement_lever_toggled(_toggled_on: bool):
     toggle_elevator_movement.emit()
