@@ -6,7 +6,7 @@ signal door_closed
 signal snapped_to_room(room:Node2D)
 signal toggle_movement_requested
 signal speed_changed(new_speed:int, speed_idx:int)
-
+signal broken_speed_changed(broken: bool)
 
 const SNAP_LERP_VALUE: float = 5.0
 
@@ -244,4 +244,5 @@ func set_broken_speed_to(value: bool) -> void:
         current_speed = 0
     else:
         current_speed = 2
+    broken_speed_changed.emit(value)
         

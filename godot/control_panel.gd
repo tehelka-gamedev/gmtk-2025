@@ -14,6 +14,7 @@ signal speed_cursor_changed(value: int)
 @onready var speed_label: Label = %SpeedLabel
 @onready var message_panel: MessagePanel = %MessagePanel
 
+
 func _ready() -> void:
     elevator_movement_lever.toggled.connect(_on_elevator_movement_lever_toggled)
 
@@ -29,9 +30,11 @@ func set_speed_cursor(value: int) -> void:
     update_speed_label(value)
     speed_slider.value = value
 
+
 func _on_h_slider_value_changed(value: float) -> void:
     update_speed_label(int(value))
-    speed_cursor_changed.emit(int(value)) #
+    speed_cursor_changed.emit(int(value))
+
         
 func update_speed_label(speed_idx: int) -> void:
     speed_label.text = "Speed: %d" % (speed_idx+1)
@@ -50,3 +53,9 @@ func _on_elevator_movement_lever_toggled(toggled_on: bool):
         start_elevator_pressed.emit()
     else:
         stop_elevator_pressed.emit()
+
+func _on_elevator_broken_set_to(broken: bool) -> void:
+    if broken:
+        speed_slider.editable = false
+    else:
+        speed_slider.editable = true

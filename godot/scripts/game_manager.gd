@@ -5,8 +5,8 @@ const TECH_GUY_COLOR: Color = Color.WHITE
 
 const NPC_class = preload("res://objects/npc/npc.tscn")
 
-@export var MIN_NPC_RESPAWN_TIME: Array[float] = [4.0, 3.5, 3.0, 2.5, 2.0]
-@export var MAX_NPC_RESPAWN_TIME: Array[float] = [8.0, 7.0, 6.0, 5.0, 4.0] 
+@export var MIN_NPC_RESPAWN_TIME: Array[float] = [4.0, 3.0, 2.0]
+@export var MAX_NPC_RESPAWN_TIME: Array[float] = [6.0, 5.0, 4.0] 
 @export var TIME_BEFORE_RESPAWN_TIME_DECREASE: float = 60.0
 
 @export var CONVEYED_NPC_TO_WIN: int = 50
@@ -77,9 +77,11 @@ func _ready() -> void:
         _control_panel.set_speed_cursor(speed_idx)
     ))
 
-    _control_panel.speed_cursor_changed.connect(elevator.set_speed_idx_no_signal)
     _control_panel.start_elevator_pressed.connect(elevator.on_start_elevator)
     _control_panel.stop_elevator_pressed.connect(elevator.on_stop_elevator)
+    _control_panel.speed_cursor_changed.connect(elevator.set_speed_idx_no_signal) 
+    elevator.broken_speed_changed.connect(_control_panel._on_elevator_broken_set_to)   
+    
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)
     _narrative_manager.fired.connect(_on_lose_condition)
     
