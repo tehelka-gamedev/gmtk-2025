@@ -112,7 +112,7 @@ theme_type_variation = &"Lever"
 layout_mode = 2
 theme_type_variation = &"MetalLabel"
 theme_override_font_sizes/font_size = 4
-text = "Z"
+text = "SPACE"
 horizontal_alignment = 1
 vertical_alignment = 1
 

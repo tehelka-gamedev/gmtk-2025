@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://uvbohnvrmqo2"
-path="res://.godot/imported/message_bip.wav-41effaf3472138ade0c3b34ed424774f.sample"
+path="res://.godot/imported/message_bip.wav-8353fc89343d3362431ec02f57ee0dd0.sample"
 
 [deps]
 
-source_file="res://audio/SE/message_bip.wav"
-dest_files=["res://.godot/imported/message_bip.wav-41effaf3472138ade0c3b34ed424774f.sample"]
+source_file="res://audio/se/message_bip.wav"
+dest_files=["res://.godot/imported/message_bip.wav-8353fc89343d3362431ec02f57ee0dd0.sample"]
 
 [params]
 
