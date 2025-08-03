@@ -55,13 +55,14 @@ func play_music(stream:AudioStream, fade_in_time:float=0.25) -> void:
         await _tween.finished
         _fading = false
 
-func play_sound_effect(stream:AudioStream) -> void:
+func play_sound_effect(stream:AudioStream) -> AudioStreamPlayer:
     var sound_player:AudioStreamPlayer = AudioStreamPlayer.new()
     sound_player.stream = stream
     sound_player.bus = se_bus_name
     sound_player.finished.connect(sound_player.queue_free)
     add_child(sound_player)
     sound_player.play()
+    return sound_player
 
 func music_is_playing() -> bool:
     return _music_player.playing
