@@ -222,8 +222,9 @@ func handle_toggle_movement() -> void:
 
 func set_speed_idx_no_signal(value: int) -> void:
     current_speed = value
-    engine_sound.stop()
-    engine_sound = AudioManager.play_sound_effect(SoundBank.engine_track)
+    if moving:
+        engine_sound.stop()
+        engine_sound = AudioManager.play_sound_effect(SoundBank.engine_track)
     
 
 func on_elevator_toggle_movement_from_ui() -> void:
