@@ -1,4 +1,4 @@
-extends MarginContainer
+extends Container
 class_name MessagePanel
 
 @export_category("Gameplay variables")
