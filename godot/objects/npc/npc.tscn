@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bttrvcujvlunr"]
+[gd_scene load_steps=28 format=3 uid="uid://bttrvcujvlunr"]
 
 [ext_resource type="Script" uid="uid://dgl1kfwtsbpp4" path="res://objects/npc/npc.gd" id="1_rn7i7"]
 [ext_resource type="PackedScene" uid="uid://mc17i3n0ujcj" path="res://objects/npc/skin.tscn" id="2_aqpri"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://baeo0kp17u8pc" path="res://sprites/teleportanimation.png" id="6_aqpri"]
 [ext_resource type="Script" uid="uid://dgbk83r6l6nt4" path="res://states/repair_state.gd" id="7_1ynp0"]
 [ext_resource type="Script" uid="uid://bteouqmd6vc7b" path="res://objects/mood_gauge.gd" id="8_qs0fi"]
+[ext_resource type="Texture2D" uid="uid://d1gengmsgbqol" path="res://ui/theme/button/uncolored button_normal_smaller.png" id="10_y4kq8"]
 
 [sub_resource type="FontFile" id="FontFile_1ynp0"]
 subpixel_positioning = 0
@@ -257,3 +258,46 @@ autoplay = "spawn"
 [node name="MoodGauge" type="Node2D" parent="."]
 script = ExtResource("8_qs0fi")
 metadata/_custom_type_script = "uid://bteouqmd6vc7b"
+
+[node name="KeyHelper" type="Node2D" parent="."]
+light_mask = 0
+z_index = 20
+
+[node name="TextureRect" type="TextureRect" parent="KeyHelper"]
+modulate = Color(0.137255, 0.541176, 0.168627, 1)
+light_mask = 0
+offset_left = -21.0
+offset_top = 7.0
+offset_right = -2.0
+offset_bottom = 22.0
+texture = ExtResource("10_y4kq8")
+
+[node name="Label" type="Label" parent="KeyHelper/TextureRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 19.0
+offset_bottom = 17.0
+theme_type_variation = &"MetalLabel"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "Q"
+
+[node name="TextureRect2" type="TextureRect" parent="KeyHelper"]
+modulate = Color(0.662745, 0.156863, 0.211765, 1)
+light_mask = 0
+offset_left = 2.0
+offset_top = 7.0
+offset_right = 21.0
+offset_bottom = 22.0
+texture = ExtResource("10_y4kq8")
+
+[node name="Label" type="Label" parent="KeyHelper/TextureRect2"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 19.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "W"

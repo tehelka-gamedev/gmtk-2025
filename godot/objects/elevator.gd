@@ -25,11 +25,15 @@ const SNAP_LERP_VALUE: float = 5.0
             current_speed = value
             speed_changed.emit(speed_array[current_speed], current_speed)
 
+var engine_sound: AudioStreamPlayer = null
 @export var moving: bool = true :
     set(value):
         if value != moving:
             moving = value
             moving_changed.emit(moving)
+        if moving:
+            engine_sound = AudioManager.play_sound_effect(SoundBank.engine_track)
+            
 
 @export var snap_duration: float = 0.5
 @export var snap_target:Node2D = null
@@ -85,6 +89,7 @@ func _ready() -> void:
     room_detector.body_exited.connect(_on_body_exited)
 
     _broken_speed_particles.emitting = false
+    engine_sound = AudioManager.play_sound_effect(SoundBank.engine_track)
 
 
 func _process(delta: float) -> void:
@@ -171,6 +176,8 @@ func _on_snap_finished() -> void:
     snapped_to_room.emit(snap_target)
     _snapped = true
     _snapping = false
+    if engine_sound:
+        engine_sound.stop()
 
     _open_door()
 

@@ -72,6 +72,7 @@ func ask_npc_coming(tech_guy: bool = false) -> void:
         }
     )
     await waiting_npc.arrived_at_slot
+    waiting_npc.show_key_helper()
     npc_is_waiting.emit(self, waiting_npc)
 
 # make the currently waiting npc to stop waiting
@@ -79,6 +80,7 @@ func npc_denied() -> void:
     if waiting_npc == null:
         push_error("Asked %s to deny npc waiting but no one is waiting, something is wrong" % name)
         return
+    waiting_npc.hide_key_helper()
     waiting_npc.go_back_to_slot()
     await waiting_npc.arrived_at_slot
     cycle_next_people_leaving_idx()
@@ -87,6 +89,7 @@ func abort_waiting() -> void:
     if waiting_npc == null:
         push_error("Asked %s to abort waiting but no one is waiting, something is wrong" % name)
         return
+    waiting_npc.hide_key_helper()
     waiting_npc.go_back_to_slot()
     await waiting_npc.arrived_at_slot
     reset_waiting_npc()
@@ -98,6 +101,7 @@ func transfer_waiting_npc_to_room(room:RoomBase) -> void:
         return
     remove_npc_from_room(waiting_npc)
 
+    waiting_npc.hide_key_helper()
     var slot: Slot
     if waiting_npc.type == NPC.Type.TECH_GUY:
         slot = room.slot_manager.get_special_slot(Slot.Type.BROKEN_SPEED)

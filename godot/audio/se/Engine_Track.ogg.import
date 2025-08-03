@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Engine_Track.ogg-ebd85925526ba38631ccb5382707
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

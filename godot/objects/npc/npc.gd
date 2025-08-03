@@ -34,6 +34,7 @@ var type: Type = Type.NORMAL
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var _key_helper: Node2D = $KeyHelper
 
 func _ready() -> void:
     animation_player.play("spawn")
@@ -42,6 +43,7 @@ func _ready() -> void:
     # mood_gauge.set_mood_state(MoodGauge.MoodState.HAPPY, false)
     mood_gauge.set_mood_value(MoodGauge.state_to_mood(MoodGauge.MoodState.HAPPY) - randf_range(0.0, mood_start_variation), false)
     mood_gauge.mood_state_changed.connect(_on_mood_state_changed)
+    _key_helper.hide()
 
 
 func _on_mood_state_changed(_old_mood_state: MoodGauge.MoodState, new_mood_state: MoodGauge.MoodState) -> void:
@@ -101,3 +103,11 @@ func show_type_label() -> void:
     elif type == NPC.Type.VIP:
         %TypeLabel.text = "VIP"
     %TypeLabel.show()
+
+
+func show_key_helper() -> void:
+    _key_helper.visible = true
+
+
+func hide_key_helper() -> void:
+    _key_helper.visible = false
