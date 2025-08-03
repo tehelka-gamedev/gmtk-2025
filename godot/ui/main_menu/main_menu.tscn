@@ -1,34 +1,66 @@
-[gd_scene load_steps=8 format=3 uid="uid://ceixwddhonrtk"]
+[gd_scene load_steps=13 format=3 uid="uid://ceixwddhonrtk"]
 
 [ext_resource type="Texture2D" uid="uid://f7r2jfo6rhl4" path="res://ui/main_menu/spacecrossroads.png" id="1_mu8pm"]
-[ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="1_omy8q"]
+[ext_resource type="Script" uid="uid://cybd81i573qef" path="res://ui/main_menu/main_menu.gd" id="1_u184e"]
 [ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="2_3c04x"]
+[ext_resource type="Texture2D" uid="uid://erjmfm4qxnmx" path="res://sprites/spacebackground.png" id="2_6mijq"]
 [ext_resource type="Script" uid="uid://c7ymip2u74hvc" path="res://ui/main_menu/rotate_control.gd" id="2_i5wg5"]
 [ext_resource type="Texture2D" uid="uid://dnafk07nawdet" path="res://ui/main_menu/spacecrossroads-station.png" id="2_omy8q"]
+[ext_resource type="PackedScene" uid="uid://sayukqxsydsn" path="res://game/intro.tscn" id="2_w2r0d"]
 [ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="6_joh67"]
+[ext_resource type="Texture2D" uid="uid://bq8gfnv4drwjg" path="res://sprites/particles/staranimation-Sheet.png" id="9_w2r0d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mijq"]
+atlas = ExtResource("2_6mijq")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4e78x"]
+particles_animation = true
+particles_anim_h_frames = 11
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
 shader = ExtResource("2_3c04x")
 shader_parameter/pixel_scale = 1.0
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("button_play", "button_credits", "_background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_u184e")
+intro_scene = ExtResource("2_w2r0d")
+button_play = NodePath("MarginContainer/VBoxContainer/Buttons/ButtonPlay")
+button_credits = NodePath("MarginContainer/VBoxContainer/Buttons/ButtonCredits")
+background_scroll_speed = 4.0
+_background = NodePath("Background")
+fade_in_time = 0.25
 
-[node name="BackgroundRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_omy8q")
+[node name="Background" type="TextureRect" parent="."]
+texture_repeat = 2
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("AtlasTexture_6mijq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4e78x")
+position = Vector2(296, 157)
+texture = ExtResource("9_w2r0d")
+lifetime = 2.0
+explosiveness = 0.1
+randomness = 0.3
+lifetime_randomness = 0.1
+emission_shape = 3
+emission_rect_extents = Vector2(320, 180)
+gravity = Vector2(0, 0)
+anim_speed_min = 0.05
+anim_speed_max = 0.5
 
 [node name="stationLogo" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_joh67")
@@ -41,6 +73,7 @@ pivot_offset = Vector2(40, 41)
 texture = ExtResource("2_omy8q")
 stretch_mode = 3
 script = ExtResource("2_i5wg5")
+rotation_speed = 5.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
