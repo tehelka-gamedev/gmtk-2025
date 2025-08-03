@@ -48,7 +48,7 @@ func _on_timer_timeout() -> void:
             possible_event_function.append(_play_broken_door_event) 
     if game_manager.current_npc_count + VIP_NUMBER + 1 < game_manager.max_npc_count:
         if _previous_event != EventType.VIP:
-            possible_event_function.append(_play_vip_event) 
+            possible_event_function.append(_play_vip_event)
         
     if possible_event_function.is_empty():
         _setup_timer_for_next_event()

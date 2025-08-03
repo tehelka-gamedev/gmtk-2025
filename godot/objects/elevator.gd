@@ -116,8 +116,9 @@ func _open_door() -> void:
     _door.play("open")
     await _door.animation_finished
    
-    snap_target.open_door()
-    await (snap_target as Room).door_opened
+    if not (snap_target as Room).door_broken:
+        snap_target.open_door()
+        await (snap_target as Room).door_opened
     _current_door_state = DoorState.OPENED
     door_opened.emit()
     
