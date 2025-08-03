@@ -5,13 +5,27 @@
 
 [node name="Jinglebutton" type="HBoxContainer" node_paths=PackedStringArray("check_button", "small_light")]
 script = ExtResource("1_4c0je")
-check_button = NodePath("JingleCheckButton")
+check_button = NodePath("VBoxContainer/JingleCheckButton")
 small_light = NodePath("SmallLight")
 
-[node name="JingleCheckButton" type="CheckButton" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="JingleCheckButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
 focus_mode = 0
 theme_type_variation = &"JingleButton"
+
+[node name="Shortcut2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_type_variation = &"MetalLabel"
+theme_override_font_sizes/font_size = 4
+text = "J"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SmallLight" parent="." instance=ExtResource("1_3dqqu")]
 layout_mode = 2
