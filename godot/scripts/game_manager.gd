@@ -124,7 +124,7 @@ func _unhandled_input(event: InputEvent):
     handle_player_choice(event)
 
 func handle_pause(event: InputEvent):
-    if event.is_action_pressed("ui_cancel"):
+    if event.is_action_pressed("pause_game"):
         Events.pause()
 
 func send_player_choice(player_choice:PlayerChoice) -> void:
