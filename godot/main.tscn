@@ -123,10 +123,13 @@ one_shot = true
 
 [node name="ControlPanel" parent="HUD" instance=ExtResource("11_cegan")]
 unique_name_in_owner = true
-offset_left = 381.0
-offset_top = 25.0
-offset_right = 618.0
-offset_bottom = 338.0
+light_mask = 0
+anchors_preset = 11
+anchor_left = 1.0
+offset_left = -234.0
+offset_top = 1.0
+offset_right = -1.0
+grow_horizontal = 0
 
 [node name="MuteSoundsContainer" parent="HUD" instance=ExtResource("12_dg77c")]
 offset_left = -98.0
