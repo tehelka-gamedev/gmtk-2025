@@ -71,15 +71,16 @@ func _ready() -> void:
     elevator.door_opened.connect(_on_elevator_door_opened)
     _restart_npc_spawn_timer()
     
-    _control_panel.set_speed_cursor(elevator.current_speed)
+    
+    _control_panel.initialize(elevator)
     
     elevator.speed_changed.connect(func(_new_speed: int, speed_idx: int): (
         _control_panel.set_speed_cursor(speed_idx)
     ))
 
-    _control_panel.toggle_elevator_movement.connect(elevator.on_elevator_toggle_movement_from_ui)
-    _control_panel.speed_cursor_changed.connect(elevator.set_speed_idx_no_signal) 
+    
     elevator.broken_speed_changed.connect(_control_panel._on_elevator_broken_set_to)   
+    elevator.moving_changed.connect(_control_panel._on_elevator_move_state_changed)
     
     _narrative_manager.update.connect(_control_panel.message_panel.set_message)
     _narrative_manager.fired.connect(_on_lose_condition)
@@ -242,8 +243,9 @@ func _ask_player_choice() -> PlayerChoice:
 
     # ugly fix for using control panel. Joy of end of jam O:)
     _control_panel.toggle_elevator_movement.connect((func():
-        elevator.stop_loading_people()
         send_player_choice(PlayerChoice.ABORT)
+        await get_tree().process_frame # eurk
+        elevator.handle_toggle_movement()
         ),
         ConnectFlags.CONNECT_ONE_SHOT
     )
