@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://bteouqmd6vc7b" path="res://objects/mood_gauge.gd" id="8_qs0fi"]
 
 [sub_resource type="FontFile" id="FontFile_1ynp0"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/5/0/ascent = 0.0
 cache/0/5/0/descent = 0.0
 cache/0/5/0/underline_position = 0.0
