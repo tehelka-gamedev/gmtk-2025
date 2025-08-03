@@ -7,7 +7,6 @@ Plus urgent
 - Erreur ligne 157 de elevator, snap_target est nul
     - Voir s'il y a une différence entre l'UI et les touches keyboard
 - Griser elevator quand il est en panne
-- Ajouter bip bip bip avant les message
 
 Moins urgent
 - Changer l'animation impatient du tech guy pour une animation emoji de clé à molette

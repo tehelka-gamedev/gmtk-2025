@@ -34,6 +34,7 @@ var max_npc_count: int = 0
 
 var _current_time_before_respawn_time_decrease: float = 0.0
 var _respawn_time_idx: int = 0
+var _game_won: bool = false
 
 
 # player choice
@@ -329,7 +330,7 @@ func _restart_npc_spawn_timer() -> void:
 func _on_npc_arrived_at_target_room() -> void:
     _conveyed_npc_count += 1
     _control_panel.set_conveyed_npc_count(_conveyed_npc_count)
-    if _conveyed_npc_count >= CONVEYED_NPC_TO_WIN:
+    if not _game_won and _conveyed_npc_count >= CONVEYED_NPC_TO_WIN:
         _on_win_condition()
 
     
@@ -349,7 +350,9 @@ func _on_lose_condition() -> void:
 
 
 func _on_win_condition() -> void:
+    _game_won = true
     get_tree().paused = true
     _end_control.show_end(EndControl.Type.WIN)
     await _end_control.continue_pressed
     get_tree().paused = false
+    

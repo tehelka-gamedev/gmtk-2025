@@ -22,9 +22,12 @@ var audio_va: AudioStreamPlayer = null
 func show_end(type: Type) -> void:
     end_type = type
     if type == Type.WIN:
+        %WinLabel.show()
         AudioManager.play_sound_effect(SoundBank.job_well_done)
         set_message(win_message)
     elif type == Type.LOSE:
+        %WinLabel.hide()
+        %Button.text = "Back to main menu"
         set_message(lose_message)
     show()
 
@@ -44,4 +47,5 @@ func _on_button_pressed() -> void:
     if end_type == Type.WIN:
         continue_pressed.emit()
     elif end_type == Type.LOSE:
+        get_tree().paused = false
         get_tree().change_scene_to_file(main_menu_path)
