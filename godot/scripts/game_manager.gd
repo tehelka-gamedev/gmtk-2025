@@ -58,8 +58,8 @@ func _ready() -> void:
     
     AudioManager.play_music(SoundBank.background_music)
     
-    if OS.has_feature("editor"):
-        AudioManager.mute_bgm(true)
+    # if OS.has_feature("editor"):
+    #     AudioManager.mute_bgm(true)
 
     max_npc_count = 0
     var color_array: Array = Enum.NPCColors.values()

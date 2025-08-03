@@ -17,7 +17,6 @@ custom_minimum_size = Vector2(20, 84)
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"ScreenLabel"
-text = "	"
 autowrap_mode = 2
 
 [node name="MessageTimer" type="Timer" parent="."]
