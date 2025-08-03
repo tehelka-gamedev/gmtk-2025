@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://ceixwddhonrtk"]
+
+[ext_resource type="Texture2D" uid="uid://f7r2jfo6rhl4" path="res://ui/main_menu/spacecrossroads.png" id="1_mu8pm"]
+[ext_resource type="Texture2D" uid="uid://b6nuk4e64hnsf" path="res://sprites/background.png" id="1_omy8q"]
+[ext_resource type="Shader" uid="uid://cln8o8wolh2av" path="res://rotsprite.gdshader" id="2_3c04x"]
+[ext_resource type="Script" uid="uid://c7ymip2u74hvc" path="res://ui/main_menu/rotate_control.gd" id="2_i5wg5"]
+[ext_resource type="Texture2D" uid="uid://dnafk07nawdet" path="res://ui/main_menu/spacecrossroads-station.png" id="2_omy8q"]
+[ext_resource type="PackedScene" uid="uid://cyiio111ful15" path="res://ui/mute_sounds_container.tscn" id="6_joh67"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
+shader = ExtResource("2_3c04x")
+shader_parameter/pixel_scale = 1.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_omy8q")
+
+[node name="stationLogo" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_joh67")
+layout_mode = 2
+offset_left = 378.0
+offset_top = 9.0
+offset_right = 458.0
+offset_bottom = 91.0
+pivot_offset = Vector2(40, 41)
+texture = ExtResource("2_omy8q")
+stretch_mode = 3
+script = ExtResource("2_i5wg5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLogo" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+texture = ExtResource("1_mu8pm")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+alignment = 1
+
+[node name="ButtonPlay" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Play"
+
+[node name="ButtonCredits" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="MuteSoundsContainer" parent="." instance=ExtResource("6_joh67")]
+layout_mode = 1
+offset_left = -98.0
+offset_bottom = 63.0
