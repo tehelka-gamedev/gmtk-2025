@@ -11,5 +11,6 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-    va_sound.stop()
+    if va_sound:
+        va_sound.stop()
     get_tree().change_scene_to_packed(game_scene)
