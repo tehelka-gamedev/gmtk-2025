@@ -10,6 +10,7 @@ signal fired
 @export var TIME_BEFORE_RANDOM_MESSAGE: float = 30.0
 
 @export var angry_npc_warning_threshold: Array[int] = [8, 14, 20]
+#@export var angry_npc_warning_threshold: Array[int] = [1, 2, 3]
 
 @export var almost_fired_to_warning_messages: Messages
 @export var warning_to_ok_messages: Messages

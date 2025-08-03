@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dtidxkaetf78h"]
+[gd_scene load_steps=27 format=3 uid="uid://dtidxkaetf78h"]
 
 [ext_resource type="Script" uid="uid://cdo6vkw180fto" path="res://scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://erjmfm4qxnmx" path="res://sprites/spacebackground.png" id="2_cegan"]
@@ -11,9 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://yb7xrfudbkkw" path="res://sprites/spacestation_n.png" id="7_cegan"]
 [ext_resource type="Texture2D" uid="uid://ql6m5dp2c24u" path="res://sprites/light.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cyg333imlt7y0" path="res://ui/control_panel.tscn" id="11_cegan"]
+[ext_resource type="PackedScene" uid="uid://bn7sstwj75imj" path="res://game/end_control.tscn" id="13_getpj"]
 [ext_resource type="PackedScene" uid="uid://cf2nexjie7s88" path="res://ui/pause/PauseMenu.tscn" id="13_ycdy4"]
+[ext_resource type="Resource" uid="uid://cqjeft3xl6s6u" path="res://narrative_manager/intro_and_ending/good_ending_message.tres" id="14_ryguw"]
 [ext_resource type="Script" uid="uid://cs6dnihsfnd6m" path="res://narrative_manager/narrative_manager.gd" id="14_w48qg"]
 [ext_resource type="Resource" uid="uid://7k5rhofrpd44" path="res://narrative_manager/warning_messages/almost_fired_to_warning.tres" id="15_074og"]
+[ext_resource type="Resource" uid="uid://cutip58qhilrb" path="res://narrative_manager/intro_and_ending/bad_ending_message.tres" id="15_d13ii"]
 [ext_resource type="Resource" uid="uid://brgmqpjo34qch" path="res://narrative_manager/warning_messages/warning_to_ok_messages.tres" id="16_cegan"]
 [ext_resource type="Resource" uid="uid://dyx3wqawopdo6" path="res://narrative_manager/warning_messages/ok_to_warning_messages.tres" id="17_82xsv"]
 [ext_resource type="Resource" uid="uid://coo4p0s6xoabp" path="res://narrative_manager/warning_messages/warning_to_almost_fired_messages.tres" id="18_getpj"]
@@ -40,13 +43,14 @@ normal_texture = ExtResource("7_cegan")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("elevator")]
 script = ExtResource("1_lquwl")
+CONVEYED_NPC_TO_WIN = 1
 starting_npc_count = 8
 elevator = NodePath("World/Elevator")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_repeat = 2
 offset_right = 640.0
-offset_bottom = 382.0
+offset_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource("AtlasTexture_cegan")
@@ -138,6 +142,11 @@ grow_horizontal = 0
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("13_ycdy4")]
 visible = false
+
+[node name="EndControl" parent="HUD" instance=ExtResource("13_getpj")]
+visible = false
+win_message = ExtResource("14_ryguw")
+lose_message = ExtResource("15_d13ii")
 
 [node name="NarrativeManager" type="Node2D" parent="."]
 script = ExtResource("14_w48qg")

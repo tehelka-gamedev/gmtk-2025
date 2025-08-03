@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="Message" load_steps=2 format=3 uid="uid://cqjeft3xl6s6u"]
+[gd_resource type="Resource" script_class="VAMessage" load_steps=3 format=3 uid="uid://cqjeft3xl6s6u"]
 
+[ext_resource type="AudioStream" uid="uid://42jpck4cw71a" path="res://audio/voice_acting/good-ending-boss.ogg" id="1_em6ch"]
 [ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_mu0rl"]
 
 [resource]
 script = ExtResource("1_mu0rl")
-message = ""
+text = "Well, look at you. Your contract has been extended indefinitely. Not bad for a rookie.
+
+We've sent your wages to your account, you're welcome.
+Keep your eyes on the customers, and the screen.
+
+Now sit tight. The founders are about to make their big dramatic reveal."
+audio_va = ExtResource("1_em6ch")
 metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"

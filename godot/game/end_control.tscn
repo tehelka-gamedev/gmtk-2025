@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn7sstwj75imj"]
+
+[ext_resource type="Script" uid="uid://cvc4sxep3cx0p" path="res://game/end_control.gd" id="1_hl105"]
+
+[node name="EndControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_hl105")
+
+[node name="GreyedOutBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.788235)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.0
+offset_top = -130.0
+offset_right = 257.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"ControlPanel"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextLabel" type="Label" parent="PanelContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="PanelContainer/PanelContainer/MarginContainer"]
+process_mode = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_mode = 0
+text = "Continue"
+
+[connection signal="pressed" from="PanelContainer/PanelContainer/MarginContainer/Button" to="." method="_on_button_pressed"]

@@ -1,11 +1,15 @@
 # Gameplay
 
+Plus urgent
+- Faire attention à ce que les VA ne se stack pas
 - Faire attendre le repair guy que la porte s'ouvre une fois qu'il a fini de réparer la porte
 - Voir pour régler le Z-index du tech guy quand on le laisse bosser sur une room broken
 - Erreur ligne 157 de elevator, snap_target est nul
     - Voir s'il y a une différence entre l'UI et les touches keyboard
 - Griser elevator quand il est en panne
 - Ajouter bip bip bip avant les message
+
+Moins urgent
 - Changer l'animation impatient du tech guy pour une animation emoji de clé à molette
 - Rendre le tech_guy plus visible/marqué
 

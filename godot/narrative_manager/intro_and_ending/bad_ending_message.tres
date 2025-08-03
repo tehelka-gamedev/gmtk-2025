@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="Message" load_steps=2 format=3 uid="uid://cutip58qhilrb"]
+[gd_resource type="Resource" script_class="VAMessage" load_steps=3 format=3 uid="uid://cutip58qhilrb"]
 
+[ext_resource type="AudioStream" uid="uid://bmsno5bdrby0q" path="res://audio/voice_acting/badending-boss.ogg" id="1_fqnhl"]
 [ext_resource type="Script" uid="uid://cfu2yd1qqsmr3" path="res://narrative_manager/message.gd" id="1_hjax5"]
 
 [resource]
 script = ExtResource("1_hjax5")
-message = ""
+text = "You blew it. Too many complaints, too much chaos. You're being replaced.
+Disconnect. Power off. Don't make this awkard.
+
+Oh and be a dear, fill out your exit survey before you disappear.
+Wanny try again? Fine, reapply.
+If the spot's open, maybe, just maybe, you'll get another shot."
+audio_va = ExtResource("1_fqnhl")
 metadata/_custom_type_script = "uid://cfu2yd1qqsmr3"

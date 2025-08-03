@@ -10,6 +10,7 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @export var TIME_BEFORE_RESPAWN_TIME_DECREASE: float = 60.0
 
 @export var CONVEYED_NPC_TO_WIN: int = 50
+@export var VIP_REGEN: float = -5.0
 
 @export var starting_npc_count: int = 5
 @export var elevator: Elevator = null
@@ -22,6 +23,8 @@ const NPC_class = preload("res://objects/npc/npc.tscn")
 @onready var _narrative_manager: NarrativeManager = $NarrativeManager
 @onready var _event_manager: EventManager = $EventManager
 @onready var _background: TextureRect = $Background
+@onready var _end_control: EndControl = $HUD/EndControl
+
 
 var current_npc_count: int = 0
 var _angry_npc_count: int = 0
@@ -89,6 +92,8 @@ func _ready() -> void:
     
     _event_manager.game_manager = self
     _event_manager.broken_room_repaired.connect(_on_broken_room_repaired)
+    
+    _end_control.hide()
     
 
 func _process(delta: float) -> void:
@@ -299,7 +304,7 @@ func _spawn_npc(type: NPC.Type = NPC.Type.NORMAL) -> void:
         npc.mood_gauge.mood_state_changed.connect(_on_npc_mood_state_changed)
         npc.arrived_at_target_room.connect(_on_npc_arrived_at_target_room)
         if type == NPC.Type.VIP:
-            npc.mood_gauge.regen_per_tick = -10
+            npc.mood_gauge.regen_per_tick = VIP_REGEN
             npc.arrived_at_target_room.connect(_event_manager.on_vip_conveyed)
             
     current_npc_count += 1
@@ -339,8 +344,12 @@ func _on_broken_room_repaired(room: Room) -> void:
 
 
 func _on_lose_condition() -> void:
-    print("You lose")
+    get_tree().paused = true
+    _end_control.show_end(EndControl.Type.LOSE)
 
 
 func _on_win_condition() -> void:
-    print("You win")
+    get_tree().paused = true
+    _end_control.show_end(EndControl.Type.WIN)
+    await _end_control.continue_pressed
+    get_tree().paused = false
