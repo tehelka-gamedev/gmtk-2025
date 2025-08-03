@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cribq6u7w7k3k"
-path="res://.godot/imported/Kenney Future Narrow.ttf-ae3b0f88f37bfa92ca8a8ebb865edf32.fontdata"
+uid="uid://dxr1rsl7b7yq5"
+path="res://.godot/imported/9x9-pix.otf-4a16c6a98edaaad3220604a64c96b91e.fontdata"
 
 [deps]
 
-source_file="res://ui/theme/font/Kenney Future Narrow.ttf"
-dest_files=["res://.godot/imported/Kenney Future Narrow.ttf-ae3b0f88f37bfa92ca8a8ebb865edf32.fontdata"]
+source_file="res://ui/theme/font/9x9-pix.otf"
+dest_files=["res://.godot/imported/9x9-pix.otf-4a16c6a98edaaad3220604a64c96b91e.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=0
+antialiasing=1
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
