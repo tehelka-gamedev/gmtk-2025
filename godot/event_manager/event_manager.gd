@@ -27,6 +27,8 @@ var tech_guy_present: bool = false
 var current_event: EventType = EventType.NONE
 var vip_conveyed: int = 0
 
+var _previous_event: EventType = EventType.NONE
+
 
 func _ready() -> void:
     _timer.start(TIME_BEFORE_FIRST_EVENT)
@@ -40,10 +42,13 @@ func _setup_timer_for_next_event() -> void:
 func _on_timer_timeout() -> void:
     var possible_event_function: Array[Callable] = []
     if not tech_guy_present:
-        possible_event_function.append(_play_slow_elevator_event)
-        possible_event_function.append(_play_broken_door_event)
+        if _previous_event != EventType.BROKEN_SPEED:
+            possible_event_function.append(_play_slow_elevator_event) 
+        if _previous_event != EventType.BROKEN_DOOR:
+            possible_event_function.append(_play_broken_door_event) 
     if game_manager.current_npc_count + VIP_NUMBER + 1 < game_manager.max_npc_count:
-        possible_event_function.append(_play_vip_event)
+        if _previous_event != EventType.VIP:
+            possible_event_function.append(_play_vip_event) 
         
     if possible_event_function.is_empty():
         _setup_timer_for_next_event()
@@ -104,6 +109,7 @@ func on_vip_conveyed() -> void:
 
 func _on_all_vip_conveyed() -> void:
     vip_conveyed = 0
+    _previous_event = current_event
     current_event = EventType.NONE
     _setup_timer_for_next_event()
 
@@ -112,6 +118,7 @@ func on_tech_guy_arrived_in_elevator(tech_guy: NPC) -> void:
     if current_event == EventType.BROKEN_SPEED:
         tech_guy.repair()
         await tech_guy.on_repair_finished
+        _previous_event = current_event
         current_event = EventType.NONE
         game_manager.elevator.set_broken_speed_to(false)
         
@@ -136,6 +143,7 @@ func on_tech_guy_arrived_at_broken_door(tech_guy: NPC, room: Room) -> void:
     await tech_guy.on_repair_finished
     room.set_broken_to(false)
     broken_room_repaired.emit(room)
+    _previous_event = current_event
     current_event = EventType.NONE
     
     _setup_timer_for_next_event()
